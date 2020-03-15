@@ -1,0 +1,5 @@
+pairs:
+  sd: Steven Diamante; stevendiamante13@gmail.com
+email:
+  prefix: pair
+global: false  # Set to true for git-pair to change git  configuration for all your projects
