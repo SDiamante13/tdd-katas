@@ -2,4 +2,5 @@ rootProject.name = 'tdd-katas'
 include 'leap-year'
 include 'human-readable-time'
 include 'fizzbuzz'
+include 'ease-the-stockbroker'
 
