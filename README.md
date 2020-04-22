@@ -75,7 +75,8 @@ Clients place orders to a stockbroker as strings. The order can be simple or mul
 
 Type of a simple order: Quote/white-space/Quantity/white-space/Price/white-space/Status
 
-where Quote is formed of non-whitespace character, Quantity is an int, Price a double (with mandatory decimal point "." ), Status is represented by the letter B (buy) or the letter S (sell).
+where Quote is formed of non-whitespace character, Quantity is an int, Price a double (with mandatory decimal point "." ),
+ Status is represented by the letter B (buy) or the letter S (sell).
 
 #### Example:
 
