@@ -64,3 +64,5 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+**/.jqwik-database
