@@ -20,6 +20,10 @@ MM = minutes, padded to 2 digits, range: 00 - 59
 SS = seconds, padded to 2 digits, range: 00 - 59
 The maximum time never exceeds 359999 (99:59:59)
 
+Resources: 
+https://www.codewars.com/kata/52685f7382004e774f0001f7/train/java
+https://www.programmingwithwolfgang.com/tdd-kata/
+
 ## 3) Word Counter
 
 A method that, given a delimited string, returns a collection of all of the 
@@ -111,3 +115,8 @@ where nb is the number of badly formed simple orders, b representing the total p
 "Buy: 263 Sell: 11802; Badly formed 2: CLH16.NYM 50 56 S ;OWW 1000 11 S ;"
 
 "Buy: 100 Sell: 56041; Badly formed 1: ZNGA 1300 2.66 ;"
+
+
+
+### Law #1: You are not allowed to write any production 
+### code unless it is to make a failing unit test pass.
