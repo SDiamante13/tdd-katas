@@ -1,7 +1,11 @@
 package tech.pathtoprogramming.fizzbuzz;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class FizzBuzzTest {
 
@@ -69,5 +73,14 @@ public class FizzBuzzTest {
 
         // Assert
         Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    void encoding() throws Exception {
+        String policyId = "161951410^289800^IL1^2707^1000^20180610";
+
+        String encodedPolicyId = URLEncoder.encode(policyId, "UTF-8");
+
+        Assertions.assertEquals("161951410%5E289800%5EIL1%5E2707%5E1000%5E20180610", encodedPolicyId);
     }
 }

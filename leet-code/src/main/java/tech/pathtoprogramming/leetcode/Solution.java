@@ -117,5 +117,32 @@ public class Solution {
 
         return 2*count + 2;
     }
+
+    // #38
+    public String countAndSay(int n) {
+        if (n == 1) {
+            return "1";
+        }
+        if (n == 2) {
+            return "11";
+        }
+        String lastOutput = "11";
+        int freq = 1;
+        int nextWindow = 0;
+        for (int c1 = nextWindow; c1 < lastOutput.length(); c1++) {
+            char digit = lastOutput.charAt(c1);
+            for (int c2 = 1; c2 < lastOutput.length(); c2++) {
+                if (digit == lastOutput.charAt(c2)) {
+                    freq++;
+                } else {
+                    nextWindow = c2;
+                    break;
+                }
+            }
+            lastOutput = String.valueOf(freq) + digit;
+            nextWindow = 1;
+        }
+        return lastOutput;
+    }
 }
 

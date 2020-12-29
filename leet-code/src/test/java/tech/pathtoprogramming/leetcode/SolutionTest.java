@@ -90,4 +90,12 @@ class SolutionTest {
 
         );
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1,1", "2,11", "3,21", "4,1211"})
+    void countAndSay(int input, String expected) {
+        String result = solution.countAndSay(input);
+
+        assertThat(result).isEqualTo(expected);
+    }
 }
