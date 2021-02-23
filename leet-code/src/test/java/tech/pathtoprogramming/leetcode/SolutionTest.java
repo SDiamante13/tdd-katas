@@ -1,5 +1,6 @@
 package tech.pathtoprogramming.leetcode;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -97,5 +98,31 @@ class SolutionTest {
         String result = solution.countAndSay(input);
 
         assertThat(result).isEqualTo(expected);
+    }
+
+    @Test
+    void orangesRotting() {
+        int[][] grid = new int[][]{
+                {2,1,1},
+                {1,1,0},
+                {0,1,1}
+        };
+        int result = solution.orangesRotting(grid);
+
+        assertThat(result).isEqualTo(4);
+
+    }
+
+    @Test
+    void orangesRotting_returnsNeg1_whenAnOrangeNeverRots() {
+        int[][] grid = new int[][]{
+                {2,1,1},
+                {0,1,1},
+                {1,0,1}
+        };
+        int result = solution.orangesRotting(grid);
+
+        assertThat(result).isEqualTo(-1);
+
     }
 }

@@ -129,14 +129,88 @@ public class Solution {
         int count = 1;
         int i = 1;
         while (i < lastResult.length() + 1) {
-            if (i < lastResult.length() && lastResult.charAt(i) == lastResult.charAt(i-1)) {
+            if (i < lastResult.length() && lastResult.charAt(i) == lastResult.charAt(i - 1)) {
                 count++;
             } else {
-                output += String.valueOf(count) + String.valueOf(lastResult.charAt(i-1));
+                output += String.valueOf(count) + String.valueOf(lastResult.charAt(i - 1));
             }
             i++;
         }
         return output;
     }
+
+    // #994 BFS optimize later, should be using Sets to store
+    public int orangesRotting(int[][] grid) {
+        // need to deal with -1 case
+        int count = 0;
+
+        int[][] newGrid = copyGrid(grid);
+
+        while (!isFullyRotten(newGrid)) {
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if (grid[i][j] == 1 && isRottenOrangeAdjacent(grid, i, j)) {
+                        newGrid[i][j] = 2;
+                    }
+                }
+            }
+            if (areGridsEqual(grid, newGrid)) {
+                return -1;
+            }
+            count++;
+            grid = copyGrid(newGrid);
+        }
+        return count;
+    }
+
+    private boolean areGridsEqual(int[][] grid, int[][] newGrid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] != newGrid[i][j]) return false;
+            }
+        }
+        return true;
+    }
+
+    private int[][] copyGrid(int[][] grid) {
+        int[][] copiedGrid = new int[grid.length][];
+        for (int i = 0; i < grid.length; ++i) {
+            copiedGrid[i] = new int[grid[i].length];
+            System.arraycopy(grid[i], 0, copiedGrid[i], 0, copiedGrid[i].length);
+        }
+        return copiedGrid;
+    }
+
+    private boolean isRottenOrangeOnLeft(int[][] grid, int i, int j) {
+        return j > 0 && grid[i][j - 1] == 2;
+    }
+
+    private boolean isRottenOrangeOnTop(int[][] grid, int i, int j) {
+        return i > 0 && grid[i - 1][j] == 2;
+    }
+
+    private boolean isRottenOrangeOnRight(int[][] grid, int i, int j) {
+        return j < grid[0].length - 1 && grid[i][j + 1] == 2;
+    }
+
+    private boolean isRottenOrangeOnBottom(int[][] grid, int i, int j) {
+        return i < grid.length - 1 && grid[i + 1][j] == 2;
+    }
+
+    private boolean isRottenOrangeAdjacent(int[][] grid, int i, int j) {
+        return isRottenOrangeOnLeft(grid, i, j) || isRottenOrangeOnTop(grid, i, j) || isRottenOrangeOnRight(grid, i, j) || isRottenOrangeOnBottom(grid, i, j);
+    }
+
+    private boolean isFullyRotten(int[][] grid) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
 
