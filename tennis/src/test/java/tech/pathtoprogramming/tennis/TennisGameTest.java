@@ -9,7 +9,7 @@ import static tech.pathtoprogramming.tennis.Player.PLAYER2;
 
 public class TennisGameTest {
 
-    private Scoreboard scoreboard = new Scoreboard(new PointConverter());
+    private final Scoreboard scoreboard = new Scoreboard(new PointConverter());
 
     @Test
     @DisplayName("getScore returns an initial score of 0-0")
@@ -75,5 +75,20 @@ public class TennisGameTest {
         String actualScore = tennisGame.score(PLAYER2);
 
         assertThat(actualScore).isEqualTo("Player 2 Wins!");
+    }
+
+    @Test
+    @DisplayName("score returns Deuce when both players score 40")
+    void score_deuce() {
+        TennisGame tennisGame = new TennisGame(scoreboard);
+
+        tennisGame.score(PLAYER2);
+        tennisGame.score(PLAYER2);
+        tennisGame.score(PLAYER2);
+        tennisGame.score(PLAYER1);
+        tennisGame.score(PLAYER1);
+        String actualScore = tennisGame.score(PLAYER1);
+
+        assertThat(actualScore).isEqualTo("Deuce");
     }
 }

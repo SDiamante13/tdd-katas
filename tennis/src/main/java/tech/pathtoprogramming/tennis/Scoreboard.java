@@ -11,6 +11,10 @@ public class Scoreboard {
         String player1Score = pointConverter.convertPointsToScore(player1Points);
         String player2Score = pointConverter.convertPointsToScore(player2Points);
 
+        if (player1Score.equals("40") && player2Score.equals("40")) {
+            return "Deuce";
+        }
+
         if (player1Score.equals("Winner")) {
             return "Player 1 Wins!";
         }
