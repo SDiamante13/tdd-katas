@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 public class TennisGameTest {
 
     @Test
-    @DisplayName("play returns an initial score of 0-0")
-    void play_initialScore() {
+    @DisplayName("getScore returns an initial score of 0-0")
+    void getScore_initialScore() {
         TennisGame tennisGame = new TennisGame();
 
-        String actualScore = tennisGame.play();
+        String actualScore = tennisGame.getScore();
 
         Assertions.assertThat(actualScore).isEqualTo("0-0");
     }
