@@ -37,5 +37,16 @@ public class TennisGameTest {
         assertThat(actualScore).isEqualTo("0-15");
     }
 
+    @Test
+    @DisplayName("score returns 30-0 when player 1 scores twice")
+    void score_player1ScoresThenPlayer2Scores() {
+        TennisGame tennisGame = new TennisGame();
+
+        tennisGame.score("Player 1");
+        String actualScore = tennisGame.score("Player 1");
+
+        assertThat(actualScore).isEqualTo("30-0");
+    }
+
 
 }
