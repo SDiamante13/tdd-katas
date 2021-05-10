@@ -7,6 +7,9 @@ public class TennisGame {
     }
 
     public String score(String playerWhoScored) {
-        return "15-0";
+        if (playerWhoScored.equals("Player 1"))
+            return "15-0";
+        else
+            return "0-15";
     }
 }

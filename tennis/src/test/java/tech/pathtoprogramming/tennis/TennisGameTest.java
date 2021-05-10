@@ -1,8 +1,9 @@
 package tech.pathtoprogramming.tennis;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TennisGameTest {
 
@@ -13,7 +14,7 @@ public class TennisGameTest {
 
         String actualScore = tennisGame.getScore();
 
-        Assertions.assertThat(actualScore).isEqualTo("0-0");
+        assertThat(actualScore).isEqualTo("0-0");
     }
 
     @Test
@@ -23,6 +24,18 @@ public class TennisGameTest {
 
         String actualScore = tennisGame.score("Player 1");
 
-        Assertions.assertThat(actualScore).isEqualTo("15-0");
+        assertThat(actualScore).isEqualTo("15-0");
     }
+
+    @Test
+    @DisplayName("score returns the new score after player 2 scores: 0-15")
+    void score_player2Scores() {
+        TennisGame tennisGame = new TennisGame();
+
+        String actualScore = tennisGame.score("Player 2");
+
+        assertThat(actualScore).isEqualTo("0-15");
+    }
+
+
 }
