@@ -3,11 +3,14 @@ package tech.pathtoprogramming.tennis;
 import java.util.HashMap;
 import java.util.Map;
 
+import static tech.pathtoprogramming.tennis.Player.PLAYER1;
+import static tech.pathtoprogramming.tennis.Player.PLAYER2;
+
 public class TennisGame {
 
     private int player1Score;
     private int player2Score;
-    private Map<Integer, Integer> pointsMap;
+    private final Map<Integer, Integer> pointsMap;
 
     public TennisGame() {
         this.player1Score = 0;
@@ -23,10 +26,10 @@ public class TennisGame {
         return pointsMap.get(player1Score) + "-" + pointsMap.get(player2Score);
     }
 
-    public String score(String playerWhoScored) {
-        if (playerWhoScored.equals("Player 1")) {
+    public String score(Player playerWhoScored) {
+        if (playerWhoScored.equals(PLAYER1)) {
             player1Score++;
-        } else {
+        } else if(playerWhoScored.equals(PLAYER2)) {
             player2Score++;
         }
         return getScore();

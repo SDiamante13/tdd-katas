@@ -22,7 +22,7 @@ public class TennisGameTest {
     void score_player1Scores() {
         TennisGame tennisGame = new TennisGame();
 
-        String actualScore = tennisGame.score("Player 1");
+        String actualScore = tennisGame.score(Player.PLAYER1);
 
         assertThat(actualScore).isEqualTo("15-0");
     }
@@ -32,7 +32,7 @@ public class TennisGameTest {
     void score_player2Scores() {
         TennisGame tennisGame = new TennisGame();
 
-        String actualScore = tennisGame.score("Player 2");
+        String actualScore = tennisGame.score(Player.PLAYER2);
 
         assertThat(actualScore).isEqualTo("0-15");
     }
@@ -42,8 +42,8 @@ public class TennisGameTest {
     void score_Player1ScoresTwice() {
         TennisGame tennisGame = new TennisGame();
 
-        tennisGame.score("Player 1");
-        String actualScore = tennisGame.score("Player 1");
+        tennisGame.score(Player.PLAYER1);
+        String actualScore = tennisGame.score(Player.PLAYER1);
 
         assertThat(actualScore).isEqualTo("30-0");
     }
@@ -53,9 +53,9 @@ public class TennisGameTest {
     void score_Player2ScoresThreeTimes() {
         TennisGame tennisGame = new TennisGame();
 
-        tennisGame.score("Player 2");
-        tennisGame.score("Player 2");
-        String actualScore = tennisGame.score("Player 2");
+        tennisGame.score(Player.PLAYER2);
+        tennisGame.score(Player.PLAYER2);
+        String actualScore = tennisGame.score(Player.PLAYER2);
 
         assertThat(actualScore).isEqualTo("0-40");
     }
