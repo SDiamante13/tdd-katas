@@ -8,29 +8,26 @@ import static tech.pathtoprogramming.tennis.Player.PLAYER2;
 
 public class TennisGame {
 
-    private int player1Score;
-    private int player2Score;
-    private final Map<Integer, Integer> pointsMap;
+    private int player1Points;
+    private int player2Points;
+    private Scoreboard scoreboard;
 
-    public TennisGame() {
-        this.player1Score = 0;
-        this.player2Score = 0;
-        pointsMap = new HashMap<>();
-        pointsMap.put(0, 0);
-        pointsMap.put(1, 15);
-        pointsMap.put(2, 30);
-        pointsMap.put(3, 40);
+    public TennisGame(Scoreboard scoreboard) {
+        this.scoreboard = scoreboard;
+
+        this.player1Points = 0;
+        this.player2Points = 0;
     }
 
     public String getScore() {
-        return pointsMap.get(player1Score) + "-" + pointsMap.get(player2Score);
+        return scoreboard.currentScore(player1Points, player2Points);
     }
 
     public String score(Player playerWhoScored) {
         if (playerWhoScored.equals(PLAYER1)) {
-            player1Score++;
+            player1Points++;
         } else if(playerWhoScored.equals(PLAYER2)) {
-            player2Score++;
+            player2Points++;
         }
         return getScore();
     }
