@@ -1,15 +1,20 @@
 package tech.pathtoprogramming.tennis;
 
 public class StandingsCalculator {
+
     public String calculate(int playerAScore, int playerBScore) {
         String result;
 
         if (checkIfGameIsWon(playerAScore, playerBScore)) {
-            result = playerAScore > playerBScore ? "PlayerA won" : "PlayerB won";
+            result = playerAScore > playerBScore ?
+                    "PlayerA won" :
+                    "PlayerB won";
         } else if (checkIfScoreIsDeuce(playerAScore, playerBScore)) {
             result = "deuce";
         } else if (checkIfScoreIsAdvantage(playerAScore, playerBScore)) {
-            result = playerAScore > playerBScore ? "advantage PlayerA" : "advantage PlayerB";
+            result = playerAScore > playerBScore ?
+                    "advantage PlayerA" :
+                    "advantage PlayerB";
         } else {
             result = translateScore(playerAScore);
             result += ":";
@@ -30,16 +35,16 @@ public class StandingsCalculator {
         return gameWon;
     }
 
-    private boolean checkIfScoreIsAdvantage(int playerAScore, int playerBScore) {
-        boolean isAdvantage = playerAScore >= 3 && playerBScore >= 3 && playerAScore != playerBScore;
-
-        return isAdvantage;
-    }
-
     private boolean checkIfScoreIsDeuce(int playerAScore, int playerBScore) {
         boolean isDeuce = playerAScore >= 3 && playerBScore >= 3 && playerAScore == playerBScore;
 
         return isDeuce;
+    }
+
+    private boolean checkIfScoreIsAdvantage(int playerAScore, int playerBScore) {
+        boolean isAdvantage = playerAScore >= 3 && playerBScore >= 3 && playerAScore != playerBScore;
+
+        return isAdvantage;
     }
 
     private String translateScore(int playerScore) {
@@ -56,7 +61,7 @@ public class StandingsCalculator {
                 result = "thirty";
                 break;
             case 3:
-                result = "fourty";
+                result = "forty";
                 break;
         }
 

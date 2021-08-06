@@ -13,7 +13,10 @@ public class Game {
     }
 
     public String score() {
-        return standingsCalculator.calculate(playerA.getScore(), playerB.getScore());
+        return standingsCalculator.calculate(
+                playerA.getScore(),
+                playerB.getScore()
+        );
     }
 
     public void playPoint(Player playerWinsPoint) {
