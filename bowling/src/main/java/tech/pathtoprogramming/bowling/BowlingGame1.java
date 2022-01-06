@@ -5,13 +5,13 @@ import tech.pathtoprogramming.bowling.model.Mark;
 
 import static tech.pathtoprogramming.bowling.model.Mark.*;
 
-public class BowlingGame {
+public class BowlingGame1 {
     private int score;
     private int frameScore;
     private BallState ballState;
     private Mark mark;
 
-    public BowlingGame() {
+    public BowlingGame1() {
         this.score = 0;
         this.ballState = BallState.FIRST_BALL;
         this.mark = NO_MARK;

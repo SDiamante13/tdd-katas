@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BowlingGameTest {
+class BowlingGame1Test {
 
-    private BowlingGame bowlingGame;
+    private BowlingGame1 bowlingGame;
 
     @BeforeEach
     void setUp() {
-        bowlingGame = new BowlingGame();
+        bowlingGame = new BowlingGame1();
     }
 
     @Test
