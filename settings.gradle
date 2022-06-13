@@ -11,4 +11,5 @@ include 'city-search'
 include 'word-wrap'
 include 'bowling'
 include 'game-of-life'
+include 'elevator'
 
