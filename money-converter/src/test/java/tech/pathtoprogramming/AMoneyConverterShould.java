@@ -29,4 +29,8 @@ class AMoneyConverterShould {
 
         assertThat(actualMoney).isEqualTo(expectedMoney);
     }
+
+    // pass in invalid base currency
+    // pass in invalid target currency
+    // pass in letters in basePrice
 }
