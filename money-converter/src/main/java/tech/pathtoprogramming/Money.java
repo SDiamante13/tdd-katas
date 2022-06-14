@@ -15,8 +15,14 @@ class Money {
         return new Money(BigDecimal.valueOf(Double.parseDouble(price)), Currency.valueOf(currency));
     }
 
+    public Currency currency() {
+        return currency;
+    }
+
     public static Money createMoney(BigDecimal price, String currency) {
         return new Money(price, Currency.valueOf(currency));
+
+
     }
 
     @Override
