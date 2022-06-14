@@ -1,17 +1,15 @@
 Code design:
 
-Money (currency, price)
+Money (price: BigDecimal, currency: Currency)
 
-private final CurrencyClient currencyClient;
-
-input: 100 USD -> EUR = 33 * 0.96 =
-
-Can we make it a pure function?
 
 ```java
-public convert(String price, String currency); // MoneyConverter
-public BigDecimal getConversionRate(Money startingMoney, Currency targetCurrency); // Interface :: CurrencyExchangeBoard
-public BigDecimal calculate(BigDecimal basePrice, BigDecimal conversionRate); // MoneyCalculator
+// MoneyConverter
+public Money convert(String basePrice, String baseCurrency, String targetCurrency); 
+// Interface :: CurrencyExchangeBoard
+public BigDecimal getExchangeRateFor(Money baseMoney, Currency targetCurrency);
+// MoneyCalculator
+public BigDecimal calculate(BigDecimal basePrice, BigDecimal exchangeRate); 
 ```
 
 ## test list - EndToEnd
