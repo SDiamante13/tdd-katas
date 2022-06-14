@@ -18,48 +18,10 @@ class EndToEndTest {
     }
 }
 
-class Money {
-private final BigDecimal price;
-private final Currency currency;
-
-    Money(BigDecimal price, Currency currency) {
-        this.price = price;
-        this.currency = currency;
-    }
-}
-
-enum Currency {
-    USD,
-    EUR,
-    GBP
-}
-
-class MoneyConverter {
-    private final ExchangeBoard exchangeBoard;
-    private final MoneyCalculator moneyCalculator;
-
-    MoneyConverter(ExchangeBoard exchangeBoard, MoneyCalculator moneyCalculator) {
-        this.exchangeBoard = exchangeBoard;
-        this.moneyCalculator = moneyCalculator;
-    }
-
-    public Money convert(String basePrice, String baseCurrency, String targetCurrency) {
-        throw new UnsupportedOperationException("Not implemented");
-    }
-}
-
 class FakeCurrencyExchangeBoard implements ExchangeBoard {
 
     @Override
     public BigDecimal getExchangeRateFor(Money baseMoney, Currency targetCurrency) {
         return BigDecimal.valueOf(0.96);
     }
-}
-
-interface ExchangeBoard {
-    BigDecimal getExchangeRateFor(Money baseMoney, Currency targetCurrency);
-}
-
-class MoneyCalculator {
-
 }
