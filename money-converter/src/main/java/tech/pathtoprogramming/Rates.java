@@ -1,5 +1,7 @@
 package tech.pathtoprogramming;
 
+import java.nio.charset.StandardCharsets;
+
 class Rates {
     private final double EUR;
     private final double USD;
@@ -19,5 +21,9 @@ class Rates {
         } else {
             return GBP;
         }
+        new String(input.getBytes(), StandardCharsets.);
+        Character.toChars("".code)
+                "".repl
+
     }
 }
