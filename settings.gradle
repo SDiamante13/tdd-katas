@@ -13,4 +13,5 @@ include 'bowling'
 include 'game-of-life'
 include 'elevator'
 include 'money-converter'
+include 'monopoly'
 
