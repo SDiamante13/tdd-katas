@@ -21,9 +21,5 @@ class Rates {
         } else {
             return GBP;
         }
-        new String(input.getBytes(), StandardCharsets.);
-        Character.toChars("".code)
-                "".repl
-
     }
 }

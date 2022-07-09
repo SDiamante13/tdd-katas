@@ -26,7 +26,7 @@ input: 100 USD -> EUR = 100 * 0.96 = 96
 
 ```java
 HttpRequest httpRequest = HttpRequest.newBuilder()
-        .header("apikey", "DSnpC3Zn1zf1VduVixFYJLfFSM7lNWxP")
+        .header("apikey", "secret")
         .uri(new URI("https://api.apilayer.com/fixer/latest?symbols=EUR&base=USD"))
         .build();
 
