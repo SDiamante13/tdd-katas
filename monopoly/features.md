@@ -51,7 +51,7 @@ Water Works
 Marvin Gardens
 Go To Jail
 Pacific Avenue
-North Carolina Avenue
+North Carolina *A*venue
 Community Chest
 Pennsylvania Avenue
 Short Line

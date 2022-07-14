@@ -10,6 +10,10 @@ public class Property {
         this.price = price;
     }
 
+    public String name() {
+        return name;
+    }
+
     public int price() {
         return this.price;
     }
