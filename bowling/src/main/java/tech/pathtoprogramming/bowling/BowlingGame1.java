@@ -3,6 +3,7 @@ package tech.pathtoprogramming.bowling;
 import tech.pathtoprogramming.bowling.model.BallState;
 import tech.pathtoprogramming.bowling.model.Mark;
 
+import static tech.pathtoprogramming.bowling.model.BallState.*;
 import static tech.pathtoprogramming.bowling.model.Mark.*;
 
 public class BowlingGame1 {
@@ -13,7 +14,7 @@ public class BowlingGame1 {
 
     public BowlingGame1() {
         this.score = 0;
-        this.ballState = BallState.FIRST_BALL;
+        this.ballState = FIRST_BALL;
         this.mark = NO_MARK;
     }
 
@@ -25,7 +26,8 @@ public class BowlingGame1 {
         addToTotalScore(pins);
         addToFrameScore(pins);
 
-        if (this.ballState.equals(BallState.FIRST_BALL)) {
+        if (this.ballState.equals(FIRST_BALL)) {
+            BallState.values()
             if (mark.equals(STRIKE)) {
                 addToTotalScore(pins);
             }
@@ -42,7 +44,7 @@ public class BowlingGame1 {
             }
 
             completeRoll();
-        } else if (ballState.equals(BallState.SECOND_BALL)) {
+        } else if (ballState.equals(SECOND_BALL)) {
             if (mark.equals(STRIKE)) {
                 addToTotalScore(pins);
             }
