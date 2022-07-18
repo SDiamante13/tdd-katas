@@ -24,47 +24,92 @@ class AShoppingBasketShould {
         put("eggs", 50);
     }};
 
+
+    public static final HashMap<String, Integer> one = new HashMap<>() {{
+        put("eggs", 50);
+    }};
+
     @Test
     void haveZeroTotalForNoItems() {
-        float actualTotalPrice = aBasketWith(NO_ITEMS).calculateTotalPrice();
+        float actualTotalPrice = new ShoppingBasket(Items.of()).calculateTotalPrice();
 
         assertThat(actualTotalPrice).isZero();
     }
 
     @Test
     void calculateTotalPriceOfOneItem() {
-        float actualTotalPrice = aBasketWith(ONE_ITEM).calculateTotalPrice();
+        float actualTotalPrice = new ShoppingBasket(
+                Items.of(
+                        new Item("eggs", 50)
+                ))
+                .calculateTotalPrice();
 
         assertThat(actualTotalPrice).isEqualTo(50);
     }
 
     @Test
     void twoItems() {
-        float actualTotalPrice = aBasketWith(new HashMap<>() {{
-            put("eggs", 50);
-            put("milk", 3);
-        }}).calculateTotalPrice();
+        float actualTotalPrice = new ShoppingBasket(Items.of(new Item("eggs", 50), new Item("milk", 3))).calculateTotalPrice();
 
         assertThat(actualTotalPrice).isEqualTo(50 + 3);
 
     }
 
-    private ShoppingBasket aBasketWith(Map<String, Integer> items) {
-        return new ShoppingBasket(items);
-    }
-
 }
 
 class ShoppingBasket {
-    private Map<String, Integer> items;
+    private final Items newItems;
 
-    public ShoppingBasket(Map<String, Integer> items) {
-        this.items = items;
+    public ShoppingBasket(Items newItems) {
+        this.newItems = newItems;
     }
 
     public float calculateTotalPrice() {
+        return newItems.total();
+    }
+}
+
+class Items {
+    private final Map<String, Item> items;
+
+    public static Items of(Item... itemList) {
+        return new Items(itemList);
+    }
+
+    private Items(Item... newItems) {
+        items = new HashMap<>();
+
+        for (Item newItem : newItems) {
+            this.items.put(newItem.getName(), newItem);
+        }
+    }
+    // wrote too much code here. The get is not necessary since items calculate its own total
+//    public Item get(String name) {
+//        return items.get(name);
+//    }
+
+    public float total() {
         return items.values().stream()
-                .reduce(Integer::sum)
-                .orElse(0);
+                .map(Item::getUnitPrice)
+                .reduce(Float::sum)
+                .orElse(0.0f);
+    }
+}
+
+class Item {
+    private final String name;
+    private final float unitPrice;
+
+    Item(String name, float unitPrice) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getUnitPrice() {
+        return unitPrice;
     }
 }
