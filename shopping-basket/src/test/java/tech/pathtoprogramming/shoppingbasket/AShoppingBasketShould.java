@@ -2,7 +2,6 @@ package tech.pathtoprogramming.shoppingbasket;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AShoppingBasketShould {
 
     private static final Map<String, Integer> NO_ITEMS = Map.of();
+    public static final HashMap<String, Integer> ONE_ITEM = new HashMap<>() {{
+        put("eggs", 50);
+    }};
 
     @Test
     void haveZeroTotalForNoItems() {
@@ -31,16 +33,13 @@ class AShoppingBasketShould {
 
     @Test
     void calculateTotalPriceOfOneItem() {
-        float actualTotalPrice = aBasketWith(new HashMap<>() {{
-            put("eggs", 50);
-        }}).calculateTotalPrice();
+        float actualTotalPrice = aBasketWith(ONE_ITEM).calculateTotalPrice();
 
         assertThat(actualTotalPrice).isEqualTo(50);
     }
 
     private ShoppingBasket aBasketWith(Map<String, Integer> items) {
-        ShoppingBasket shoppingBasket = new ShoppingBasket(items);
-        return shoppingBasket;
+        return new ShoppingBasket(items);
     }
 
 }
