@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tech.pathtoprogramming.shoppingbasket.Items.*;
+import static tech.pathtoprogramming.shoppingbasket.Items.of;
 
 // test list:
 
@@ -44,6 +44,18 @@ class AShoppingBasketShould {
 
         assertThat(actualTotalPrice).isEqualTo(50 + 3);
     }
+
+    // 1 item of $25, 2 items of $ 49
+
+    @Test
+    void calculateTotalPriceOfMultipleItemsOfSameName() {
+        float actualTotalPrice = new ShoppingBasket(of(
+                new Item("steak", 33, 3)
+        )).calculateTotalPrice();
+
+        assertThat(actualTotalPrice).isEqualTo(99);
+
+    }
 }
 
 class ShoppingBasket {
@@ -75,16 +87,17 @@ class Items {
 
     public float total() {
         return items.values().stream()
-                .map(Item::getUnitPrice)
+                .map(Item::itemSubtotal)
                 .reduce(Float::sum)
                 .orElse(0.0f);
     }
+
 }
 
 class Item {
     private final String name;
     private final float unitPrice;
-    private int quantity;
+    private final int quantity;
 
     Item(String name, float unitPrice, int quantity) {
         this.name = name;
@@ -96,7 +109,7 @@ class Item {
         return name;
     }
 
-    public float getUnitPrice() {
-        return unitPrice;
+    float itemSubtotal() {
+        return unitPrice * quantity;
     }
 }
