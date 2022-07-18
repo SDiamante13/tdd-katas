@@ -19,6 +19,9 @@ import static tech.pathtoprogramming.shoppingbasket.Items.of;
 
 class AShoppingBasketShould {
 
+    private static final float FIVE_PERCENT_DISCOUNT = 1 - 0.05f;
+    private static final float TEN_PERCENT_DISCOUNT = 1 - 0.1f;
+
     @Test
     void haveZeroTotalPriceForNoItems() {
         float actualTotalPrice = new ShoppingBasket(of()).calculateTotalPrice();
@@ -29,23 +32,22 @@ class AShoppingBasketShould {
     @Test
     void calculateTotalPriceOfOneItem() {
         float actualTotalPrice = new ShoppingBasket(of(
-                new Item("eggs", 50, 1)
+                new Item("eggs", 5, 1)
         )).calculateTotalPrice();
 
-        assertThat(actualTotalPrice).isEqualTo(50);
+        assertThat(actualTotalPrice).isEqualTo(5);
     }
 
     @Test
     void calculateTotalPriceOfTwoItems() {
         float actualTotalPrice = new ShoppingBasket(of(
-                new Item("eggs", 50, 1),
+                new Item("eggs", 5, 1),
                 new Item("milk", 3, 1)
         )).calculateTotalPrice();
 
-        assertThat(actualTotalPrice).isEqualTo(50 + 3);
+        assertThat(actualTotalPrice).isEqualTo(5 + 3);
     }
 
-    // 1 item of $25, 2 items of $ 49
 
     @Test
     void calculateTotalPriceOfMultipleItemsOfSameName() {
@@ -54,19 +56,38 @@ class AShoppingBasketShould {
         )).calculateTotalPrice();
 
         assertThat(actualTotalPrice).isEqualTo(99);
+    }
 
+    @Test
+    void calculateTotalPriceAppliesDiscountForOrderOver100() {
+        float actualTotalPrice = new ShoppingBasket(of(
+                new Item("clothes", 100, 1),
+                new Item("milk", 3, 1)
+        )).calculateTotalPrice();
+
+        assertThat(actualTotalPrice).isEqualTo(103 * FIVE_PERCENT_DISCOUNT);
     }
 }
 
 class ShoppingBasket {
-    private final Items newItems;
+    public static final float FIVE_PERCENT_DISCOUNT = 0.05f;
+    private final Items items;
 
     public ShoppingBasket(Items newItems) {
-        this.newItems = newItems;
+        this.items = newItems;
     }
 
     public float calculateTotalPrice() {
-        return newItems.total();
+        float totalPrice = items.total();
+        return totalPrice - discountFor(totalPrice);
+    }
+
+    private float discountFor(float totalPrice) {
+        if (totalPrice > 100) {
+            return totalPrice * FIVE_PERCENT_DISCOUNT;
+        } else {
+            return 0;
+        }
     }
 }
 
