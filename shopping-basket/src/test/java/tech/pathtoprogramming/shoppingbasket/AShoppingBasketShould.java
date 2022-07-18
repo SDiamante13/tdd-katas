@@ -29,7 +29,7 @@ class AShoppingBasketShould {
     @Test
     void calculateTotalPriceOfOneItem() {
         float actualTotalPrice = new ShoppingBasket(of(
-                new Item("eggs", 50)
+                new Item("eggs", 50, 1)
         )).calculateTotalPrice();
 
         assertThat(actualTotalPrice).isEqualTo(50);
@@ -38,14 +38,12 @@ class AShoppingBasketShould {
     @Test
     void calculateTotalPriceOfTwoItems() {
         float actualTotalPrice = new ShoppingBasket(of(
-                new Item("eggs", 50),
-                new Item("milk", 3)
+                new Item("eggs", 50, 1),
+                new Item("milk", 3, 1)
         )).calculateTotalPrice();
 
         assertThat(actualTotalPrice).isEqualTo(50 + 3);
     }
-
-
 }
 
 class ShoppingBasket {
@@ -86,10 +84,12 @@ class Items {
 class Item {
     private final String name;
     private final float unitPrice;
+    private int quantity;
 
-    Item(String name, float unitPrice) {
+    Item(String name, float unitPrice, int quantity) {
         this.name = name;
         this.unitPrice = unitPrice;
+        this.quantity = quantity;
     }
 
     public String getName() {
