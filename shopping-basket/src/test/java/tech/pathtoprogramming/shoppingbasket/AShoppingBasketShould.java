@@ -67,9 +67,21 @@ class AShoppingBasketShould {
 
         assertThat(actualTotalPrice).isEqualTo(103 * FIVE_PERCENT_DISCOUNT);
     }
+
+
+    @Test
+    void calculateTotalPriceAppliesDiscountForOrderOver200() {
+        float actualTotalPrice = new ShoppingBasket(of(
+                new Item("pots", 20, 5),
+                new Item("flowers", 30, 10)
+        )).calculateTotalPrice();
+
+        assertThat(actualTotalPrice).isEqualTo(400 * TEN_PERCENT_DISCOUNT);
+    }
 }
 
 class ShoppingBasket {
+    public static final float TEN_PERCENT_DISCOUNT = 0.1f;
     public static final float FIVE_PERCENT_DISCOUNT = 0.05f;
     private final Items items;
 
@@ -83,11 +95,13 @@ class ShoppingBasket {
     }
 
     private float discountFor(float totalPrice) {
+        if (totalPrice > 200) {
+            return totalPrice * TEN_PERCENT_DISCOUNT;
+        }
         if (totalPrice > 100) {
             return totalPrice * FIVE_PERCENT_DISCOUNT;
-        } else {
-            return 0;
         }
+        return 0;
     }
 }
 
