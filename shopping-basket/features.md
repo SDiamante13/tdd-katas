@@ -18,3 +18,15 @@ Normally the total price is the sum of unit price * quantity for all the items. 
 
 * This basket qualifies for a 5% discount and the total price is $151.94
 
+## Test List
+
+total price of all items in basket including discount
+more than $100, 5%
+more than $200, 10%
+
+ShoppingBasket has a list
+
+populate the basket with Items <unitPrice, quantity>
+
+
+
