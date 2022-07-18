@@ -2,9 +2,6 @@ package tech.pathtoprogramming.shoppingbasket;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static tech.pathtoprogramming.shoppingbasket.Items.of;
 import static tech.pathtoprogramming.shoppingbasket.ShoppingBasket.FIVE_PERCENT_DISCOUNT;
@@ -69,6 +66,20 @@ class AShoppingBasketShould {
 
         float discount = 400 * TEN_PERCENT_DISCOUNT;
         assertThat(actualTotalPrice).isEqualTo(400 - discount);
+    }
+
+    @Test
+    void findOutTheQuantityOfAParticularItem() {
+        ShoppingBasket shoppingBasket = new ShoppingBasket(of(
+                new Item("eggs", 5, 1),
+                new Item("milk", 5, 2),
+                new Item("steak", 5, 3)
+        ));
+
+
+        assertThat(shoppingBasket.getItemQuantity("eggs")).isEqualTo(1);
+        assertThat(shoppingBasket.getItemQuantity("milk")).isEqualTo(2);
+        assertThat(shoppingBasket.getItemQuantity("steak")).isEqualTo(3);
     }
 }
 

@@ -15,6 +15,10 @@ class Item {
         return name;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     float itemSubtotal() {
         return unitPrice * quantity;
     }

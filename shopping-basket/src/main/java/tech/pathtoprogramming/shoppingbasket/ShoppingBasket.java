@@ -23,4 +23,8 @@ class ShoppingBasket {
         }
         return 0;
     }
+
+    public int getItemQuantity(String itemName) {
+        return items.get(itemName).getQuantity();
+    }
 }

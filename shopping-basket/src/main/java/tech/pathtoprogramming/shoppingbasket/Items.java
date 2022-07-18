@@ -25,4 +25,7 @@ class Items {
                 .orElse(0.0f);
     }
 
+    public Item get(String itemName) {
+        return itemMap.get(itemName);
+    }
 }
