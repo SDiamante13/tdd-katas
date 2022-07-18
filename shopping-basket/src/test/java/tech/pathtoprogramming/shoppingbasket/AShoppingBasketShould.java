@@ -38,6 +38,17 @@ class AShoppingBasketShould {
         assertThat(actualTotalPrice).isEqualTo(50);
     }
 
+    @Test
+    void twoItems() {
+        float actualTotalPrice = aBasketWith(new HashMap<>() {{
+            put("eggs", 50);
+            put("milk", 3);
+        }}).calculateTotalPrice();
+
+        assertThat(actualTotalPrice).isEqualTo(50 + 3);
+
+    }
+
     private ShoppingBasket aBasketWith(Map<String, Integer> items) {
         return new ShoppingBasket(items);
     }
@@ -52,7 +63,8 @@ class ShoppingBasket {
     }
 
     public float calculateTotalPrice() {
-        if (items.containsKey("eggs")) return 50;
-        return 0;
+        return items.values().stream()
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 }
