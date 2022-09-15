@@ -18,6 +18,7 @@ class Items {
         }
     }
 
+
     public float total() {
         return itemMap.values().stream()
                 .map(Item::itemSubtotal)
