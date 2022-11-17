@@ -1,5 +1,7 @@
 package texasholdem;
 
+import org.assertj.core.groups.Tuple;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,10 @@ class Player {
     // TODO: code smell primitive obsession
     private final List<String> possibleCardsList;
     // TODO: code smell primitive obsession
-    private final int chips;
+    private int chips;
 
-    Player(UserInput userInput) {
-        this.userInput = userInput;
+    Player() {
+        this.userInput = new UserInput(System.in);
         this.cards = new ArrayList<>();
         // TODO: move to Cards
         this.possibleCardsList = List.of("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A");
@@ -41,6 +43,17 @@ class Player {
     }
 
     public Choice makeChoice() {
-        return Choice.CHECK;
+        String choice = userInput.read();
+        if (choice.equals("C")); {
+            return new Choice("C");
+        }
+//        if (choice.contains("B")) {
+//            return new Choice("B", Integer.parseInt(choice.split("B")[1]));
+//        }
+
+    }
+
+    public void takeChipsAway(int amount) {
+        chips -= amount;
     }
 }
