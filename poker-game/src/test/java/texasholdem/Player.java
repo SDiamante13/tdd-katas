@@ -1,18 +1,21 @@
 package texasholdem;
 
-import org.assertj.core.groups.Tuple;
-
 import java.util.ArrayList;
 import java.util.List;
 
 class Player {
 
     private final UserInput userInput;
+
+    // TODO: separate state data from UserInput
     private final List<String> cards;
     // TODO: code smell primitive obsession
     private final List<String> possibleCardsList;
     // TODO: code smell primitive obsession
     private int chips;
+    private boolean didFold; // this is bad,
+    // a player should not be tied to a Hand,
+    // they should exist in a gAme
 
     Player() {
         this.userInput = new UserInput(System.in);
@@ -44,16 +47,24 @@ class Player {
 
     public Choice makeChoice() {
         String choice = userInput.read();
-        if (choice.equals("C")); {
+        if (choice.equals("C")) ;
+        {
             return new Choice("C");
         }
-//        if (choice.contains("B")) {
-//            return new Choice("B", Integer.parseInt(choice.split("B")[1]));
-//        }
-
+/        if (choice.contains("B")) {
+/            return new Choice("B", Integer.parseInt(choice.split("B")[1]));
+/        }
     }
 
     public void takeChipsAway(int amount) {
         chips -= amount;
+    }
+
+    public boolean didNotFold() {
+        return !didFold;
+    }
+
+    public void fold() {
+        this.didFold = true;
     }
 }

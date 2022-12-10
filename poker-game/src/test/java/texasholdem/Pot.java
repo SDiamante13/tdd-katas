@@ -3,8 +3,12 @@ package texasholdem;
 public class Pot {
     private int amount;
 
-    public Pot() {
-        this.amount = 0;
+    private Pot(int amount) {
+        this.amount = amount;
+    }
+
+    public static Pot EMPTY() {
+        return new Pot(0);
     }
 
     public int amount() {

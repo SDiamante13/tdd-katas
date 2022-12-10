@@ -1,7 +1,6 @@
 package texasholdem;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +10,6 @@ import static texasholdem.Choice.*;
 
 class FeatureTest {
 
-    public static final int FIRST = 0;
     private Player spyPlayer1;
     private Player spyPlayer2;
     private Player[] players;
@@ -27,7 +25,7 @@ class FeatureTest {
                 .extracting(Player::numberOfCards)
                 .contains(0, 0);
 
-        new Game(new Pot(), players)
+        new Hand(Pot.EMPTY(), players)
                 .deal();
 
         assertThat(players)
@@ -47,8 +45,8 @@ class FeatureTest {
         stubPlayerChoiceTo(spyPlayer1, check());
         stubPlayerChoiceTo(spyPlayer2, check());
 
-        new Game(new Pot(), players)
-                .bettingRound();
+        new Hand(Pot.EMPTY(), players)
+                .bet();
 
         assertThat(players)
                 .extracting(Player::chips)
@@ -60,10 +58,10 @@ class FeatureTest {
         stubPlayerChoiceTo(spyPlayer1, check());
         stubPlayerChoiceTo(spyPlayer2, bet(10));
 
-        Pot pot = new Pot();
-        Game game = new Game(pot, players);
+        Pot pot = Pot.EMPTY();
+        Hand hand = new Hand(pot, players);
 
-        game.bettingRound();
+        hand.bet();
 
         assertThat(players)
                 .extracting(Player::chips)
@@ -72,20 +70,18 @@ class FeatureTest {
     }
 
     @Test
-    @Disabled
-    void each_player_can_choose_to_fold_thus_dropping_them_from_the_hand() {
+    void each_player_can_choose_to_fold_their_cards() {
         stubPlayerChoiceTo(spyPlayer1, bet(50));
         stubPlayerChoiceTo(spyPlayer2, fold());
 
-        Pot pot = new Pot();
-        Game game = new Game(pot, players);
+        Pot pot = Pot.EMPTY();
+        Hand hand = new Hand(pot, players);
 
-        game.bettingRound();
+        hand.bet();
 
         assertThat(players)
                 .extracting(Player::chips)
                 .containsOnly(50);
-        assertThat(pot.amount()).isEqualTo(10);
     }
 
     private void stubPlayerChoiceTo(Player player, Choice choice) {

@@ -2,12 +2,12 @@ package texasholdem;
 
 class Choice {
 
-    public static final String CHECK_VALUE = "C";
-    public static final String BET_VALUE = "B";
-    public static final String FOLD_VALUE = "F";
+    public static final String CHECK = "C";
+    public static final String BET = "B";
+    public static final String FOLD = "F";
 
-    private String value;
-    private int amount;
+    private final String value;
+    private final int amount;
 
     public Choice(String value) {
         this.value = value;
@@ -35,15 +35,11 @@ class Choice {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public int amount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    boolean choseToFold() {
+        return value.equals("F");
     }
 }
