@@ -1,51 +1,54 @@
 package tech.pathtoprogramming.gameoflife;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CellTest {
 
-
     @Test
     void deadCellWithThreeLiveNeighborsBecomesLiveCell() {
         int liveNeighbors = 3;
-        Cell cell = new Cell(0);
+        Cell cell = new Cell(State.DEAD);
 
         cell.updateState(liveNeighbors);
 
-        assertThat(cell.currentState()).isEqualTo(1);
+        assertThat(cell.currentState()).isEqualTo(State.ALIVE);
     }
 
     @Test
     void liveCellWithMoreThanThreeLiveNeighborsDies() {
         int liveNeighbors = 4;
-        Cell cell = new Cell(1);
+        Cell cell = new Cell(State.ALIVE);
 
         cell.updateState(liveNeighbors);
 
-        assertThat(cell.currentState()).isEqualTo(0);
+        assertThat(cell.currentState()).isEqualTo(State.DEAD);
     }
+}
+
+enum State {
+    ALIVE,
+    DEAD
 }
 
 class Cell {
 
-    private int state;
+    private State state;
 
-    public Cell(int state) {
+    public Cell(State state) {
         this.state = state;
     }
 
     public void updateState(int liveNeighbors) {
         if (liveNeighbors > 3) {
-            this.state = 0;
+            this.state = State.DEAD;
         } else {
-            this.state = 1;
+            this.state = State.ALIVE;
         }
     }
 
-    public int currentState() {
+    public State currentState() {
         return this.state;
     }
 }
