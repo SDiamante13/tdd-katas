@@ -48,29 +48,3 @@ class CellTest {
 
     }
 }
-
-enum State {
-    ALIVE,
-    DEAD
-}
-
-class Cell {
-
-    private State state;
-
-    public Cell(State state) {
-        this.state = state;
-    }
-
-    public void updateState(int liveNeighbors) {
-        if (liveNeighbors > 3 || liveNeighbors < 2) {
-            this.state = State.DEAD;
-        } else {
-            this.state = State.ALIVE;
-        }
-    }
-
-    public State currentState() {
-        return this.state;
-    }
-}
