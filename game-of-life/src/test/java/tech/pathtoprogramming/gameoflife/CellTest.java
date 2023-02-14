@@ -1,13 +1,15 @@
 package tech.pathtoprogramming.gameoflife;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CellTest {
 
     @Test
-    void deadCellWithExactlyThreeLiveNeighborsBecomesLiveCell() {
+    void deadCellWithExactly3LiveNeighborsBecomesLiveCell() {
         int liveNeighbors = 3;
         Cell cell = new Cell(State.DEAD);
 
@@ -16,9 +18,9 @@ class CellTest {
         assertThat(cell.currentState()).isEqualTo(State.ALIVE);
     }
 
-    @Test
-    void aliveCellWithMoreThanThreeLiveNeighborsDies() {
-        int liveNeighbors = 4;
+    @ParameterizedTest(name = "alive cell dies with {0} live neighbors")
+    @ValueSource(ints = {4, 5, 6, 7, 8, 9, 10})
+    void aliveCellWithMoreThan3LiveNeighborsDies(int liveNeighbors) {
         Cell cell = new Cell(State.ALIVE);
 
         cell.updateState(liveNeighbors);
@@ -26,43 +28,24 @@ class CellTest {
         assertThat(cell.currentState()).isEqualTo(State.DEAD);
     }
 
-    @Test
-    void aliveCellWithOneLiveNeighborsDies() {
-        int liveNeighbors = 1;
+    @ParameterizedTest(name = "alive cell dies with {0} live neighbors")
+    @ValueSource(ints = {0, 1})
+    void aliveCellWithFewerThan2LiveNeighborsDies(int liveNeighbors) {
         Cell cell = new Cell(State.ALIVE);
 
         cell.updateState(liveNeighbors);
         assertThat(cell.currentState()).isEqualTo(State.DEAD);
     }
 
-    @Test
-    void aliveCellWithZeroLiveNeighborsDies() {
-        int liveNeighbors = 0;
-        Cell cell = new Cell(State.ALIVE);
-
-        cell.updateState(liveNeighbors);
-        assertThat(cell.currentState()).isEqualTo(State.DEAD);
-    }
-
-    @Test
-    void aliveCellWithTwoNeighborsLives() {
-        int liveNeighbors = 2;
+    @ParameterizedTest(name = "alive cell lives with {0} neighbors")
+    @ValueSource(ints = {2, 3})
+    void aliveCellWith2Or3LiveNeighborsLives(int liveNeighbors) {
         Cell cell = new Cell(State.ALIVE);
 
         cell.updateState(liveNeighbors);
 
         assertThat(cell.currentState()).isEqualTo(State.ALIVE);
 
-    }
-
-    @Test
-    void aliveCellWithThreeNeighborsLives() {
-        int liveNeighbors = 3;
-        Cell cell = new Cell(State.ALIVE);
-
-        cell.updateState(liveNeighbors);
-
-        assertThat(cell.currentState()).isEqualTo(State.ALIVE);
     }
 }
 
