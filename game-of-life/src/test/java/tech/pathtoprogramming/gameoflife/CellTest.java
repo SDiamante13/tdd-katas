@@ -7,16 +7,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CellTest {
 
-    private static final Cell DEAD_CELL = new Cell(0);
 
     @Test
     void deadCellWithThreeLiveNeighborsBecomesLiveCell() {
         int liveNeighbors = 3;
-        Cell cell = DEAD_CELL;
+        Cell cell = new Cell(0);
 
         cell.updateState(liveNeighbors);
 
         assertThat(cell.currentState()).isEqualTo(1);
+    }
+
+    @Test
+    void liveCellWithMoreThanThreeLiveNeighborsDies() {
+        int liveNeighbors = 4;
+        Cell cell = new Cell(1);
+
+        cell.updateState(liveNeighbors);
+
+        assertThat(cell.currentState()).isEqualTo(0);
     }
 }
 
@@ -29,15 +38,14 @@ class Cell {
     }
 
     public void updateState(int liveNeighbors) {
-        this.state = 1;
+        if (liveNeighbors > 3) {
+            this.state = 0;
+        } else {
+            this.state = 1;
+        }
     }
 
     public int currentState() {
         return this.state;
     }
 }
-
-// Grid of Cells with States
-// 0 0 0       0 0 0
-// 0 0 0  -->  0 0 0
-// 1 1 0       0 0 0
