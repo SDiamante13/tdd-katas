@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CellTest {
 
     @Test
-    void deadCellWithThreeLiveNeighborsBecomesLiveCell() {
+    void deadCellWithExactlyThreeLiveNeighborsBecomesLiveCell() {
         int liveNeighbors = 3;
         Cell cell = new Cell(State.DEAD);
 
@@ -17,13 +17,52 @@ class CellTest {
     }
 
     @Test
-    void liveCellWithMoreThanThreeLiveNeighborsDies() {
+    void aliveCellWithMoreThanThreeLiveNeighborsDies() {
         int liveNeighbors = 4;
         Cell cell = new Cell(State.ALIVE);
 
         cell.updateState(liveNeighbors);
 
         assertThat(cell.currentState()).isEqualTo(State.DEAD);
+    }
+
+    @Test
+    void aliveCellWithOneLiveNeighborsDies() {
+        int liveNeighbors = 1;
+        Cell cell = new Cell(State.ALIVE);
+
+        cell.updateState(liveNeighbors);
+        assertThat(cell.currentState()).isEqualTo(State.DEAD);
+    }
+
+    @Test
+    void aliveCellWithZeroLiveNeighborsDies() {
+        int liveNeighbors = 0;
+        Cell cell = new Cell(State.ALIVE);
+
+        cell.updateState(liveNeighbors);
+        assertThat(cell.currentState()).isEqualTo(State.DEAD);
+    }
+
+    @Test
+    void aliveCellWithTwoNeighborsLives() {
+        int liveNeighbors = 2;
+        Cell cell = new Cell(State.ALIVE);
+
+        cell.updateState(liveNeighbors);
+
+        assertThat(cell.currentState()).isEqualTo(State.ALIVE);
+
+    }
+
+    @Test
+    void aliveCellWithThreeNeighborsLives() {
+        int liveNeighbors = 3;
+        Cell cell = new Cell(State.ALIVE);
+
+        cell.updateState(liveNeighbors);
+
+        assertThat(cell.currentState()).isEqualTo(State.ALIVE);
     }
 }
 
@@ -41,7 +80,7 @@ class Cell {
     }
 
     public void updateState(int liveNeighbors) {
-        if (liveNeighbors > 3) {
+        if (liveNeighbors > 3 || liveNeighbors < 2) {
             this.state = State.DEAD;
         } else {
             this.state = State.ALIVE;
