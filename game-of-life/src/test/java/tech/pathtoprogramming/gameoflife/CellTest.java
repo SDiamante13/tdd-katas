@@ -45,6 +45,5 @@ class CellTest {
         cell.updateState(liveNeighbors);
 
         assertThat(cell.currentState()).isEqualTo(State.ALIVE);
-
     }
 }

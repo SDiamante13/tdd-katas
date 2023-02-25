@@ -1,6 +1,6 @@
 package tech.pathtoprogramming.gameoflife;
 
-class Cell {
+public class Cell {
 
     private State state;
 

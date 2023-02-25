@@ -17,28 +17,26 @@ class GridTest {
     // - zero
     // - one
 
-
     private static final Cell[][] O =
     new Cell[][]{{new Cell(State.ALIVE)}};
     private static final Cell[][] X =
     new Cell[][]{{new Cell(State.DEAD)}};
-    private static final Cell[][] EMPTY =
-            new Cell[][]{{}};
+
 
     @Test
     void creatingAnEmptyGridThrowsAnIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Grid(EMPTY));
+                () -> new Grid(""));
     }
 
     @Test
     void gridWith1LiveCellBecomesDeadCell() {
-        Grid grid = new Grid(O);
+        Grid grid = new Grid("O");
 
         grid.update();
 
         assertThat(grid.cells())
-                .isDeepEqualTo(X);
+                .isEqualTo("X");
     }
 
     // need to know how many live neighbors a cell has
