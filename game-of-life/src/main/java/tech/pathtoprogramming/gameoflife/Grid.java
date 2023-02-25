@@ -5,7 +5,18 @@ class Grid {
     private final Cell[][] cells;
 
     public Grid(Cell[][] cells) {
+        validate(cells);
         this.cells = cells;
+    }
+
+    private static void validate(Cell[][] cells) {
+        if (isEmpty(cells)) {
+            throw new IllegalArgumentException("Cannot have a empty grid of the game of life.");
+        }
+    }
+
+    private static boolean isEmpty(Cell[][] cells) { // primitive obsession
+        return cells == null || cells.length == 0 || cells[0].length == 0;
     }
 
     public void update() {
