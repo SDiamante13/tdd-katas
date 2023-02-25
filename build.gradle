@@ -3,7 +3,7 @@ buildscript {
     ext {
         jUnitVersion='5.6.0'
         mockitoVersion='3.3.3'
-        assertJVersion='3.15.0'
+        assertJVersion='3.24.2'
     }
 
     repositories {
