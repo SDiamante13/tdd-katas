@@ -2,11 +2,9 @@
 
 ## Features
 
-Deal 2 cards face down to each player
-
-Card has a value and suit
-
-Players bet on the strength their cards (User Input) (check, bet, fold)
+- [x] Deal 2 cards face down to each player
+- [x] Card has a value and suit
+- [x] Players bet on the strength their cards (User Input) (check, bet, fold)
 
 ### Flop
 
@@ -36,3 +34,4 @@ Winner receives the chips in the pot.
 ## Out of Scope
 
 Betting Round implemented later
+Validation for user input

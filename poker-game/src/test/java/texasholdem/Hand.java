@@ -21,6 +21,7 @@ class Hand {
     //
     private final Pot pot;
     private final List<Player> players;
+    private List<String> communityCards;
 
     public Hand(Pot pot, Player... players) {
         this.pot = pot;
@@ -36,9 +37,9 @@ class Hand {
 
 
     public void deal() {
-        for (Player player : players) {
+        for (Player player : this.players) {
             player.addCard();
-            player.addCard();
+//            player.addCard();
         }
     }
 
@@ -50,12 +51,12 @@ class Hand {
                     int bettingAmount = choice.amount();
                     player.bet(bettingAmount);
                     pot.add(bettingAmount);
+                    System.out.println("Player Bets. Pot: " + pot.amount());
                 }
 
                 if (choice.choseToFold()) {
                     player.fold();
                     allPlayersFold();
-
                 }
             }
         }
@@ -74,4 +75,15 @@ class Hand {
         players.get(0).win(pot);
     }
 
+    public List<String> communityCards() {
+        return communityCards;
+    }
+
+    public Pot pot() {
+        return pot;
+    }
+
+    public void flop() {
+        communityCards = List.of("A", "K", "2");
+    }
 }

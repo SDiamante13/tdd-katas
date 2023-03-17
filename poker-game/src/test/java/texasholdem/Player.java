@@ -50,7 +50,7 @@ class Player {
         if (choice.equals("C")) {
             return new Choice("C");
         }
-        return new Choice("B", Integer.parseInt(choice.split("B")[1]));
+        return new Choice("B", Integer.parseInt(choice.split("B")[1])); // B50
     }
 
     public void bet(int amount) {
@@ -62,7 +62,7 @@ class Player {
     }
 
     public void fold() {
-
+        didFold = true;
     }
 
     public void win(Pot pot) {

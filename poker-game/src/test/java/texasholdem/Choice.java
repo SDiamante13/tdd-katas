@@ -1,5 +1,7 @@
 package texasholdem;
 
+import java.util.Objects;
+
 class Choice {
 
     public static final String CHECK = "C";
@@ -41,5 +43,13 @@ class Choice {
 
     boolean choseToFold() {
         return value.equals("F");
+    }
+
+    @Override
+    public String toString() {
+        return "Choice{" +
+                "value='" + value + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 }

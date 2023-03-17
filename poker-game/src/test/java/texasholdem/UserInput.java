@@ -12,6 +12,7 @@ class UserInput {
     }
 
     public String read() {
+        System.out.println("B?, C?, F?");
         return new Scanner(inputStream).nextLine();
     }
 }
