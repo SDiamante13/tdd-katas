@@ -81,7 +81,7 @@ class FeatureTest {
 
         assertThat(players)
                 .extracting(Player::chips)
-                .containsOnly(50);
+                .containsOnly(100, 100);
     }
 
     private void stubPlayerChoiceTo(Player player, Choice choice) {

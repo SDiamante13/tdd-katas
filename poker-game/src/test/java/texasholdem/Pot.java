@@ -1,6 +1,7 @@
 package texasholdem;
 
 public class Pot {
+
     private int amount;
 
     private Pot(int amount) {

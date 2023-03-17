@@ -15,7 +15,7 @@ class Player {
     private int chips;
     private boolean didFold; // this is bad,
     // a player should not be tied to a Hand,
-    // they should exist in a gAme
+    // they should exist in a game
 
     Player() {
         this.userInput = new UserInput(System.in);
@@ -47,16 +47,13 @@ class Player {
 
     public Choice makeChoice() {
         String choice = userInput.read();
-        if (choice.equals("C")) ;
-        {
+        if (choice.equals("C")) {
             return new Choice("C");
         }
-/        if (choice.contains("B")) {
-/            return new Choice("B", Integer.parseInt(choice.split("B")[1]));
-/        }
+        return new Choice("B", Integer.parseInt(choice.split("B")[1]));
     }
 
-    public void takeChipsAway(int amount) {
+    public void bet(int amount) {
         chips -= amount;
     }
 
@@ -65,6 +62,10 @@ class Player {
     }
 
     public void fold() {
-        this.didFold = true;
+
+    }
+
+    public void win(Pot pot) {
+        this.chips += pot.amount();
     }
 }

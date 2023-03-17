@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// Each game consists of unlimited hands until 1 player has all the chips
 class Hand {
 
 
@@ -42,17 +43,19 @@ class Hand {
     }
 
     public void bet() {
-        for (Player player : players) {
-            if (player.didNotFold()) {
+        for (Player player : players) { // return new players to make it functional
+            if (player.didNotFold()) { // get rid of this ask choice and switch then polymorphism
                 Choice choice = player.makeChoice(); // choice has name, and amount
-                if (choice.value().equals("B")) {
+                if (choice.value().equals("B")) { // change to enum BET
                     int bettingAmount = choice.amount();
-                    player.takeChipsAway(bettingAmount);
+                    player.bet(bettingAmount);
                     pot.add(bettingAmount);
                 }
 
                 if (choice.choseToFold()) {
                     player.fold();
+                    allPlayersFold();
+
                 }
             }
         }
@@ -64,6 +67,11 @@ class Hand {
 
         // ask each player: CHECK, BET, FOLD
         // B10
+    }
+
+    private void allPlayersFold() {
+        players.get(1).fold();
+        players.get(0).win(pot);
     }
 
 }
