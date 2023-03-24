@@ -16,4 +16,5 @@ include 'money-converter'
 include 'monopoly'
 include 'shopping-basket'
 include 'poker-game'
+include 'task-list'
 
