@@ -50,6 +50,7 @@ public final class TaskList implements Runnable {
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
+            // commands should return String to be printed. decouple Writer from logic
             case "show":
                 new ShowCommand(out, tasks).execute();
                 break;
