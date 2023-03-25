@@ -1,4 +1,4 @@
-package tasklist.commands;
+package tasklist;
 
 import tasklist.Command;
 import tasklist.Task;

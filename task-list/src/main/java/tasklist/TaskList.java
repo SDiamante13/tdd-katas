@@ -1,8 +1,5 @@
 package tasklist;
 
-import tasklist.commands.AddCommand;
-import tasklist.commands.ShowCommand;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,9 +12,11 @@ public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
     // tasks are assigned to a project
+    // Tasks
     private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
     private final PrintWriter out;
+    private Projects projects = new Projects(tasks);
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -55,7 +54,7 @@ public final class TaskList implements Runnable {
                 new ShowCommand(out, tasks).execute();
                 break;
             case "add":
-                new AddCommand(out, tasks).execute(commandRest[1]);
+                new AddCommand(out, tasks, projects).execute(commandRest[1]);
                 break;
             case "check":
                 new CheckCommand(out, tasks).execute(commandRest[1]);
