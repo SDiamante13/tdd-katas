@@ -10,7 +10,7 @@ class Grid {
         constructGridFrom(initialState);
     }
 
-    private static void validate(String initialState) {
+    private void validate(String initialState) {
         if (null == initialState || "".equals(initialState)) {
             throw new IllegalArgumentException("Cannot have a empty grid of the game of life.");
         }

@@ -11,9 +11,9 @@ public class Cell {
     public void updateState(int liveNeighbors) {
         if (liveNeighbors > 3 || liveNeighbors < 2) {
             this.state = State.DEAD;
-        } else {
-            this.state = State.ALIVE;
+            return;
         }
+        this.state = State.ALIVE;
     }
 
     public State currentState() {
