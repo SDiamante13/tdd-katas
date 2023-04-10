@@ -19,13 +19,16 @@ For this kata you will implement Conway's Game of Life. Here are some recommenda
 * The problems specifies that the grid should be infinite. If this is your first time implementing Game of Life, you should probably use a fixed size grid.
 * You are encouraged to develop your solution using TDD.
 * You are encouraged to develop your solution using the [4 rules of simple design](https://martinfowler.com/bliki/BeckDesignRules.html).
+---
   
+## Object Calisthenics
+
 * Only One Level Of Indentation Per Method
-  Don’t Use The ELSE Keyword
-  Wrap All Primitives And Strings
-  First Class Collections
-  One Dot Per Line
-  Don’t Abbreviate
-  Keep All Entities Small (50 lines per class, 5 lines per method)
-  No Classes With More Than Two Instance Variables
-  No Getters/Setters/Properties
+* Don’t Use The ELSE Keyword
+* Wrap All Primitives And Strings
+* First Class Collections
+* One Dot Per Line
+* Don’t Abbreviate
+* Keep All Entities Small (50 lines per class, 5 lines per method)
+* No Classes With More Than Two Instance Variables
+* No Getters/Setters/Properties
