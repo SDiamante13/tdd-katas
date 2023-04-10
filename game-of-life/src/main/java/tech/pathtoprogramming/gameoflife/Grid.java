@@ -2,44 +2,58 @@ package tech.pathtoprogramming.gameoflife;
 
 class Grid {
 
-    private final Cell[][] cells;
+    private final Cell[] cells;
 
-    public Grid(String initialState) {
-        validate(initialState);
-        this.cells = new Cell[1][1];
-        constructGridFrom(initialState);
+    public Grid(String cellSymbols) {
+        validate(cellSymbols);
+        this.cells = new Cell[cellSymbols.length()];
+        constructGridFrom(cellSymbols);
     }
 
-    private void validate(String initialState) {
-        if (null == initialState || "".equals(initialState)) {
+    private void validate(String cellSymbols) {
+        if (null == cellSymbols || "".equals(cellSymbols)) {
+            // can check that string only contains O and X
             throw new IllegalArgumentException("Cannot have a empty grid of the game of life.");
         }
     }
 
-    private void constructGridFrom(String initialState) {
-        for (String s : initialState.split(" ")) {
-            if ("O".equals(s)) {
-                this.cells[0][0] = new Cell(State.ALIVE);
-            }
+    private void constructGridFrom(String cellSymbols) {
+        String[] cellSymbolArray = cellSymbols.split("");
+        for (int index = 0; index < cellSymbolArray.length; index++) {
+            this.cells[index] = convertToCell(cellSymbolArray[index]);
         }
     }
 
-    public void update() {
-        for (var i = 0; i < cells[0].length; i++) {
-            for (var j = 0; j < cells.length; j++) {
-                int liveNeighbors = 0;
-                Cell cell = this.cells[i][j];
-                cell.updateState(liveNeighbors);
-            }
+    private Cell convertToCell(String cellSymbol) {
+        if ("O".equals(cellSymbol)) {
+            return new Cell(State.ALIVE);
         }
+        if ("X".equals(cellSymbol)) {
+            return new Cell(State.DEAD);
+        }
+        throw new IllegalArgumentException("Only Alive and Dead are allowed.");
+    }
+
+    public void update() {
+        for (var index = 0; index < cells.length; index++) {
+            updateCellAt(index);
+        }
+    }
+
+    private void updateCellAt(int index) {
+        Cell cell = this.cells[index];
+        cell.updateState(getLiveNeighbors());
+        this.cells[index] = cell;
+    }
+
+    private int getLiveNeighbors() {
+        return 0;
     }
 
     public String cells() {
         StringBuilder cellsAsString = new StringBuilder();
-        for (var i = 0; i < this.cells[0].length; i++) {
-            for (var j = 0; j < this.cells.length; j++) {
-                cellsAsString.append("X");
-            }
+        for (var index = 0; index < this.cells.length; index++) {
+            cellsAsString.append(cells[index].currentState().symbol());
         }
         return cellsAsString.toString();
     }

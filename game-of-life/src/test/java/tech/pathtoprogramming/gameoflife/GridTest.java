@@ -1,6 +1,8 @@
 package tech.pathtoprogramming.gameoflife;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,14 +22,19 @@ class GridTest {
                 () -> new Grid(""));
     }
 
-    @Test
-    void gridWith1LiveCellBecomesDeadCell() {
-        Grid grid = new Grid("O");
+    @ParameterizedTest
+    @CsvSource(value = {
+            "O,X",
+            "OO,XX",
+            "OX,XX"
+    })
+    void updateGrid(String initialCells, String expectedUpdatedCells) {
+        Grid grid = new Grid(initialCells);
 
         grid.update();
 
         assertThat(grid.cells())
-                .isEqualTo("X");
+                .isEqualTo(expectedUpdatedCells);
     }
 
     // need to know how many live neighbors a cell has
