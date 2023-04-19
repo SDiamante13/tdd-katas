@@ -6,7 +6,9 @@ class Grid {
 
     public Grid(String cellSymbols) {
         validate(cellSymbols);
-        this.cells = new Cell[cellSymbols.length()][1];
+        int rowLength = deriveRowLength(cellSymbols);
+        int columnLength = deriveColumnLength(cellSymbols);
+        this.cells = new Cell[rowLength][columnLength];
         constructGridFrom(cellSymbols);
     }
 
@@ -17,10 +19,21 @@ class Grid {
         }
     }
 
+    private int deriveRowLength(String cellSymbols) {
+        return cellSymbols.split("\n")[0].length();
+    }
+
+    private int deriveColumnLength(String cellSymbols) {
+        return cellSymbols.split("\n").length;
+    }
+
     private void constructGridFrom(String cellSymbols) { //XX\nXX
-        String[] cellSymbolArray = cellSymbols.split("");
-        for (int index = 0; index < cellSymbolArray.length; index++) {
-            this.cells[index][0] = convertToCell(cellSymbolArray[index]);
+        String[] rows = cellSymbols.split("\n");
+        for (int row = 0; row < rows.length; row++) {
+            String[] cellSymbolArray = rows[row].split("");
+            for (int index = 0; index < cellSymbolArray.length; index++) {
+                this.cells[index][row] = convertToCell(cellSymbolArray[index]);
+            }
         }
     }
 
@@ -52,8 +65,11 @@ class Grid {
 
     public String cells() {
         StringBuilder cellsAsString = new StringBuilder();
-        for (var index = 0; index < this.cells.length; index++) {
-            cellsAsString.append(cells[index][0].currentState().symbol());
+
+        for (var row = 0; row < this.cells[0].length; row++) {
+            for (var index = 0; index < this.cells.length; index++) {
+                cellsAsString.append(cells[index][row].currentState().symbol());
+            }
         }
         return cellsAsString.toString();
     }

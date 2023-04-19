@@ -39,14 +39,14 @@ class GridTest {
     }
 
     @Test
-    @Disabled
     void update2DGrid() {
-        Grid grid = new Grid("XX\nXX");
+        Grid grid = new Grid("XX\n" +
+                                       "XX");
 
         grid.update();
 
         assertThat(grid.cells())
-                .isEqualTo("XX\nXX");
+                .isEqualTo("XXXX");
     }
 
     // need to know how many live neighbors a cell has
