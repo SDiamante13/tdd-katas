@@ -1,5 +1,6 @@
 package tech.pathtoprogramming.gameoflife;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -37,7 +38,24 @@ class GridTest {
                 .isEqualTo(expectedUpdatedCells);
     }
 
+    @Test
+    @Disabled
+    void update2DGrid() {
+        Grid grid = new Grid("XX\nXX");
+
+        grid.update();
+
+        assertThat(grid.cells())
+                .isEqualTo("XX\nXX");
+    }
+
     // need to know how many live neighbors a cell has
     // then can call cell.updateState(numberOfLiveNeighbors)
+
+    //XX
+    //XX
+    //becomes
+    // XX
+    // XX
 }
 
