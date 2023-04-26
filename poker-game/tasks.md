@@ -2,9 +2,9 @@
 
 ## Features
 
-- [x] Deal 2 cards face down to each player
-- [x] Card has a value and suit
-- [x] Players bet on the strength their cards (User Input) (check, bet, fold)
+- [ ] Deal 2 cards face down to each player
+- [ ] Card has a value and suit
+- [ ] Players bet on the strength their cards (User Input) (check, bet, fold)
 
 ### Flop
 
