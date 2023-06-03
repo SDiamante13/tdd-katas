@@ -18,4 +18,5 @@ include 'shopping-basket'
 include 'poker-game'
 include 'task-list'
 include 'expense-report'
+include 'katacombs'
 

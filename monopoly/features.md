@@ -2,7 +2,7 @@
 
 Your goal is to recreate the game of Monopoly using TDD to drive the design.
 
-[Game Rules](https://www.ultraboardgames.com/monopoly/game-rules.php)
+[katacombs.Game Rules](https://www.ultraboardgames.com/monopoly/game-rules.php)
 
 Let's start small by defining the behavior of the Player.
 
