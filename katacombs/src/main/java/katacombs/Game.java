@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 import static java.util.stream.Collectors.toMap;
 
-class LocationMap {
+class Locations {
 
     private final Map<Coordinates, Location> map;
 
-    private LocationMap(List<Location> locations) {
+    private Locations(List<Location> locations) {
         map = locations.stream()
                 .collect(toMap(
                         Location::coordinates,
@@ -18,8 +18,8 @@ class LocationMap {
                 );
     }
 
-    public static LocationMap create(List<Location> locations) {
-        return new LocationMap(locations);
+    public static Locations create(List<Location> locations) {
+        return new Locations(locations);
     }
 
     public Location findLocation(Coordinates coordinates) {
@@ -32,34 +32,21 @@ public class Game {
 
     private final UserInput userInput;
     private final GameOutput gameOutput;
-    //    private World world; move Player and LocationMap into World!
-    private Player player;
-    private LocationMap locationMap;
+    private final World world;
 
-    public Game(UserInput userInput, GameOutput gameOutput, List<Location> locations) {
+    public Game(UserInput userInput, GameOutput gameOutput, World world) {
         this.userInput = userInput;
         this.gameOutput = gameOutput;
-        this.locationMap = LocationMap.create(locations);
-        player = new Player(locations.get(0).coordinates());
+        this.world = world;
     }
 
     public void play() {
         do {
-            gameOutput.print(locationMap.findLocation(player.currentCoordinates()).toString());
-            String commandString = userInput.capture();
-            // need something to take a string and convert it to a command GO N
-            Command command = parseCommand(commandString);
-            command.execute();
+            var currentLocation = world.currentLocation();
+            gameOutput.print(currentLocation.toString());
+            String input = userInput.capture();
+            world.executeAction(input);
         } while (true);
-    }
-
-    private Command parseCommand(String commandString) {
-        String[] args = commandString.split(" ");
-        switch (args[0]) {
-            case "GO":
-                return new GoCommand(player, Direction.valueOf(args[1]));
-        }
-        throw new IllegalArgumentException();
     }
 }
 
@@ -84,33 +71,11 @@ class Player {
     }
 }
 
-interface Command {
-
-    void execute();
-}
-
 enum Direction {
     N,
     E,
     S,
     W
-}
-
-class GoCommand implements Command {
-
-    private final Player player;
-    private final Direction direction;
-
-    public GoCommand(Player player, Direction direction) {
-        this.player = player;
-        this.direction = direction;
-    }
-
-    @Override
-    public void execute() {
-        System.out.println("GO go go " + direction.name());
-        player.move(direction);
-    }
 }
 
 class Location {
@@ -137,6 +102,9 @@ class Location {
 }
 
 class Coordinates {
+
+    public static final Coordinates ORIGIN = new Coordinates(0,0);
+
     private final int x;
     private final int y;
 
