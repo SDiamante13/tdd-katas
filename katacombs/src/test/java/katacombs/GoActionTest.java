@@ -2,36 +2,63 @@ package katacombs;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
+import static katacombs.LocationTestData.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GoActionTest {
 
-    private static final Location FOREST = new Location(
-            "Forest",
-            "You are lost, but determined to get home!",
-            new Coordinates(0, 0));
-    private static final Location BUILDING = new Location(
-            "Building",
-            "There's a Brewery",
-            new Coordinates(0, 1));
-    private static final Location MONSTER = new Location(
-            "Monster",
-            "There's a goblin in front of you",
-            new Coordinates(0, 2));
-
     @Test
     void playerGoesNorth() {
-        World world = new World(new Player(), Locations.create(Set.of(
-                FOREST,
-                BUILDING,
-                MONSTER
-        )));
+        World world = createWorld(new Coordinates(0, 0),
+                FOREST.withCoordinates(0, 0),
+                BUILDING.withCoordinates(0, 1),
+                MONSTER.withCoordinates(0, 2));
 
         assertThat(world.respond(Action.GO, "N"))
-                .isEqualTo("Building\nThere's a Brewery");
+                .isEqualTo(BUILDING.toString());
         assertThat(world.respond(Action.GO, "N"))
-                .isEqualTo("Monster\nThere's a goblin in front of you");
+                .isEqualTo(MONSTER.toString());
+    }
+
+    @Test
+    void playerGoesSouth() {
+        World world = createWorld(new Coordinates(0, 2),
+                FOREST.withCoordinates(0, 0),
+                BUILDING.withCoordinates(0, 1),
+                MONSTER.withCoordinates(0, 2));
+
+        assertThat(world.respond(Action.GO, "S"))
+                .isEqualTo(BUILDING.toString());
+        assertThat(world.respond(Action.GO, "S"))
+                .isEqualTo(FOREST.toString());
+    }
+
+    @Test
+    void playerGoesWest() {
+        World world = createWorld(new Coordinates(0, 0),
+                FOREST.withCoordinates(0, 0),
+                BUILDING.withCoordinates(-1, 0));
+
+        assertThat(world.respond(Action.GO, "W"))
+                .isEqualTo(BUILDING.toString());
+    }
+
+    @Test
+    void playerGoesEast() {
+        World world = createWorld(new Coordinates(0, 0),
+                FOREST.withCoordinates(0, 0),
+                BUILDING.withCoordinates(1, 0));
+
+        assertThat(world.respond(Action.GO, "E"))
+                .isEqualTo(BUILDING.toString());
+    }
+
+    private World createWorld(Coordinates playerCoordinates, Location... locations) {
+        return new World(new Player(playerCoordinates), Locations.create(
+                Arrays.stream(locations).collect(Collectors.toSet())
+        ));
     }
 }

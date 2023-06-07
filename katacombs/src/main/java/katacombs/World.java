@@ -1,6 +1,7 @@
 package katacombs;
 
 class World {
+
     private final Player player;
     private final Locations locations;
 
@@ -12,10 +13,9 @@ class World {
     public String respond(Action action, String noun) {
         switch (action) {
             case GO:
-                player.go(noun);
-                Location currentLocation = locations.findLocation(player.currentCoordinates());
-                return currentLocation.toString();
+                player.go(Direction.valueOf(noun));
+                return locations.findLocation(player.currentCoordinates()).toString();
         }
-        throw new IllegalArgumentException("Wrong");
+        throw new IllegalArgumentException("Not implemented");
     }
 }

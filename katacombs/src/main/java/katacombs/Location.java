@@ -1,6 +1,7 @@
 package katacombs;
 
 class Location {
+
     private final String title;
     private final String mainDescription;
     private final Coordinates coordinates;
@@ -13,6 +14,10 @@ class Location {
 
     public Coordinates coordinates() {
         return coordinates;
+    }
+
+    public Location withCoordinates(int x, int y) {
+        return new Location(title, mainDescription, new Coordinates(x, y));
     }
 
     @Override

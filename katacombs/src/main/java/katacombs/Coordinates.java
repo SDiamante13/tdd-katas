@@ -1,6 +1,7 @@
 package katacombs;
 
 class Coordinates {
+
     private final int x;
     private final int y;
 
@@ -11,6 +12,18 @@ class Coordinates {
 
     public Coordinates moveNorth() {
         return new Coordinates(x, y + 1);
+    }
+
+    public Coordinates moveEast() {
+        return new Coordinates(x + 1, y);
+    }
+
+    public Coordinates moveSouth() {
+        return new Coordinates(x, y - 1);
+    }
+
+    public Coordinates moveWest() {
+        return new Coordinates(x - 1, y);
     }
 
     @Override

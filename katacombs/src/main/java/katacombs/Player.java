@@ -4,10 +4,6 @@ class Player {
 
     private Coordinates currentCoordinates;
 
-    Player() {
-        this(new Coordinates(0, 0));
-    }
-
     Player(Coordinates currentCoordinates) {
         this.currentCoordinates = currentCoordinates;
     }
@@ -16,7 +12,20 @@ class Player {
         return currentCoordinates;
     }
 
-    public void go(String direction) {
-        this.currentCoordinates = currentCoordinates.moveNorth();
+    public void go(Direction direction) {
+        switch (direction) {
+            case S:
+                this.currentCoordinates = currentCoordinates.moveSouth();
+                break;
+            case W:
+                this.currentCoordinates = currentCoordinates.moveWest();
+                break;
+            case E:
+                this.currentCoordinates = currentCoordinates.moveEast();
+                break;
+            default:
+                this.currentCoordinates = currentCoordinates.moveNorth();
+                break;
+        }
     }
 }
