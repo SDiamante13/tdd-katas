@@ -33,4 +33,9 @@ class World {
                 .map(Location::toString)
                 .orElse("You can't move there!");
     }
+
+    public Location playerLocation() {
+        return locations.findLocation(player.currentCoordinates())
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }
