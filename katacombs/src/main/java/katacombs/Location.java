@@ -1,5 +1,7 @@
 package katacombs;
 
+import java.util.Objects;
+
 class Location {
 
     private final String title;
@@ -18,6 +20,27 @@ class Location {
 
     public Location withCoordinates(int x, int y) {
         return new Location(title, mainDescription, new Coordinates(x, y));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Location location = (Location) o;
+
+        if (!Objects.equals(title, location.title)) return false;
+        if (!Objects.equals(mainDescription, location.mainDescription))
+            return false;
+        return Objects.equals(coordinates, location.coordinates);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title != null ? title.hashCode() : 0;
+        result = 31 * result + (mainDescription != null ? mainDescription.hashCode() : 0);
+        result = 31 * result + (coordinates != null ? coordinates.hashCode() : 0);
+        return result;
     }
 
     @Override

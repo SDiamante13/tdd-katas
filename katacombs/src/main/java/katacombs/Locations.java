@@ -1,6 +1,7 @@
 package katacombs;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toMap;
@@ -18,7 +19,7 @@ class Locations {
         return new Locations(locationSet);
     }
 
-    public Location findLocation(Coordinates coordinates) {
-        return map.get(coordinates);
+    public Optional<Location> findLocation(Coordinates coordinates) {
+        return Optional.ofNullable(map.get(coordinates));
     }
 }

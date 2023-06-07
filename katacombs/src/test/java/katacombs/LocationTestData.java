@@ -14,4 +14,8 @@ public class LocationTestData {
             "Monster",
             "There's a goblin in front of you",
             new Coordinates(0, 2));
+    public static final Location CAVE = new Location(
+            "Cave",
+            "You've entered a dark cave",
+            new Coordinates(0, 3));
 }
