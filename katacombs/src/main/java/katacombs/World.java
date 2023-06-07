@@ -14,8 +14,17 @@ class World {
         switch (action) {
             case GO:
                 return goTo(noun);
+            case LOOK:
+                return lookTo(noun);
         }
         throw new IllegalArgumentException("Not implemented");
+    }
+
+    private String lookTo(String noun) {
+        Coordinates lookCoordinates = player.look(Direction.valueOf(noun));
+        return locations.findLocation(lookCoordinates)
+                .map(Location::lookDescription)
+                .orElse("Nothing interesting to look at there!");
     }
 
     private String goTo(String noun) {

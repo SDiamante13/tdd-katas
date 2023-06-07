@@ -6,12 +6,18 @@ class Location {
 
     private final String title;
     private final String mainDescription;
+    private final String lookDescription;
     private final Coordinates coordinates;
 
-    Location(String title, String mainDescription, Coordinates coordinates) {
+    Location(String title, String mainDescription, String lookDescription, Coordinates coordinates) {
         this.title = title;
         this.mainDescription = mainDescription;
+        this.lookDescription = lookDescription;
         this.coordinates = coordinates;
+    }
+
+    public String lookDescription() {
+        return lookDescription;
     }
 
     public Coordinates coordinates() {
@@ -19,7 +25,7 @@ class Location {
     }
 
     public Location withCoordinates(int x, int y) {
-        return new Location(title, mainDescription, new Coordinates(x, y));
+        return new Location(title, mainDescription, lookDescription, new Coordinates(x, y));
     }
 
     @Override

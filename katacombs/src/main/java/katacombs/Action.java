@@ -1,5 +1,6 @@
 package katacombs;
 
 enum Action {
-    GO
+    GO,
+    LOOK
 }

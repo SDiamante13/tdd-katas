@@ -10,19 +10,19 @@ class Coordinates {
         this.y = y;
     }
 
-    public Coordinates moveNorth() {
+    public Coordinates north() {
         return new Coordinates(x, y + 1);
     }
 
-    public Coordinates moveEast() {
+    public Coordinates east() {
         return new Coordinates(x + 1, y);
     }
 
-    public Coordinates moveSouth() {
+    public Coordinates south() {
         return new Coordinates(x, y - 1);
     }
 
-    public Coordinates moveWest() {
+    public Coordinates west() {
         return new Coordinates(x - 1, y);
     }
 
