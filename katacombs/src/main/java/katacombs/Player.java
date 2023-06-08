@@ -13,7 +13,7 @@ class Player {
     }
 
     public void go(Direction direction) {
-        switch (direction) {
+        switch (direction) { // repeated switch cases - polymorphism!
             case N:
                 this.currentCoordinates = currentCoordinates.north();
                 break;

@@ -32,7 +32,21 @@ class GoUseCaseTest {
                 .isEqualTo("You can't move there!");
     }
 
-    private World createWorld(Coordinates playerCoordinates, Location... locations) {
+    @Test
+    void playerCannotMoveToCoordinatesThatDoNotHaveALocation() {
+        World world = createWorld(new Coordinates(0, 0),
+                FOREST.withCoordinates(0, 0),
+                BUILDING.withCoordinates(0, 1),
+                MONSTER.withCoordinates(-1, 0),
+                CAVE.withCoordinates(1, 0));
+
+        assertThat(world.respond(Action.GO, "S"))
+                .isEqualTo("You can't move there!");
+        assertThat(world.respond(Action.GO, "N"))
+                .isEqualTo(BUILDING.toString());
+    }
+
+    private World createWorld(Coordinates playerCoordinates, Location... locations) { // could move to World
         return new World(new Player(playerCoordinates), Locations.create(
                 Arrays.stream(locations).collect(Collectors.toSet())
         ));

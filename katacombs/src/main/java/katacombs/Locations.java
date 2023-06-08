@@ -22,4 +22,9 @@ class Locations {
     public Optional<Location> findLocation(Coordinates coordinates) {
         return Optional.ofNullable(map.get(coordinates));
     }
+
+    public boolean noLocationAt(Coordinates coordinates) {
+        return findLocation(coordinates)
+                .isEmpty();
+    }
 }
