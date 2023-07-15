@@ -19,4 +19,5 @@ include 'poker-game'
 include 'task-list'
 include 'expense-report'
 include 'katacombs'
+include 'laundry-reservation'
 
