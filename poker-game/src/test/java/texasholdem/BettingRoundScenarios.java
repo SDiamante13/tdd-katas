@@ -1,6 +1,5 @@
 package texasholdem;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,9 +7,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class HandShould {
+class BettingRoundScenarios {
 
-    @Test
+    @Test // common scenario
     void dropActivePlayersWhenTheyFold() {
         List<Player> players = List.of(
                 () -> Choice.FOLD,
@@ -27,11 +26,13 @@ class HandShould {
     }
 
     @Test
-    @Disabled
     void addToPotWhenPlayerMakesABet() {
+        Player danielN = givenPlayerBets(Choice.CALL);
+        Player danPolk = givenPlayerBets(Choice.CALL);
+
         List<Player> players = List.of(
-                () -> Choice.CALL,
-                () -> Choice.CALL
+                danielN,
+                danPolk
         );
         final List<Player> activePlayers = new ArrayList<>(players);
         final Hand hand = new Hand(new Pot(), activePlayers);
@@ -39,5 +40,11 @@ class HandShould {
         hand.bettingRound();
 
         assertThat(hand.pot().chips()).isEqualTo(40);
+    }
+
+    private static Player givenPlayerBets(Choice choice) {
+        Choice choice2 = choice;
+        Player danPolk = () -> choice2;
+        return danPolk;
     }
 }

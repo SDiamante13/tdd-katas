@@ -3,6 +3,9 @@ package texasholdem;
 import java.util.ArrayList;
 import java.util.List;
 
+// Hand contains players, pot
+// player should have a next decision that can be faked
+
 public class ActivePlayer implements Player {
 
     private int chips;
@@ -13,7 +16,7 @@ public class ActivePlayer implements Player {
         this.holeCards = new ArrayList<>();
     }
 
-    public int chips() {
+    public int currentChips() {
         return this.chips;
     }
 
@@ -21,7 +24,7 @@ public class ActivePlayer implements Player {
         this.chips -= chips;
     }
 
-    public void receiveHoleCards(Card card) {
+    public void take(Card card) {
         this.holeCards.add(card);
     }
 
@@ -39,7 +42,7 @@ public class ActivePlayer implements Player {
     }
 
     @Override
-    public Choice choice() {
+    public Choice choice() { // what depends on choice of players
         // get system in
         // F - fold
         // C - call
@@ -48,6 +51,11 @@ public class ActivePlayer implements Player {
 
         // factory method
         // based on input return a different Choice
+        // whenever I remove chips from the play
+        // I need to add it to the hand
+
+
+
         return Choice.CHECK;
     }
 }

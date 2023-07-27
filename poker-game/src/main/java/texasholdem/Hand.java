@@ -14,10 +14,6 @@ public class Hand {
     }
 
     public void bettingRound() {
-        getEachPlayersChoice();
-    }
-
-    private void getEachPlayersChoice() {
         this.activePlayers = activePlayers.stream()
                 .filter(Player::didNotFold)
                 .collect(Collectors.toList());

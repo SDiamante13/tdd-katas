@@ -11,20 +11,20 @@ class PlayerShould {
 
     @Test
     void startWithChips() {
-        assertThat(player.chips()).isEqualTo(1000);
+        assertThat(player.currentChips()).isEqualTo(1000);
     }
 
     @Test
     void makeABet() {
         player.bet(100);
 
-        assertThat(player.chips()).isEqualTo(900);
+        assertThat(player.currentChips()).isEqualTo(900);
     }
 
     @Test
     void receiveHoleCardOneAtATime() {
         Card aceOfClubs = new Card(Rank.ACE, Suite.CLUBS);
-        player.receiveHoleCards(aceOfClubs);
+        player.take(aceOfClubs);
 
         assertThat(player.holeCards())
                 .contains(aceOfClubs);
@@ -32,8 +32,8 @@ class PlayerShould {
 
     @Test
     void forfeitTheirHoleCardsAfterFolding() {
-        player.receiveHoleCards(new Card(Rank.TWO, Suite.HEARTS));
-        player.receiveHoleCards(new Card(Rank.SEVEN, Suite.HEARTS));
+        player.take(new Card(Rank.TWO, Suite.HEARTS));
+        player.take(new Card(Rank.SEVEN, Suite.HEARTS));
 
         player.fold();
 
@@ -42,8 +42,8 @@ class PlayerShould {
 
     @Test
     void forfeitTheirHoleCardsAfterWinningAHand() {
-        player.receiveHoleCards(new Card(Rank.TWO, Suite.HEARTS));
-        player.receiveHoleCards(new Card(Rank.SEVEN, Suite.HEARTS));
+        player.take(new Card(Rank.TWO, Suite.HEARTS));
+        player.take(new Card(Rank.SEVEN, Suite.HEARTS));
 
         player.win(new Pot(100));
 
@@ -52,12 +52,12 @@ class PlayerShould {
 
     @Test
     void winPotAfterWinningAHand() {
-        player.receiveHoleCards(new Card(Rank.TWO, Suite.HEARTS));
-        player.receiveHoleCards(new Card(Rank.SEVEN, Suite.HEARTS));
+        player.take(new Card(Rank.TWO, Suite.HEARTS));
+        player.take(new Card(Rank.SEVEN, Suite.HEARTS));
 
         player.win(new Pot(100));
 
-        assertThat(player.chips()).isEqualTo(1100);
+        assertThat(player.currentChips()).isEqualTo(1100);
     }
 }
 
