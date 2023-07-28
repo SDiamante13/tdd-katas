@@ -9,6 +9,7 @@ class CreateReservationUseCase {
     private final EmailService emailService;
     private final ReservationStorage reservationStorage;
     private final MachineAPI machineAPI;
+    private final IdGenerator idGenerator = new IdGenerator();
 
     public CreateReservationUseCase(
             MachineSelector machineSelector,
@@ -23,15 +24,31 @@ class CreateReservationUseCase {
     }
 
     public boolean handle(LocalDateTime reservationDateTime, String phoneNumber, String emailAddress) {
-        UUID reservationId = UUID.fromString("5429f280-a06e-40e9-8fe1-0f42ee165fa0");
+
+        UUID reservationId = idGenerator.generateReservationId();
         int machineNumber = machineSelector.findAvailableMachine();
-        ConfirmationEmailDto email = new ConfirmationEmailDto(
-                machineNumber,
-                reservationId,
-                12345);
-        emailService.sendConfirmationEmail(email);
-        reservationStorage.save(new ReservationDto(reservationId, reservationDateTime, phoneNumber, emailAddress));
-        boolean machineWasLocked = machineAPI.lock(reservationId, machineNumber, reservationDateTime, 12345);
+        int pin = generatePin();
+
+        sendConfirmationEmail(reservationId, machineNumber, pin); // data clump?
+        saveReservation(reservationDateTime, phoneNumber, emailAddress, reservationId);
+        // need MachineState enum
+        boolean machineWasLocked = machineAPI.lock(reservationId, machineNumber, reservationDateTime, pin);
         return machineWasLocked;
     }
+
+    private int generatePin() {
+        return 12345;
+    }
+
+    private void saveReservation(LocalDateTime reservationDateTime, String phoneNumber, String emailAddress, UUID reservationId) {
+        reservationStorage.save(new ReservationEntity(reservationId, reservationDateTime, phoneNumber, emailAddress));
+    }
+
+    private void sendConfirmationEmail(UUID reservationId, int machineNumber, int pin) {
+        emailService.sendConfirmationEmail(new ConfirmationEmailDto(
+                machineNumber,
+                reservationId,
+                pin));
+    }
+
 }

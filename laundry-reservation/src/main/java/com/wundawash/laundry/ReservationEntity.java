@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ReservationDto {
+public class ReservationEntity {
 
     private final UUID reservationId;
     private final LocalDateTime reservationDateTime;
     private final String phoneNumber;
     private final String emailAddress;
 
-    public ReservationDto(UUID reservationId, LocalDateTime reservationDateTime, String phoneNumber, String emailAddress) {
+    public ReservationEntity(UUID reservationId, LocalDateTime reservationDateTime, String phoneNumber, String emailAddress) {
         this.reservationId = reservationId;
         this.reservationDateTime = reservationDateTime;
         this.phoneNumber = phoneNumber;
@@ -27,7 +27,7 @@ public class ReservationDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReservationDto that = (ReservationDto) o;
+        ReservationEntity that = (ReservationEntity) o;
 
         if (!Objects.equals(reservationId, that.reservationId))
             return false;

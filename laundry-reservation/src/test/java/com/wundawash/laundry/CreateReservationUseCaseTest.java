@@ -41,7 +41,7 @@ class CreateReservationUseCaseTest {
         boolean wasReservationCreated = useCase.handle(reservationDateTime, phoneNumber, emailAddress);
 
         fakeEmailService.shouldHaveSentExactly(expectedEmail);
-        fakeReservationStorage.shouldContain(new ReservationDto(reservationId, reservationDateTime, phoneNumber, emailAddress));
+        fakeReservationStorage.shouldContain(new ReservationEntity(reservationId, reservationDateTime, phoneNumber, emailAddress));
         assertThat(wasReservationCreated).isTrue();
     }
 

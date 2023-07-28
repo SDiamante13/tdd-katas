@@ -8,18 +8,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FakeReservationStorage implements ReservationStorage {
 
-    private final Map<UUID, ReservationDto> reservations;
+    private final Map<UUID, ReservationEntity> reservations;
 
     public FakeReservationStorage() {
         this.reservations = new HashMap<>();
     }
 
     @Override
-    public void save(ReservationDto reservationDto) {
-        this.reservations.put(reservationDto.getReservationId(), reservationDto);
+    public void save(ReservationEntity reservationEntity) {
+        this.reservations.put(reservationEntity.getReservationId(), reservationEntity);
     }
 
-    public void shouldContain(ReservationDto expectedReservation) {
+    public void shouldContain(ReservationEntity expectedReservation) {
         UUID reservationId = expectedReservation.getReservationId();
         var retrievedReservation = reservations.get(reservationId);
         assertThat(retrievedReservation).isEqualTo(expectedReservation);
