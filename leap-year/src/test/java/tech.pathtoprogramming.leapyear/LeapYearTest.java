@@ -3,47 +3,56 @@ package tech.pathtoprogramming.leapyear;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static tech.pathtoprogramming.leapyear.LeapYear.isLeapYear;
 
 class LeapYearTest {
 
     @Test
-    void typicalCommonYearReturnsFalse() {
-        assertThat(isLeapYear(2001)).isFalse();
+    void isNotALeapYearWhenYearIsNotDivisibleByFour() {
+        assertThat(new Year(2001).isLeapYear())
+                .isFalse();
     }
 
     @Test
-    void atypicalCommonYearReturnsFalse() {
-        assertThat(isLeapYear(1900)).isFalse();
+    void isLeapYearWhenYearIsDivisibleByFour() {
+        assertThat(new Year(1996).isLeapYear())
+                .isTrue();
+        assertThat(new Year(1992).isLeapYear())
+                .isTrue();
     }
 
     @Test
-    void typicalLeapYearReturnsTrue() {
-        assertThat(isLeapYear(1996)).isTrue();
+    void isNotALeapYearWhenYearIsDivisibleByOneHundred() {
+        assertThat(new Year(1900).isLeapYear()).isFalse();
     }
 
     @Test
-    void anotherTypicalLeapYearReturnsTrue() {
-        assertThat(isLeapYear(1992)).isTrue();
-    }
-
-    @Test
-    void atypicalLeapYearReturnsTrue() {
-        assertThat(isLeapYear(2000)).isTrue();
+    void isALeapYearWhenYearIsDivisibleByFourHundred() {
+        assertThat(new Year(2000).isLeapYear()).isTrue();
     }
 }
 
-class LeapYear {
+class Year {
 
-    public static boolean isLeapYear(int year) {
-        return isDivisibleBy(year, 4) && (isNotDivisibleBy(year, 100) || isDivisibleBy(year, 400));
+    private final int year;
+
+    public Year(int year) {
+        this.year = year;
     }
 
-    private static boolean isNotDivisibleBy(int year, int number) {
-        return year % number != 0;
+    public boolean isLeapYear() {
+        return isDivisibleBy(4) &&
+                isNotOtherwiseDivisibleBy100UnlessItIsAlsoDivisibleBy400();
     }
 
-    private static boolean isDivisibleBy(int year, int number) {
+    private boolean isNotOtherwiseDivisibleBy100UnlessItIsAlsoDivisibleBy400() {
+        return isNotDivisibleBy(100) || isDivisibleBy(400);
+    }
+
+    private boolean isDivisibleBy(int number) {
         return year % number == 0;
+    }
+
+    private boolean isNotDivisibleBy(int number) {
+        return !isDivisibleBy(number);
     }
 }
