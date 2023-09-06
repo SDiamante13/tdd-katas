@@ -21,4 +21,5 @@ include 'expense-report'
 include 'katacombs'
 include 'laundry-reservation'
 include 'string-calculator'
+include 'mars-rover'
 
