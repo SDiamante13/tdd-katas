@@ -139,8 +139,7 @@ public class ChartWindow extends JPanel {
         var foo = new Foo();
         if (chartType == 406) {
             if (reportType.equals("rpfll")) {
-                foo.data = new String[1];
-                foo.data[0] = "Bar Chart";
+                return new Foo(new String[]{"Bar Chart"});
             } else {
                 foo.data = new String[2];
                 int i = 0;
@@ -190,8 +189,15 @@ public class ChartWindow extends JPanel {
     }
 
     private class Foo {
-        public String[] data = null;
+        public String[] data;
         public List<String> specialData = new ArrayList<>();
         public String[] data3point14 = new String[0];
+
+        public Foo() {
+        }
+
+        public Foo(String[] data) {
+            this.data = data;
+        }
     }
 }
