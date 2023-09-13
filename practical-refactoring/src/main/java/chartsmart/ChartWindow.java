@@ -8,19 +8,20 @@ import java.util.List;
 
 public class ChartWindow extends JPanel {
 
-    private String jjD;
-    private String __APARAM__Z;
-    private int ct;
+    public static final int CHART_TYPE_406 = 406;
+    private String reportType;
+    private String title;
+    private int chartType;
 
     public String getTitle() {
-        return __APARAM__Z;
+        return title;
     }
 
-    public void showChart(int ct, String stjjDReq1205, boolean b) {
-        this.ct = ct;
-        this.jjD = stjjDReq1205;
+    public void showChart(int chartType, String reportType, boolean shouldShowChart) {
+        this.chartType = chartType;
+        this.reportType = reportType;
 
-        if (b) {
+        if (shouldShowChart) {
             initializeDrawArea();
         }
     }
@@ -28,18 +29,18 @@ public class ChartWindow extends JPanel {
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
 
-        if (ct == 406) {
-            if (jjD.equals("rpfll")) {
-                __APARAM__Z = "Bar Chart - Single Mode";
+        if (chartType == CHART_TYPE_406) {
+            if (reportType.equals("rpfll")) {
+                title = "Bar Chart - Single Mode";
             } else {
-                __APARAM__Z = "Bar" +
+                title = "Bar" +
                         " Chart - Compare Mode";
             }
         } else {
-            if (jjD.equals("rpfll")) {
-                __APARAM__Z = "Pie Chart - Single Mode";
+            if (reportType.equals("rpfll")) {
+                title = "Pie Chart - Single Mode";
             } else {
-                __APARAM__Z = "Pie Chart - Compare Mode";
+                title = "Pie Chart - Compare Mode";
             }
         }
     }
@@ -56,8 +57,8 @@ public class ChartWindow extends JPanel {
     private void DrawChart(Graphics g) {
 
         // Render chart background
-        if (ct == 406) {
-            if (jjD.equals("rpfll")) {
+        if (chartType == 406) {
+            if (reportType.equals("rpfll")) {
                 Color bgc = Color.RED;
                 g.setColor(bgc);
                 g.fillRect(100, 90, getWidth() - 200, 420);
@@ -66,7 +67,7 @@ public class ChartWindow extends JPanel {
                 g.fillRect(95, 95, 210, 210);
             }
         } else {
-            if (jjD.equals("rpfll")) {
+            if (reportType.equals("rpfll")) {
                 Color bgcb;
                 bgcb = Color.BLUE;
                 g.setColor(bgcb);
@@ -84,8 +85,8 @@ public class ChartWindow extends JPanel {
         List<String> specialData = new ArrayList<>();
         String[] data3point14 = new String[0];
 
-        if (ct == 406) {
-            if (jjD.equals("rpfll")) {
+        if (chartType == 406) {
+            if (reportType.equals("rpfll")) {
                 data = new String[1];
                 data[0] = "Bar Chart";
             } else {
@@ -95,7 +96,7 @@ public class ChartWindow extends JPanel {
                 data[i++] = "Small";
             }
         } else {
-            if (jjD.equals("rpfll")) {
+            if (reportType.equals("rpfll")) {
                 specialData.add("Pie Chart");
             } else {
                 data3point14 = new String[2];
@@ -106,8 +107,8 @@ public class ChartWindow extends JPanel {
 
         Font font;
 
-        if (ct == 406) {
-            if (jjD.equals("shareddisplay")) {
+        if (chartType == 406) {
+            if (reportType.equals("shareddisplay")) {
                 if (data != null) {
                     if (data == null) {
                         data = new String[5];
@@ -146,7 +147,7 @@ public class ChartWindow extends JPanel {
                         400);
             }
         } else {
-            if (jjD.equals("rpfll")) {
+            if (reportType.equals("rpfll")) {
                 font = new Font("Bookman Old Style", Font.BOLD, 55);
                 g.setColor(Color.WHITE);
                 g.setFont(font);
