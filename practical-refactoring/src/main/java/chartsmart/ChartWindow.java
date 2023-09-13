@@ -58,29 +58,33 @@ public class ChartWindow extends JPanel {
         // Render chart background
         renderChartBackground(g);
 
-        String[] data = null;
-        List<String> specialData = new ArrayList<>();
-        String[] data3point14 = new String[0];
+        Foo foo = new Foo();
+
 
         if (chartType == 406) {
             if (reportType.equals("rpfll")) {
-                data = new String[1];
-                data[0] = "Bar Chart";
+                foo.data = new String[1];
+                foo.data[0] = "Bar Chart";
             } else {
-                data = new String[2];
+                foo.data = new String[2];
                 int i = 0;
-                data[i++] = "Bar Chart";
-                data[i++] = "Small";
+                foo.data[i++] = "Bar Chart";
+                foo.data[i++] = "Small";
             }
         } else {
             if (reportType.equals("rpfll")) {
-                specialData.add("Pie Chart");
+                foo.specialData.add("Pie Chart");
             } else {
-                data3point14 = new String[2];
-                data3point14[1] = "Small";
-                data3point14[0] = "Pie" + " Chart";
+                foo.data3point14 = new String[2];
+                foo.data3point14[1] = "Small";
+                foo.data3point14[0] = "Pie" + " Chart";
             }
         }
+
+        var data = foo.data;
+        var specialData = foo.specialData;
+        var data3point14 = foo.data3point14;
+
 
         Font font;
 
@@ -180,5 +184,11 @@ public class ChartWindow extends JPanel {
 
     private String tmStmp() {
         return new Date().toString();
+    }
+
+    private class Foo {
+        public String[] data = null;
+        public List<String> specialData = new ArrayList<>();
+        public String[] data3point14 = new String[0];
     }
 }
