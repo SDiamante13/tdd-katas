@@ -29,18 +29,22 @@ public class ChartWindow extends JPanel {
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
 
+        setTitle();
+    }
+
+    private void setTitle() {
         if (chartType == CHART_TYPE_406) {
             if (reportType.equals("rpfll")) {
-                title = "Bar Chart - Single Mode";
+                this.title = "Bar Chart - Single Mode";
             } else {
-                title = "Bar" +
+                this.title = "Bar" +
                         " Chart - Compare Mode";
             }
         } else {
             if (reportType.equals("rpfll")) {
-                title = "Pie Chart - Single Mode";
+                this.title = "Pie Chart - Single Mode";
             } else {
-                title = "Pie Chart - Compare Mode";
+                this.title = "Pie Chart - Compare Mode";
             }
         }
     }
