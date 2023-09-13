@@ -3,7 +3,6 @@ package chartsmart;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ChartWindow extends JPanel {
@@ -55,10 +54,10 @@ public class ChartWindow extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        DrawChart(g);
+        drawChart(g);
     }
 
-    private void DrawChart(Graphics g) {
+    private void drawChart(Graphics g) {
 
         // Render chart background
         renderChartBackground(g);
@@ -72,8 +71,6 @@ public class ChartWindow extends JPanel {
         String[] data = chart.getData();
         List<String> specialData = chart.getSpecialData();
         String[] data3point14 = chart.getData3point14();
-
-        Font font;
 
         data = apple(g, data, specialData, data3point14);
 
@@ -93,53 +90,35 @@ public class ChartWindow extends JPanel {
     }
 
     private String[] apple(Graphics graphics, String[] data, List<String> specialData, String[] data3point14) {
-        Font font;
         if (chartType == ChartWindow.BAR_CHART_TYPE) {
             if (reportType.equals("shareddisplay")) {
                 if (data != null) {
+                    Font font;
                     font = new Font("Arial Black", Font.BOLD, 25);
                     int bottomY = 300;
 
-
-                    graphics.setColor(Color.CYAN);
-                    graphics.fillRect(100, bottomY - 100, 40, 100);
-                    graphics.fillRect(140, bottomY - 200, 40, 200);
-                    graphics.fillRect(180, bottomY - 150, 40, 150);
-                    graphics.fillRect(220, bottomY - 125, 40, 125);
-                    graphics.fillRect(260, bottomY - 170, 40, 170);
-
-                    graphics.setColor(Color.RED);
-                    graphics.setFont(font);
-                    graphics.drawString(data[0], 130, 250);
-                    graphics.drawString(data[1], 130, 270);
+                    new UI(new ChartInfo(graphics, data, font, bottomY)).invoke();
                 }
             } else {
-                int bottomY = 500;
                 graphics.setColor(Color.CYAN);
+                int bottomY = 500;
                 graphics.fillRect(112, bottomY - 200, 75, 200);
                 graphics.fillRect(187, bottomY - 400, 75, 400);
                 graphics.fillRect(262, bottomY - 300, 75, 300);
                 graphics.fillRect(337, bottomY - 250, 75, 250);
                 graphics.fillRect(412, bottomY - 340, 75, 340);
-                font = new Font("Arial Black",
-                        Font.BOLD, 55);
                 graphics.setColor(Color.BLACK);
-                graphics.setFont(font);
-                graphics.drawString(
-                        data[0], 130,
-                        400);
+                graphics.setFont(new Font("Arial Black", Font.BOLD, 55));
+                graphics.drawString(data[0], 130, 400);
             }
         } else {
             if (reportType.equals("rpfll")) {
-                font = new Font("Bookman Old Style", Font.BOLD, 55);
                 graphics.setColor(Color.WHITE);
-                graphics.setFont(font);
+                graphics.setFont(new Font("Bookman Old Style", Font.BOLD, 55));
                 graphics.drawString(specialData.get(0), 200, 340);
             } else {
-                font = new Font("Bookman Old Style", Font.BOLD, 30);
-                graphics.setFont(font);
                 graphics.setColor(Color.WHITE);
-
+                graphics.setFont(new Font("Bookman Old Style", Font.BOLD, 30));
                 graphics.drawString(data3point14[0], 145, 205);
                 graphics.drawString(data3point14[1], 170, 235);
             }
@@ -222,6 +201,34 @@ public class ChartWindow extends JPanel {
             specialData = new ArrayList<>();
             data3point14 = new String[0];
             return this;
+        }
+    }
+
+    private class UI {
+        private Graphics graphics;
+        private String[] data;
+        private Font font;
+        private int bottomY;
+
+        public UI(ChartInfo chartInfo) {
+            this.graphics = chartInfo.getGraphics();
+            this.data = chartInfo.getData();
+            this.font = chartInfo.getFont();
+            this.bottomY = chartInfo.getBottomY();
+        }
+
+        public void invoke() {
+            graphics.setColor(Color.CYAN);
+            graphics.fillRect(100, bottomY - 100, 40, 100);
+            graphics.fillRect(140, bottomY - 200, 40, 200);
+            graphics.fillRect(180, bottomY - 150, 40, 150);
+            graphics.fillRect(220, bottomY - 125, 40, 125);
+            graphics.fillRect(260, bottomY - 170, 40, 170);
+
+            graphics.setColor(Color.RED);
+            graphics.setFont(font);
+            graphics.drawString(data[0], 130, 250);
+            graphics.drawString(data[1], 130, 270);
         }
     }
 }
