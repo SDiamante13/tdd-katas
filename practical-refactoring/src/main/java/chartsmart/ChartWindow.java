@@ -8,10 +8,11 @@ import java.util.List;
 
 public class ChartWindow extends JPanel {
 
-    public static final int CHART_TYPE_406 = 406;
     private String reportType;
     private String title;
     private int chartType;
+
+    private static final int BAR_CHART_TYPE = 406;
 
     public String getTitle() {
         return title;
@@ -29,18 +30,25 @@ public class ChartWindow extends JPanel {
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
 
-        if (chartType == CHART_TYPE_406) {
+        setTitle();
+    }
+
+    private void setTitle() {
+        this.title = deriveTitle();
+    }
+
+    private String deriveTitle() {
+        if (chartType == BAR_CHART_TYPE) {
             if (reportType.equals("rpfll")) {
-                title = "Bar Chart - Single Mode";
+                return "Bar Chart - Single Mode";
             } else {
-                title = "Bar" +
-                        " Chart - Compare Mode";
+                return "Bar Chart - Compare Mode";
             }
         } else {
             if (reportType.equals("rpfll")) {
-                title = "Pie Chart - Single Mode";
+                return "Pie Chart - Single Mode";
             } else {
-                title = "Pie Chart - Compare Mode";
+                return "Pie Chart - Compare Mode";
             }
         }
     }
@@ -50,71 +58,51 @@ public class ChartWindow extends JPanel {
         DrawChart(g);
     }
 
-    private String tmStmp() {
-        return new Date().toString();
-    }
-
     private void DrawChart(Graphics g) {
 
         // Render chart background
-        if (chartType == 406) {
-            if (reportType.equals("rpfll")) {
-                Color bgc = Color.RED;
-                g.setColor(bgc);
-                g.fillRect(100, 90, getWidth() - 200, 420);
-            } else {
-                g.setColor(Color.BLACK);
-                g.fillRect(95, 95, 210, 210);
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                Color bgcb;
-                bgcb = Color.BLUE;
-                g.setColor(bgcb);
-                g.fillOval(100, 100, 450, getHeight() - 150);
-            } else {
-                g.setColor(Color.BLUE);
-                double isq = 405;
-                float padding = 90;
-                int sc = (int) (isq - padding * 2);
-                g.fillOval(100, 100, sc, sc);
-            }
-        }
+        renderChartBackground(g);
 
-        String[] data = null;
-        List<String> specialData = new ArrayList<>();
-        String[] data3point14 = new String[0];
+        foo(g);
+    }
+
+    private void foo(Graphics g) {
+        Foo foo = new Foo().invoke();
 
         if (chartType == 406) {
             if (reportType.equals("rpfll")) {
-                data = new String[1];
-                data[0] = "Bar Chart";
+                foo.data = new String[1];
+                foo.data[0] = "Bar Chart";
             } else {
-                data = new String[2];
+                foo.data = new String[2];
                 int i = 0;
-                data[i++] = "Bar Chart";
-                data[i++] = "Small";
+                foo.data[i++] = "Bar Chart";
+                foo.data[i++] = "Small";
             }
         } else {
             if (reportType.equals("rpfll")) {
-                specialData.add("Pie Chart");
+                foo.specialData.add("Pie Chart");
             } else {
-                data3point14 = new String[2];
-                data3point14[1] = "Small";
-                data3point14[0] = "Pie" + " Chart";
+                foo.data3point14 = new String[2];
+                foo.data3point14[1] = "Small";
+                foo.data3point14[0] = "Pie" + " Chart";
             }
         }
+
+        String[] data = foo.getData();
+        List<String> specialData = foo.getSpecialData();
+        String[] data3point14 = foo.getData3point14();
 
         Font font;
 
-        if (chartType == 406) {
+        if (chartType == ChartWindow.BAR_CHART_TYPE) {
             if (reportType.equals("shareddisplay")) {
                 if (data != null) {
                     if (data == null) {
                         data = new String[5];
                         data[0] = "Sally";
                         data[1] = System.getProperty("osname");
-                        data[2] = tmStmp();
+                        data[2] = new Date().toString();
                     }
                     font = new Font("Arial Black", Font.BOLD, 25);
                     g.setColor(Color.CYAN);
@@ -172,6 +160,57 @@ public class ChartWindow extends JPanel {
             } catch (Throwable e) {
                 repaint();
             }
+        }
+    }
+
+    private void renderChartBackground(Graphics g) {
+        if (chartType == 406) {
+            if (reportType.equals("rpfll")) {
+                Color bgc = Color.RED;
+                g.setColor(bgc);
+                g.fillRect(100, 90, getWidth() - 200, 420);
+            } else {
+                g.setColor(Color.BLACK);
+                g.fillRect(95, 95, 210, 210);
+            }
+        } else {
+            if (reportType.equals("rpfll")) {
+                Color bgcb;
+                bgcb = Color.BLUE;
+                g.setColor(bgcb);
+                g.fillOval(100, 100, 450, getHeight() - 150);
+            } else {
+                g.setColor(Color.BLUE);
+                double isq = 405;
+                float padding = 90;
+                int sc = (int) (isq - padding * 2);
+                g.fillOval(100, 100, sc, sc);
+            }
+        }
+    }
+
+    private class Foo {
+        private String[] data;
+        private List<String> specialData;
+        private String[] data3point14;
+
+        public String[] getData() {
+            return data;
+        }
+
+        public List<String> getSpecialData() {
+            return specialData;
+        }
+
+        public String[] getData3point14() {
+            return data3point14;
+        }
+
+        public Foo invoke() {
+            data = null;
+            specialData = new ArrayList<>();
+            data3point14 = new String[0];
+            return this;
         }
     }
 }
