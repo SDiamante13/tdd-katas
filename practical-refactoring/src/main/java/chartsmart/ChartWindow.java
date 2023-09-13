@@ -58,28 +58,7 @@ public class ChartWindow extends JPanel {
         // Render chart background
         renderChartBackground(g);
 
-        Foo foo = new Foo();
-
-
-        if (chartType == 406) {
-            if (reportType.equals("rpfll")) {
-                foo.data = new String[1];
-                foo.data[0] = "Bar Chart";
-            } else {
-                foo.data = new String[2];
-                int i = 0;
-                foo.data[i++] = "Bar Chart";
-                foo.data[i++] = "Small";
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                foo.specialData.add("Pie Chart");
-            } else {
-                foo.data3point14 = new String[2];
-                foo.data3point14[1] = "Small";
-                foo.data3point14[0] = "Pie" + " Chart";
-            }
-        }
+        Foo foo = foo();
 
         var data = foo.data;
         var specialData = foo.specialData;
@@ -154,6 +133,30 @@ public class ChartWindow extends JPanel {
                 repaint();
             }
         }
+    }
+
+    private Foo foo() {
+        var foo = new Foo();
+        if (chartType == 406) {
+            if (reportType.equals("rpfll")) {
+                foo.data = new String[1];
+                foo.data[0] = "Bar Chart";
+            } else {
+                foo.data = new String[2];
+                int i = 0;
+                foo.data[i++] = "Bar Chart";
+                foo.data[i++] = "Small";
+            }
+        } else {
+            if (reportType.equals("rpfll")) {
+                foo.specialData.add("Pie Chart");
+            } else {
+                foo.data3point14 = new String[2];
+                foo.data3point14[1] = "Small";
+                foo.data3point14[0] = "Pie" + " Chart";
+            }
+        }
+        return foo;
     }
 
     private void renderChartBackground(Graphics g) {
