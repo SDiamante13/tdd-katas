@@ -48,15 +48,10 @@ public class ChartWindow extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        DrawChart(g);
+        drawChart(g);
     }
 
-    private String tmStmp() {
-        return new Date().toString();
-    }
-
-    private void DrawChart(Graphics g) {
-
+    private void drawChart(Graphics g) {
         // Render chart background
         if (chartType == 406) {
             if (reportType.equals("rpfll")) {
@@ -115,7 +110,7 @@ public class ChartWindow extends JPanel {
                         data = new String[5];
                         data[0] = "Sally";
                         data[1] = System.getProperty("osname");
-                        data[2] = tmStmp();
+                        data[2] = new Date().toString();
                     }
                     font = new Font("Arial Black", Font.BOLD, 25);
                     g.setColor(Color.CYAN);
