@@ -8,13 +8,12 @@ import java.util.List;
 
 public class ChartWindow extends JPanel {
 
-    public static final int CHART_TYPE_406 = 406;
+    public static final int BAR_CHART_TYPE = 406;
     private String reportType;
-    private String title;
     private int chartType;
 
     public String getTitle() {
-        return title;
+        return title();
     }
 
     public void showChart(int chartType, String reportType, boolean shouldShowChart) {
@@ -28,19 +27,21 @@ public class ChartWindow extends JPanel {
 
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
+    }
 
-        if (chartType == CHART_TYPE_406) {
+    private String title() {
+        if (chartType == BAR_CHART_TYPE) {
             if (reportType.equals("rpfll")) {
-                title = "Bar Chart - Single Mode";
+                return "Bar Chart - Single Mode";
             } else {
-                title = "Bar" +
+                return "Bar" +
                         " Chart - Compare Mode";
             }
         } else {
             if (reportType.equals("rpfll")) {
-                title = "Pie Chart - Single Mode";
+                return "Pie Chart - Single Mode";
             } else {
-                title = "Pie Chart - Compare Mode";
+                return "Pie Chart - Compare Mode";
             }
         }
     }
