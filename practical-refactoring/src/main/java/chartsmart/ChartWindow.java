@@ -72,7 +72,7 @@ public class ChartWindow extends JPanel {
         List<String> specialData = chart.getSpecialData();
         String[] data3point14 = chart.getData3point14();
 
-        data = apple(g, data, specialData, data3point14);
+        data = chart.apple(g, this);
 
         sauce(data, specialData);
     }
@@ -87,44 +87,6 @@ public class ChartWindow extends JPanel {
                 repaint();
             }
         }
-    }
-
-    private String[] apple(Graphics graphics, String[] data, List<String> specialData, String[] data3point14) {
-        if (chartType == ChartWindow.BAR_CHART_TYPE) {
-            if (reportType.equals("shareddisplay")) {
-                if (data != null) {
-                    Font font;
-                    font = new Font("Arial Black", Font.BOLD, 25);
-                    int bottomY = 300;
-
-                    new UI(new ChartInfo(graphics, data, font, bottomY)).invoke();
-                }
-            } else {
-                graphics.setColor(Color.CYAN);
-                int bottomY = 500;
-                graphics.fillRect(112, bottomY - 200, 75, 200);
-                graphics.fillRect(187, bottomY - 400, 75, 400);
-                graphics.fillRect(262, bottomY - 300, 75, 300);
-                graphics.fillRect(337, bottomY - 250, 75, 250);
-                graphics.fillRect(412, bottomY - 340, 75, 340);
-                graphics.setColor(Color.BLACK);
-                graphics.setFont(new Font("Arial Black", Font.BOLD, 55));
-                graphics.drawString(data[0], 130, 400);
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                graphics.setColor(Color.WHITE);
-                graphics.setFont(new Font("Bookman Old Style", Font.BOLD, 55));
-                graphics.drawString(specialData.get(0), 200, 340);
-            } else {
-                graphics.setColor(Color.WHITE);
-                graphics.setFont(new Font("Bookman Old Style", Font.BOLD, 30));
-                graphics.drawString(data3point14[0], 145, 205);
-                graphics.drawString(data3point14[1], 170, 235);
-            }
-
-        }
-        return data;
     }
 
     private Chart createChart() {
@@ -180,9 +142,9 @@ public class ChartWindow extends JPanel {
 
     private class Chart {
 
-        private String[] data;
-        private List<String> specialData;
-        private String[] data3point14;
+        public String[] data;
+        public List<String> specialData;
+        public String[] data3point14;
 
         public String[] getData() {
             return data;
@@ -201,6 +163,50 @@ public class ChartWindow extends JPanel {
             specialData = new ArrayList<>();
             data3point14 = new String[0];
             return this;
+        }
+
+        private String[] apple(Graphics graphics, ChartWindow chartWindow) {
+            String[] data = getData();
+            String[] specialData = getSpecialData().toArray(new String[0]);
+            String[] data3point14 = getData3point14();
+            int chartType = chartWindow.chartType;
+            var reportType = chartWindow.reportType;
+
+            if (chartType == ChartWindow.BAR_CHART_TYPE) {
+                if (reportType.equals("shareddisplay")) {
+                    if (data != null) {
+                        Font font;
+                        font = new Font("Arial Black", Font.BOLD, 25);
+                        int bottomY = 300;
+
+                        chartWindow.new UI(new ChartInfo(graphics, data, font, bottomY)).invoke();
+                    }
+                } else {
+                    graphics.setColor(Color.CYAN);
+                    int bottomY = 500;
+                    graphics.fillRect(112, bottomY - 200, 75, 200);
+                    graphics.fillRect(187, bottomY - 400, 75, 400);
+                    graphics.fillRect(262, bottomY - 300, 75, 300);
+                    graphics.fillRect(337, bottomY - 250, 75, 250);
+                    graphics.fillRect(412, bottomY - 340, 75, 340);
+                    graphics.setColor(Color.BLACK);
+                    graphics.setFont(new Font("Arial Black", Font.BOLD, 55));
+                    graphics.drawString(data[0], 130, 400);
+                }
+            } else {
+                if (reportType.equals("rpfll")) {
+                    graphics.setColor(Color.WHITE);
+                    graphics.setFont(new Font("Bookman Old Style", Font.BOLD, 55));
+                    graphics.drawString(specialData[0], 200, 340);
+                } else {
+                    graphics.setColor(Color.WHITE);
+                    graphics.setFont(new Font("Bookman Old Style", Font.BOLD, 30));
+                    graphics.drawString(data3point14[0], 145, 205);
+                    graphics.drawString(data3point14[1], 170, 235);
+                }
+
+            }
+            return data;
         }
     }
 
