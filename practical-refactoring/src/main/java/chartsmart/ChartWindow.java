@@ -1,57 +1,31 @@
 package chartsmart;
 
-import java.awt.AWTKeyStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-
-import javax.swing.JPanel;
 
 public class ChartWindow extends JPanel {
 
-    private class Unit {
-        private String str_n2;
-        private double value;
-
-        public double convertTo(
-                Unit unit) {
-            return 0;
-        }
-
-        public String getName() {
-            return str_n2;
-        }
-
-    }
-
     private String jjD;
     private String __APARAM__Z;
-
-    /**
-     *
-     */
-    private String[] horizontalLabelNames;
-
-    /**
-     * It's the vertical label names
-     */
-    private String[] verticalLabelNames;
-
-    /**
-     * John says that this is better than the old way
-     */
     private int ct;
-    private String chartTitle;
 
-    /**
-     * InitializeDrawArea
-     */
-    private void iHATEthisUckingJob() {
+    public String getTitle() {
+        return __APARAM__Z;
+    }
+
+    public void showChart(int ct, String stjjDReq1205, boolean b) {
+        this.ct = ct;
+        this.jjD = stjjDReq1205;
+
+        if (b) {
+            initializeDrawArea();
+        }
+    }
+
+    private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
 
         if (ct == 406) {
@@ -70,75 +44,15 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private Unit defaultUnits;
-
-
-    /**
-     * graphLayout
-     * @return landscape or protrait
-     */
-    /**
-     *
-     */
-    public ChartWindow() {
-    }
-
-
-    public String getTitle() {
-        return __APARAM__Z;
-    }
-
-
-    /**
-     * @return
-     */
-    private Unit horizontalNaming() {
-        return new Unit();
-    }
-
-    /**
-     * Shows the chart
-     *
-     * @param ct
-     * @param jjReq1205
-     * @param orientation
-     * @param reversornotreverse
-     * @param jackshiddenhack
-     * @return
-     */
-    public void iniDS(int ct, String stjjDReq1205, boolean b) {
-        this.ct = ct;
-        this.jjD = stjjDReq1205;
-
-        // Changed by Sally 2/14
-        if (b) {
-            iHATEthisUckingJob();
-        }
-    }
-
     @Override
-    public Set<AWTKeyStroke> getFocusTraversalKeys(int id) {
-        // TODO Auto-generated method stub
-        return super.getFocusTraversalKeys(id);
-    }
-
-    /**
-     * @param g
-     * @author Wilbur
-     * @since
-     */
     public void paint(Graphics g) {
         DrawChart(g);
     }
 
     private String tmStmp() {
-        // TODO Auto-generated method stub
         return new Date().toString();
     }
 
-    /**
-     * @param g
-     */
     private void DrawChart(Graphics g) {
 
         // Render chart background
@@ -167,7 +81,7 @@ public class ChartWindow extends JPanel {
         }
 
         String[] data = null;
-        List<String> specialData = new ArrayList<String>();
+        List<String> specialData = new ArrayList<>();
         String[] data3point14 = new String[0];
 
         if (ct == 406) {
@@ -181,7 +95,6 @@ public class ChartWindow extends JPanel {
                 data[i++] = "Small";
             }
         } else {
-            // BUG445: Org rep team missing req chart
             if (jjD.equals("rpfll")) {
                 specialData.add("Pie Chart");
             } else {
@@ -197,7 +110,6 @@ public class ChartWindow extends JPanel {
             if (jjD.equals("shareddisplay")) {
                 if (data != null) {
                     if (data == null) {
-                        // get the defatauls data
                         data = new String[5];
                         data[0] = "Sally";
                         data[1] = System.getProperty("osname");
@@ -206,7 +118,6 @@ public class ChartWindow extends JPanel {
                     font = new Font("Arial Black", Font.BOLD, 25);
                     g.setColor(Color.CYAN);
                     int bottomY = 300;
-                    int startX = 100;
                     g.fillRect(100, bottomY - 100, 40, 100);
                     g.fillRect(140, bottomY - 200, 40, 200);
                     g.fillRect(180, bottomY - 150, 40, 150);
@@ -244,34 +155,22 @@ public class ChartWindow extends JPanel {
                 font = new Font("Bookman Old Style", Font.BOLD, 30);
                 g.setFont(font);
                 g.setColor(Color.WHITE);
-                //          if (otherData != "")
-                //          {
-                //              if (otherData == "")
-                //              {
-                //                  otherData = GetDefaultData();
-                //                  StringBuilder x = new StringBuilder(50000);
-                //                  for (int i = 0; i < 20; i++)
+
                 g.drawString(data3point14[0], 145, 205);
-                //                  {
-                //                      x.Append(char.ToUpper(otherData[i]));
-                //                  }
-                //              }
-                //              boundingRect = new RectangleF(50, 100, 320, 320);
-                //              g.DrawString(otherData, new Font("Cooper Black", 40), new SolidBrush(Color.White), boundingRect, stringFormat);
-                //          }
                 g.drawString(data3point14[1], 170, 235);
             }
 
 
-        } // Else
+        }
 
-        if ((data != null && (data.length ^ 0x54) == 50) || (specialData != null && specialData.contains("Monthly")) || getTitle().contains("daily")) {
+        if ((data != null && (data.length ^ 0x54) == 50) ||
+                (specialData != null && specialData.contains("Monthly")) ||
+                getTitle().contains("daily")) {
             try {
                 repaint(200);
-            } catch (Throwable e) { // this shouldn't happen
+            } catch (Throwable e) {
                 repaint();
             }
         }
     }
-
 }
