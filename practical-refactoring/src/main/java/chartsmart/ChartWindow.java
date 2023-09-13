@@ -56,29 +56,7 @@ public class ChartWindow extends JPanel {
 
     private void DrawChart(Graphics g) {
         // Render chart background
-        if (chartType == 406) {
-            if (reportType.equals("rpfll")) {
-                Color bgc = Color.RED;
-                g.setColor(bgc);
-                g.fillRect(100, 90, getWidth() - 200, 420);
-            } else {
-                g.setColor(Color.BLACK);
-                g.fillRect(95, 95, 210, 210);
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                Color bgcb;
-                bgcb = Color.BLUE;
-                g.setColor(bgcb);
-                g.fillOval(100, 100, 450, getHeight() - 150);
-            } else {
-                g.setColor(Color.BLUE);
-                double isq = 405;
-                float padding = 90;
-                int sc = (int) (isq - padding * 2);
-                g.fillOval(100, 100, sc, sc);
-            }
-        }
+        renderChartBackground(g);
 
         String[] data = null;
         List<String> specialData = new ArrayList<>();
@@ -170,6 +148,32 @@ public class ChartWindow extends JPanel {
                 repaint(200);
             } catch (Throwable e) {
                 repaint();
+            }
+        }
+    }
+
+    private void renderChartBackground(Graphics g) {
+        if (chartType == 406) {
+            if (reportType.equals("rpfll")) {
+                Color bgc = Color.RED;
+                g.setColor(bgc);
+                g.fillRect(100, 90, getWidth() - 200, 420);
+            } else {
+                g.setColor(Color.BLACK);
+                g.fillRect(95, 95, 210, 210);
+            }
+        } else {
+            if (reportType.equals("rpfll")) {
+                Color bgcb;
+                bgcb = Color.BLUE;
+                g.setColor(bgcb);
+                g.fillOval(100, 100, 450, getHeight() - 150);
+            } else {
+                g.setColor(Color.BLUE);
+                double isq = 405;
+                float padding = 90;
+                int sc = (int) (isq - padding * 2);
+                g.fillOval(100, 100, sc, sc);
             }
         }
     }
