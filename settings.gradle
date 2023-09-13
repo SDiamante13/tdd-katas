@@ -22,4 +22,5 @@ include 'katacombs'
 include 'laundry-reservation'
 include 'string-calculator'
 include 'mars-rover'
+include 'practical-refactoring'
 

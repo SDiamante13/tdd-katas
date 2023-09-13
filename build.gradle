@@ -4,6 +4,7 @@ buildscript {
         jUnitVersion='5.6.0'
         mockitoVersion='3.3.3'
         assertJVersion='3.24.2'
+        approvalsVersion='14.0.0'
     }
 
     repositories {
@@ -20,6 +21,7 @@ subprojects {
         testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
         testImplementation "org.assertj:assertj-core:$assertJVersion"
         testImplementation "org.junit.jupiter:junit-jupiter-params:$jUnitVersion"
+        testImplementation "com.approvaltests:approvaltests:$approvalsVersion"
     }
 
     group 'tech.pathtoprogramming'
