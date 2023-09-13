@@ -67,31 +67,11 @@ public class ChartWindow extends JPanel {
     }
 
     private void foo(Graphics g) {
-        Foo foo = new Foo().invoke();
+        Chart chart = createChart();
 
-        if (chartType == 406) {
-            if (reportType.equals("rpfll")) {
-                foo.data = new String[1];
-                foo.data[0] = "Bar Chart";
-            } else {
-                foo.data = new String[2];
-                int i = 0;
-                foo.data[i++] = "Bar Chart";
-                foo.data[i++] = "Small";
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                foo.specialData.add("Pie Chart");
-            } else {
-                foo.data3point14 = new String[2];
-                foo.data3point14[1] = "Small";
-                foo.data3point14[0] = "Pie" + " Chart";
-            }
-        }
-
-        String[] data = foo.getData();
-        List<String> specialData = foo.getSpecialData();
-        String[] data3point14 = foo.getData3point14();
+        String[] data = chart.getData();
+        List<String> specialData = chart.getSpecialData();
+        String[] data3point14 = chart.getData3point14();
 
         Font font;
 
@@ -163,6 +143,31 @@ public class ChartWindow extends JPanel {
         }
     }
 
+    private Chart createChart() {
+        Chart chart = new Chart().invoke();
+
+        if (chartType == 406) {
+            if (reportType.equals("rpfll")) {
+                chart.data = new String[1];
+                chart.data[0] = "Bar Chart";
+            } else {
+                chart.data = new String[2];
+                int i = 0;
+                chart.data[i++] = "Bar Chart";
+                chart.data[i++] = "Small";
+            }
+        } else {
+            if (reportType.equals("rpfll")) {
+                chart.specialData.add("Pie Chart");
+            } else {
+                chart.data3point14 = new String[2];
+                chart.data3point14[1] = "Small";
+                chart.data3point14[0] = "Pie" + " Chart";
+            }
+        }
+        return chart;
+    }
+
     private void renderChartBackground(Graphics g) {
         if (chartType == 406) {
             if (reportType.equals("rpfll")) {
@@ -189,7 +194,8 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private class Foo {
+    private class Chart {
+
         private String[] data;
         private List<String> specialData;
         private String[] data3point14;
@@ -206,7 +212,7 @@ public class ChartWindow extends JPanel {
             return data3point14;
         }
 
-        public Foo invoke() {
+        public Chart invoke() {
             data = null;
             specialData = new ArrayList<>();
             data3point14 = new String[0];
