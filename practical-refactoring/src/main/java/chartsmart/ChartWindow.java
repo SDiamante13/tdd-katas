@@ -29,10 +29,10 @@ public class ChartWindow extends JPanel {
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
 
-        setTitle();
+        setTitle(chartType, reportType);
     }
 
-    private void setTitle() {
+    private void setTitle(int chartType, String reportType) {
         if (chartType == CHART_TYPE_406) {
             if (reportType.equals("rpfll")) {
                 this.title = "Bar Chart - Single Mode";
@@ -54,12 +54,7 @@ public class ChartWindow extends JPanel {
         DrawChart(g);
     }
 
-    private String tmStmp() {
-        return new Date().toString();
-    }
-
     private void DrawChart(Graphics g) {
-
         // Render chart background
         if (chartType == 406) {
             if (reportType.equals("rpfll")) {
@@ -177,5 +172,9 @@ public class ChartWindow extends JPanel {
                 repaint();
             }
         }
+    }
+
+    private String tmStmp() {
+        return new Date().toString();
     }
 }
