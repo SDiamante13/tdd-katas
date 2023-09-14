@@ -66,10 +66,10 @@ public class ChartWindow extends JPanel {
         Data data;
         if (chartType == BAR_CHART_TYPE) {
             data = initializeBarChartData(reportType);
-            renderBarChart(g, data);
+            renderBarChart(g, data, reportType);
         } else {
             data = initializePieChartData(reportType);
-            renderPieChart(g, data);
+            renderPieChart(g, data, reportType);
         }
 
         if (shouldRepaint(data)) {
@@ -113,7 +113,7 @@ public class ChartWindow extends JPanel {
         return data;
     }
 
-    private void renderBarChart(Graphics g, Data data) {
+    private void renderBarChart(Graphics g, Data data, String reportType) {
         Font font;
         if (reportType.equals("shareddisplay")) {
             if (data.data != null) {
@@ -149,7 +149,7 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private void renderPieChart(Graphics g, Data data) {
+    private void renderPieChart(Graphics g, Data data, String reportType) {
         Font font;
         if (reportType.equals("rpfll")) {
             font = new Font("Bookman Old Style", Font.BOLD, 55);
@@ -166,7 +166,4 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private void renderChartBackground(Graphics g, Chart chart) {
-        chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
-    }
 }
