@@ -163,12 +163,12 @@ public class ChartWindow extends JPanel {
     }
 
     private void renderChartBackground(Graphics g) {
+        Chart chart;
         if (chartType == BAR_CHART_TYPE) {
-            BarChart chart = new BarChart();
-            chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
+            chart = new BarChart();
         } else {
-            PieChart chart = new PieChart();
-            chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
+            chart = new PieChart();
         }
+        chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
     }
 }
