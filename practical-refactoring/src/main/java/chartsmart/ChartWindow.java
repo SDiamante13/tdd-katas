@@ -2,7 +2,6 @@ package chartsmart;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Date;
 
 public class ChartWindow extends JPanel {
 
@@ -33,17 +32,25 @@ public class ChartWindow extends JPanel {
 
     private void deriveTitle() {
         if (chartType == BAR_CHART_TYPE) {
-            if (reportType.equals("rpfll")) {
-                title = "Bar Chart - Single Mode";
-            } else {
-                title = "Bar Chart - Compare Mode";
-            }
+            title = barChartTitle();
         } else {
-            if (reportType.equals("rpfll")) {
-                title = "Pie Chart - Single Mode";
-            } else {
-                title = "Pie Chart - Compare Mode";
-            }
+            title = pieChartTitle();
+        }
+    }
+
+    private String pieChartTitle() {
+        if (reportType.equals("rpfll")) {
+            return "Pie Chart - Single Mode";
+        } else {
+            return "Pie Chart - Compare Mode";
+        }
+    }
+
+    private String barChartTitle() {
+        if (reportType.equals("rpfll")) {
+            return "Bar Chart - Single Mode";
+        } else {
+            return "Bar Chart - Compare Mode";
         }
     }
 
@@ -58,40 +65,48 @@ public class ChartWindow extends JPanel {
         Data data = new Data();
 
         if (chartType == BAR_CHART_TYPE) {
-            if (reportType.equals("rpfll")) {
-                data.data = new String[1];
-                data.data[0] = "Bar Chart";
-            } else {
-                data.data = new String[2];
-                int i = 0;
-                data.data[i++] = "Bar Chart";
-                data.data[i++] = "Small";
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                data.specialData.add("Pie Chart");
-            } else {
-                data.data3point14 = new String[2];
-                data.data3point14[1] = "Small";
-                data.data3point14[0] = "Pie" + " Chart";
-            }
-        }
-
-        if (chartType == BAR_CHART_TYPE) {
+            getBarChartData(data);
             renderBarChart(g, data);
         } else {
+            getPieChartData(data);
             renderPieChart(g, data);
         }
 
-        if ((data.data != null && (data.data.length ^ 0x54) == 50) ||
-                (data.specialData != null && data.specialData.contains("Monthly")) ||
-                getTitle().contains("daily")) {
+        if (shouldRepaint(data)) {
             try {
                 repaint(200);
             } catch (Throwable e) {
                 repaint();
             }
         }
+    }
+
+    private void getPieChartData(Data data) {
+        if (reportType.equals("rpfll")) {
+            data.specialData.add("Pie Chart");
+        } else {
+            data.data3point14 = new String[2];
+            data.data3point14[1] = "Small";
+            data.data3point14[0] = "Pie" + " Chart";
+        }
+    }
+
+    private void getBarChartData(Data data) {
+        if (reportType.equals("rpfll")) {
+            data.data = new String[1];
+            data.data[0] = "Bar Chart";
+        } else {
+            data.data = new String[2];
+            int i = 0;
+            data.data[i++] = "Bar Chart";
+            data.data[i++] = "Small";
+        }
+    }
+
+    private boolean shouldRepaint(Data data) {
+        return (data.data != null && (data.data.length ^ 0x54) == 50) ||
+                (data.specialData != null && data.specialData.contains("Monthly")) ||
+                getTitle().contains("daily");
     }
 
     private void renderPieChart(Graphics g, Data data) {
