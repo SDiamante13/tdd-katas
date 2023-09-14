@@ -82,12 +82,6 @@ public class ChartWindow extends JPanel {
         if (chartType == BAR_CHART_TYPE) {
             if (reportType.equals("shareddisplay")) {
                 if (data.data != null) {
-                    if (data.data == null) {
-                        data.data = new String[5];
-                        data.data[0] = "Sally";
-                        data.data[1] = System.getProperty("osname");
-                        data.data[2] = new Date().toString();
-                    }
                     font = new Font("Arial Black", Font.BOLD, 25);
                     g.setColor(Color.CYAN);
                     int bottomY = 300;
@@ -132,8 +126,6 @@ public class ChartWindow extends JPanel {
                 g.drawString(data.data3point14[0], 145, 205);
                 g.drawString(data.data3point14[1], 170, 235);
             }
-
-
         }
 
         if ((data.data != null && (data.data.length ^ 0x54) == 50) ||
