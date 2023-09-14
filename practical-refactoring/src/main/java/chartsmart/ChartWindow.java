@@ -38,8 +38,7 @@ public class ChartWindow extends JPanel {
             if (reportType.equals("rpfll")) {
                 title = "Bar Chart - Single Mode";
             } else {
-                title = "Bar" +
-                        " Chart - Compare Mode";
+                title = "Bar Chart - Compare Mode";
             }
         } else {
             if (reportType.equals("rpfll")) {
@@ -57,29 +56,7 @@ public class ChartWindow extends JPanel {
 
     private void drawChart(Graphics g) {
         // Render chart background
-        if (chartType == BAR_CHART_TYPE) {
-            if (reportType.equals("rpfll")) {
-                Color bgc = Color.RED;
-                g.setColor(bgc);
-                g.fillRect(100, 90, getWidth() - 200, 420);
-            } else {
-                g.setColor(Color.BLACK);
-                g.fillRect(95, 95, 210, 210);
-            }
-        } else {
-            if (reportType.equals("rpfll")) {
-                Color bgcb;
-                bgcb = Color.BLUE;
-                g.setColor(bgcb);
-                g.fillOval(100, 100, 450, getHeight() - 150);
-            } else {
-                g.setColor(Color.BLUE);
-                double isq = 405;
-                float padding = 90;
-                int sc = (int) (isq - padding * 2);
-                g.fillOval(100, 100, sc, sc);
-            }
-        }
+        renderChartBackground(g);
 
         String[] data = null;
         List<String> specialData = new ArrayList<>();
@@ -172,6 +149,40 @@ public class ChartWindow extends JPanel {
             } catch (Throwable e) {
                 repaint();
             }
+        }
+    }
+
+    private void renderChartBackground(Graphics g) {
+        if (chartType == BAR_CHART_TYPE) {
+            renderBarChartBackground(g);
+        } else {
+            renderPieChartBackground(g);
+        }
+    }
+
+    private void renderPieChartBackground(Graphics g) {
+        if (reportType.equals("rpfll")) {
+            Color bgcb;
+            bgcb = Color.BLUE;
+            g.setColor(bgcb);
+            g.fillOval(100, 100, 450, getHeight() - 150);
+        } else {
+            g.setColor(Color.BLUE);
+            double isq = 405;
+            float padding = 90;
+            int sc = (int) (isq - padding * 2);
+            g.fillOval(100, 100, sc, sc);
+        }
+    }
+
+    private void renderBarChartBackground(Graphics g) {
+        if (reportType.equals("rpfll")) {
+            Color bgc = Color.RED;
+            g.setColor(bgc);
+            g.fillRect(100, 90, getWidth() - 200, 420);
+        } else {
+            g.setColor(Color.BLACK);
+            g.fillRect(95, 95, 210, 210);
         }
     }
 }
