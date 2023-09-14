@@ -2,9 +2,10 @@ package chartsmart;
 
 import java.awt.*;
 
-class BarChart {
+class BarChart implements Chart {
 
-    void renderBarChartBackground(Graphics g, String reportType, Dimensions dimensions) {
+    @Override
+    public void renderBackground(Graphics g, String reportType, Dimensions dimensions) {
         if (reportType.equals("rpfll")) {
             Color bgc = Color.RED;
             g.setColor(bgc);

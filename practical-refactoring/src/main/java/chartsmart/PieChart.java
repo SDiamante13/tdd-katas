@@ -2,9 +2,10 @@ package chartsmart;
 
 import java.awt.*;
 
-class PieChart {
+class PieChart implements Chart {
 
-    void renderPieChartBackground(Graphics g, String reportType, Dimensions dimensions) {
+    @Override
+    public void renderBackground(Graphics g, String reportType, Dimensions dimensions) {
         if (reportType.equals("rpfll")) {
             Color bgcb;
             bgcb = Color.BLUE;
