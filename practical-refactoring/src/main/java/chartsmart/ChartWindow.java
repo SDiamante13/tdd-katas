@@ -6,7 +6,6 @@ import java.awt.*;
 public class ChartWindow extends JPanel {
 
     private String reportType;
-    private String title;
     private int chartType;
     private Chart chart;
 
@@ -28,8 +27,6 @@ public class ChartWindow extends JPanel {
 
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
-
-        setTitle(chart.title(reportType));
     }
 
     @Override
@@ -38,8 +35,6 @@ public class ChartWindow extends JPanel {
     }
 
     private void drawChart(Graphics g) {
-        Chart chart = Chart.create(chartType);
-
         chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
         Data data = chart.initializeData(reportType);
         chart.render(g, data, reportType);
@@ -57,9 +52,5 @@ public class ChartWindow extends JPanel {
         return (data.data != null && (data.data.length ^ 0x54) == 50) ||
                 (data.specialData != null && data.specialData.contains("Monthly")) ||
                 chart.title(reportType).contains("daily");
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }
