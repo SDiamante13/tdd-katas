@@ -57,7 +57,7 @@ public class ChartWindow extends JPanel {
 
     private void drawChart(Graphics g) {
         // Render chart background
-        if (chartType == 406) {
+        if (chartType == BAR_CHART_TYPE) {
             if (reportType.equals("rpfll")) {
                 Color bgc = Color.RED;
                 g.setColor(bgc);
@@ -85,7 +85,7 @@ public class ChartWindow extends JPanel {
         List<String> specialData = new ArrayList<>();
         String[] data3point14 = new String[0];
 
-        if (chartType == 406) {
+        if (chartType == BAR_CHART_TYPE) {
             if (reportType.equals("rpfll")) {
                 data = new String[1];
                 data[0] = "Bar Chart";
@@ -107,7 +107,7 @@ public class ChartWindow extends JPanel {
 
         Font font;
 
-        if (chartType == 406) {
+        if (chartType == BAR_CHART_TYPE) {
             if (reportType.equals("shareddisplay")) {
                 if (data != null) {
                     if (data == null) {
