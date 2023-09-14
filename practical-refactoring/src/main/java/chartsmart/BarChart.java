@@ -6,7 +6,7 @@ class BarChart implements Chart {
 
     public static final int BAR_CHART_TYPE = 406;
 
-    static String barChartTitle(String reportType) {
+    public String title(String reportType) {
         if (reportType.equals("rpfll")) {
             return "Bar Chart - Single Mode";
         } else {

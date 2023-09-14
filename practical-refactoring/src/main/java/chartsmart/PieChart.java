@@ -4,7 +4,8 @@ import java.awt.*;
 
 class PieChart implements Chart {
 
-    static String pieChartTitle(String reportType) {
+    @Override
+    public String title(String reportType) {
         if (reportType.equals("rpfll")) {
             return "Pie Chart - Single Mode";
         } else {

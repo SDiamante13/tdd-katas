@@ -8,6 +8,7 @@ public class ChartWindow extends JPanel {
     private String reportType;
     private String title;
     private int chartType;
+    private Chart chart;
 
     public static final int BAR_CHART_TYPE = 406;
 
@@ -18,6 +19,7 @@ public class ChartWindow extends JPanel {
     public void showChart(int chartType, String reportType, boolean shouldShowChart) {
         this.chartType = chartType;
         this.reportType = reportType;
+        this.chart = Chart.create(chartType);
 
         if (shouldShowChart) {
             initializeDrawArea();
@@ -32,9 +34,9 @@ public class ChartWindow extends JPanel {
 
     private void deriveTitle() {
         if (chartType == BAR_CHART_TYPE) {
-            title = BarChart.barChartTitle(reportType);
+            title = chart.title(reportType);
         } else {
-            title = PieChart.pieChartTitle(reportType);
+            title = chart.title(reportType);
         }
     }
 

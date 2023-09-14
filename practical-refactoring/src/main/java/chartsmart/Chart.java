@@ -13,4 +13,6 @@ public interface Chart {
     Data initializeData(String reportType);
 
     void render(Graphics g, Data data, String reportType);
+
+    String title(String reportType);
 }
