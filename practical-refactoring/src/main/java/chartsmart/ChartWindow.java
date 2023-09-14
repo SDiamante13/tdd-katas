@@ -13,7 +13,7 @@ public class ChartWindow extends JPanel {
     public static final int BAR_CHART_TYPE = 406;
 
     public String getTitle() {
-        return title;
+        return chart.title(reportType);
     }
 
     public void showChart(int chartType, String reportType, boolean shouldShowChart) {
@@ -29,11 +29,7 @@ public class ChartWindow extends JPanel {
     private void initializeDrawArea() {
         this.setPreferredSize(new Dimension(600, 600));
 
-        deriveTitle();
-    }
-
-    private void deriveTitle() {
-        title = chart.title(reportType);
+        setTitle(chart.title(reportType));
     }
 
     @Override
@@ -60,6 +56,10 @@ public class ChartWindow extends JPanel {
     private boolean shouldRepaint(Data data) {
         return (data.data != null && (data.data.length ^ 0x54) == 50) ||
                 (data.specialData != null && data.specialData.contains("Monthly")) ||
-                getTitle().contains("daily");
+                chart.title(reportType).contains("daily");
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
