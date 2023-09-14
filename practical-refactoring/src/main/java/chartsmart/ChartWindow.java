@@ -165,19 +165,21 @@ public class ChartWindow extends JPanel {
     private void renderChartBackground(Graphics g) {
         if (chartType == BAR_CHART_TYPE) {
             BarChart chart = new BarChart();
-            chart.renderBarChartBackground(g, reportType, getWidth());
+            Dimensions dimensions = new Dimensions(getWidth(), getHeight());
+            chart.renderBarChartBackground(g, reportType, dimensions);
         } else {
             PieChart chart = new PieChart();
-            chart.renderPieChartBackground(g, reportType, getHeight());
+            Dimensions dimensions = new Dimensions(getWidth(), getHeight());
+            chart.renderPieChartBackground(g, reportType, dimensions);
         }
     }
 
     class BarChart {
-        private void renderBarChartBackground(Graphics g, String reportType, int border) {
+        private void renderBarChartBackground(Graphics g, String reportType, Dimensions dimensions) {
             if (reportType.equals("rpfll")) {
                 Color bgc = Color.RED;
                 g.setColor(bgc);
-                g.fillRect(100, 90, border - 200, 420);
+                g.fillRect(100, 90, dimensions.width - 200, 420);
             } else {
                 g.setColor(Color.BLACK);
                 g.fillRect(95, 95, 210, 210);
@@ -186,12 +188,12 @@ public class ChartWindow extends JPanel {
     }
 
     class PieChart {
-        private void renderPieChartBackground(Graphics g, String reportType, int border) {
+        private void renderPieChartBackground(Graphics g, String reportType, Dimensions dimensions) {
             if (reportType.equals("rpfll")) {
                 Color bgcb;
                 bgcb = Color.BLUE;
                 g.setColor(bgcb);
-                g.fillOval(100, 100, 450, border - 150);
+                g.fillOval(100, 100, 450, dimensions.height - 150);
             } else {
                 g.setColor(Color.BLUE);
                 double isq = 405;
@@ -199,6 +201,16 @@ public class ChartWindow extends JPanel {
                 int sc = (int) (isq - padding * 2);
                 g.fillOval(100, 100, sc, sc);
             }
+        }
+    }
+
+    private class Dimensions {
+        public final int width;
+        public final int height;
+
+        public Dimensions(int width, int height) {
+            this.width = width;
+            this.height = height;
         }
     }
 }
