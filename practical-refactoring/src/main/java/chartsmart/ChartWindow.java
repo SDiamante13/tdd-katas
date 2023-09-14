@@ -60,15 +60,15 @@ public class ChartWindow extends JPanel {
     }
 
     private void drawChart(Graphics g) {
-        renderChartBackground(g);
+        Chart chart = chartType == BAR_CHART_TYPE ? new BarChart() : new PieChart();
+        chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
 
-        Data data = new Data();
-
+        Data data;
         if (chartType == BAR_CHART_TYPE) {
-            initializeBarChartData(data);
+            data = initializeBarChartData(reportType);
             renderBarChart(g, data);
         } else {
-            initializePieChartData(data);
+            data = initializePieChartData(reportType);
             renderPieChart(g, data);
         }
 
@@ -87,7 +87,8 @@ public class ChartWindow extends JPanel {
                 getTitle().contains("daily");
     }
 
-    private void initializeBarChartData(Data data) {
+    private Data initializeBarChartData(String reportType) {
+        Data data = new Data();
         if (reportType.equals("rpfll")) {
             data.data = new String[1];
             data.data[0] = "Bar Chart";
@@ -97,9 +98,11 @@ public class ChartWindow extends JPanel {
             data.data[i++] = "Bar Chart";
             data.data[i++] = "Small";
         }
+        return data;
     }
 
-    private void initializePieChartData(Data data) {
+    private Data initializePieChartData(String reportType) {
+        Data data = new Data();
         if (reportType.equals("rpfll")) {
             data.specialData.add("Pie Chart");
         } else {
@@ -107,6 +110,7 @@ public class ChartWindow extends JPanel {
             data.data3point14[1] = "Small";
             data.data3point14[0] = "Pie" + " Chart";
         }
+        return data;
     }
 
     private void renderBarChart(Graphics g, Data data) {
@@ -162,13 +166,7 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private void renderChartBackground(Graphics g) {
-        Chart chart;
-        if (chartType == BAR_CHART_TYPE) {
-            chart = new BarChart();
-        } else {
-            chart = new PieChart();
-        }
+    private void renderChartBackground(Graphics g, Chart chart) {
         chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
     }
 }
