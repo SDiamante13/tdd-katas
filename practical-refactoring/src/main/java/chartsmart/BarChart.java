@@ -6,6 +6,7 @@ class BarChart implements Chart {
 
     public static final int BAR_CHART_TYPE = 406;
 
+    @Override
     public String title(String reportType) {
         if (reportType.equals("rpfll")) {
             return "Bar Chart - Single Mode";
@@ -14,6 +15,7 @@ class BarChart implements Chart {
         }
     }
 
+    @Override
     public Data initializeData(String reportType) {
         Data data = new Data();
         if (reportType.equals("rpfll")) {

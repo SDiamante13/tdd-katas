@@ -13,6 +13,7 @@ class PieChart implements Chart {
         }
     }
 
+    @Override
     public Data initializeData(String reportType) {
         Data data = new Data();
         if (reportType.equals("rpfll")) {

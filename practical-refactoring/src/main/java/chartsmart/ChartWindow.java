@@ -33,11 +33,7 @@ public class ChartWindow extends JPanel {
     }
 
     private void deriveTitle() {
-        if (chartType == BAR_CHART_TYPE) {
-            title = chart.title(reportType);
-        } else {
-            title = chart.title(reportType);
-        }
+        title = chart.title(reportType);
     }
 
     @Override
