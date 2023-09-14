@@ -165,17 +165,17 @@ public class ChartWindow extends JPanel {
     private void renderChartBackground(Graphics g) {
         if (chartType == BAR_CHART_TYPE) {
             BarChart chart = new BarChart();
-            renderBarChartBackground(g);
+            renderBarChartBackground(g, reportType, getWidth());
         } else {
             renderPieChartBackground(g);
         }
     }
 
-    private void renderBarChartBackground(Graphics g) {
+    private static void renderBarChartBackground(Graphics g, String reportType, int width) {
         if (reportType.equals("rpfll")) {
             Color bgc = Color.RED;
             g.setColor(bgc);
-            g.fillRect(100, 90, getWidth() - 200, 420);
+            g.fillRect(100, 90, width - 200, 420);
         } else {
             g.setColor(Color.BLACK);
             g.fillRect(95, 95, 210, 210);
