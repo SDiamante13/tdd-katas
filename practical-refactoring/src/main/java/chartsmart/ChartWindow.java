@@ -77,55 +77,10 @@ public class ChartWindow extends JPanel {
             }
         }
 
-        Font font;
-
         if (chartType == BAR_CHART_TYPE) {
-            if (reportType.equals("shareddisplay")) {
-                if (data.data != null) {
-                    font = new Font("Arial Black", Font.BOLD, 25);
-                    g.setColor(Color.CYAN);
-                    int bottomY = 300;
-                    g.fillRect(100, bottomY - 100, 40, 100);
-                    g.fillRect(140, bottomY - 200, 40, 200);
-                    g.fillRect(180, bottomY - 150, 40, 150);
-                    g.fillRect(220, bottomY - 125, 40, 125);
-                    g.fillRect(260, bottomY - 170, 40, 170);
-
-                    g.setColor(Color.RED);
-                    g.setFont(font);
-                    g.drawString(data.data[0], 130, 250);
-                    g.drawString(data.data[1], 130, 270);
-                }
-            } else {
-                int bottomY = 500;
-                g.setColor(Color.CYAN);
-                g.fillRect(112, bottomY - 200, 75, 200);
-                g.fillRect(187, bottomY - 400, 75, 400);
-                g.fillRect(262, bottomY - 300, 75, 300);
-                g.fillRect(337, bottomY - 250, 75, 250);
-                g.fillRect(412, bottomY - 340, 75, 340);
-                font = new Font("Arial Black",
-                        Font.BOLD, 55);
-                g.setColor(Color.BLACK);
-                g.setFont(font);
-                g.drawString(
-                        data.data[0], 130,
-                        400);
-            }
+            renderBarChart(g, data);
         } else {
-            if (reportType.equals("rpfll")) {
-                font = new Font("Bookman Old Style", Font.BOLD, 55);
-                g.setColor(Color.WHITE);
-                g.setFont(font);
-                g.drawString(data.specialData.get(0), 200, 340);
-            } else {
-                font = new Font("Bookman Old Style", Font.BOLD, 30);
-                g.setFont(font);
-                g.setColor(Color.WHITE);
-
-                g.drawString(data.data3point14[0], 145, 205);
-                g.drawString(data.data3point14[1], 170, 235);
-            }
+            renderPieChart(g, data);
         }
 
         if ((data.data != null && (data.data.length ^ 0x54) == 50) ||
@@ -136,6 +91,59 @@ public class ChartWindow extends JPanel {
             } catch (Throwable e) {
                 repaint();
             }
+        }
+    }
+
+    private void renderPieChart(Graphics g, Data data) {
+        Font font;
+        if (reportType.equals("rpfll")) {
+            font = new Font("Bookman Old Style", Font.BOLD, 55);
+            g.setColor(Color.WHITE);
+            g.setFont(font);
+            g.drawString(data.specialData.get(0), 200, 340);
+        } else {
+            font = new Font("Bookman Old Style", Font.BOLD, 30);
+            g.setFont(font);
+            g.setColor(Color.WHITE);
+
+            g.drawString(data.data3point14[0], 145, 205);
+            g.drawString(data.data3point14[1], 170, 235);
+        }
+    }
+
+    private void renderBarChart(Graphics g, Data data) {
+        Font font;
+        if (reportType.equals("shareddisplay")) {
+            if (data.data != null) {
+                font = new Font("Arial Black", Font.BOLD, 25);
+                g.setColor(Color.CYAN);
+                int bottomY = 300;
+                g.fillRect(100, bottomY - 100, 40, 100);
+                g.fillRect(140, bottomY - 200, 40, 200);
+                g.fillRect(180, bottomY - 150, 40, 150);
+                g.fillRect(220, bottomY - 125, 40, 125);
+                g.fillRect(260, bottomY - 170, 40, 170);
+
+                g.setColor(Color.RED);
+                g.setFont(font);
+                g.drawString(data.data[0], 130, 250);
+                g.drawString(data.data[1], 130, 270);
+            }
+        } else {
+            int bottomY = 500;
+            g.setColor(Color.CYAN);
+            g.fillRect(112, bottomY - 200, 75, 200);
+            g.fillRect(187, bottomY - 400, 75, 400);
+            g.fillRect(262, bottomY - 300, 75, 300);
+            g.fillRect(337, bottomY - 250, 75, 250);
+            g.fillRect(412, bottomY - 340, 75, 340);
+            font = new Font("Arial Black",
+                    Font.BOLD, 55);
+            g.setColor(Color.BLACK);
+            g.setFont(font);
+            g.drawString(
+                    data.data[0], 130,
+                    400);
         }
     }
 
