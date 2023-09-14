@@ -4,11 +4,9 @@ import java.awt.*;
 
 class BarChart implements Chart {
 
-    public static final String SINGLE_MODE = "rpfll";
-
     @Override
     public String title(String reportType) {
-        return reportType.equals(SINGLE_MODE) ?
+        return reportType.equals(Chart.SINGLE_MODE) ?
                 "Bar Chart - Single Mode" :
                 "Bar Chart - Compare Mode";
     }
@@ -16,7 +14,7 @@ class BarChart implements Chart {
     @Override
     public Data initializeData(String reportType) {
         Data data = new Data();
-        if (reportType.equals(SINGLE_MODE)) {
+        if (reportType.equals(Chart.SINGLE_MODE)) {
             data.data = new String[1];
             data.data[0] = "Bar Chart";
         } else {
@@ -66,7 +64,7 @@ class BarChart implements Chart {
 
     @Override
     public void renderBackground(Graphics g, String reportType, Dimensions dimensions) {
-        if (reportType.equals(SINGLE_MODE)) {
+        if (reportType.equals(Chart.SINGLE_MODE)) {
             Color bgc = Color.RED;
             g.setColor(bgc);
             g.fillRect(100, 90, dimensions.width - 200, 420);

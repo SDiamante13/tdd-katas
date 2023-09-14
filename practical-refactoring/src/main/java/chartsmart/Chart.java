@@ -5,6 +5,7 @@ import java.awt.*;
 public interface Chart {
 
     int BAR_CHART_TYPE = 406;
+    String SINGLE_MODE = "rpfll";
 
     static Chart create(int chartType) {
         return chartType == BAR_CHART_TYPE ? new BarChart() : new PieChart();
