@@ -32,25 +32,9 @@ public class ChartWindow extends JPanel {
 
     private void deriveTitle() {
         if (chartType == BAR_CHART_TYPE) {
-            title = barChartTitle();
+            title = BarChart.barChartTitle(reportType);
         } else {
-            title = pieChartTitle();
-        }
-    }
-
-    private String pieChartTitle() {
-        if (reportType.equals("rpfll")) {
-            return "Pie Chart - Single Mode";
-        } else {
-            return "Pie Chart - Compare Mode";
-        }
-    }
-
-    private String barChartTitle() {
-        if (reportType.equals("rpfll")) {
-            return "Bar Chart - Single Mode";
-        } else {
-            return "Bar Chart - Compare Mode";
+            title = PieChart.pieChartTitle(reportType);
         }
     }
 
@@ -60,17 +44,11 @@ public class ChartWindow extends JPanel {
     }
 
     private void drawChart(Graphics g) {
-        Chart chart = chartType == BAR_CHART_TYPE ? new BarChart() : new PieChart();
-        chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
+        Chart chart = Chart.create(chartType);
 
-        Data data;
-        if (chartType == BAR_CHART_TYPE) {
-            data = chart.initializeData(reportType);
-            chart.render(g, data, reportType);
-        } else {
-            data = chart.initializeData(reportType);
-            chart.render(g, data, reportType);
-        }
+        chart.renderBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
+        Data data = chart.initializeData(reportType);
+        chart.render(g, data, reportType);
 
         if (shouldRepaint(data)) {
             try {

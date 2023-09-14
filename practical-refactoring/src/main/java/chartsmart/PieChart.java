@@ -4,7 +4,15 @@ import java.awt.*;
 
 class PieChart implements Chart {
 
-     public Data initializeData(String reportType) {
+    static String pieChartTitle(String reportType) {
+        if (reportType.equals("rpfll")) {
+            return "Pie Chart - Single Mode";
+        } else {
+            return "Pie Chart - Compare Mode";
+        }
+    }
+
+    public Data initializeData(String reportType) {
         Data data = new Data();
         if (reportType.equals("rpfll")) {
             data.specialData.add("Pie Chart");
