@@ -65,10 +65,10 @@ public class ChartWindow extends JPanel {
         Data data = new Data();
 
         if (chartType == BAR_CHART_TYPE) {
-            getBarChartData(data);
+            initializeBarChartData(data);
             renderBarChart(g, data);
         } else {
-            getPieChartData(data);
+            initializePieChartData(data);
             renderPieChart(g, data);
         }
 
@@ -81,17 +81,13 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private void getPieChartData(Data data) {
-        if (reportType.equals("rpfll")) {
-            data.specialData.add("Pie Chart");
-        } else {
-            data.data3point14 = new String[2];
-            data.data3point14[1] = "Small";
-            data.data3point14[0] = "Pie" + " Chart";
-        }
+    private boolean shouldRepaint(Data data) {
+        return (data.data != null && (data.data.length ^ 0x54) == 50) ||
+                (data.specialData != null && data.specialData.contains("Monthly")) ||
+                getTitle().contains("daily");
     }
 
-    private void getBarChartData(Data data) {
+    private void initializeBarChartData(Data data) {
         if (reportType.equals("rpfll")) {
             data.data = new String[1];
             data.data[0] = "Bar Chart";
@@ -103,26 +99,13 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private boolean shouldRepaint(Data data) {
-        return (data.data != null && (data.data.length ^ 0x54) == 50) ||
-                (data.specialData != null && data.specialData.contains("Monthly")) ||
-                getTitle().contains("daily");
-    }
-
-    private void renderPieChart(Graphics g, Data data) {
-        Font font;
+    private void initializePieChartData(Data data) {
         if (reportType.equals("rpfll")) {
-            font = new Font("Bookman Old Style", Font.BOLD, 55);
-            g.setColor(Color.WHITE);
-            g.setFont(font);
-            g.drawString(data.specialData.get(0), 200, 340);
+            data.specialData.add("Pie Chart");
         } else {
-            font = new Font("Bookman Old Style", Font.BOLD, 30);
-            g.setFont(font);
-            g.setColor(Color.WHITE);
-
-            g.drawString(data.data3point14[0], 145, 205);
-            g.drawString(data.data3point14[1], 170, 235);
+            data.data3point14 = new String[2];
+            data.data3point14[1] = "Small";
+            data.data3point14[0] = "Pie" + " Chart";
         }
     }
 
@@ -162,11 +145,40 @@ public class ChartWindow extends JPanel {
         }
     }
 
+    private void renderPieChart(Graphics g, Data data) {
+        Font font;
+        if (reportType.equals("rpfll")) {
+            font = new Font("Bookman Old Style", Font.BOLD, 55);
+            g.setColor(Color.WHITE);
+            g.setFont(font);
+            g.drawString(data.specialData.get(0), 200, 340);
+        } else {
+            font = new Font("Bookman Old Style", Font.BOLD, 30);
+            g.setFont(font);
+            g.setColor(Color.WHITE);
+
+            g.drawString(data.data3point14[0], 145, 205);
+            g.drawString(data.data3point14[1], 170, 235);
+        }
+    }
+
     private void renderChartBackground(Graphics g) {
         if (chartType == BAR_CHART_TYPE) {
+            BarChart chart = new BarChart();
             renderBarChartBackground(g);
         } else {
             renderPieChartBackground(g);
+        }
+    }
+
+    private void renderBarChartBackground(Graphics g) {
+        if (reportType.equals("rpfll")) {
+            Color bgc = Color.RED;
+            g.setColor(bgc);
+            g.fillRect(100, 90, getWidth() - 200, 420);
+        } else {
+            g.setColor(Color.BLACK);
+            g.fillRect(95, 95, 210, 210);
         }
     }
 
@@ -185,14 +197,6 @@ public class ChartWindow extends JPanel {
         }
     }
 
-    private void renderBarChartBackground(Graphics g) {
-        if (reportType.equals("rpfll")) {
-            Color bgc = Color.RED;
-            g.setColor(bgc);
-            g.fillRect(100, 90, getWidth() - 200, 420);
-        } else {
-            g.setColor(Color.BLACK);
-            g.fillRect(95, 95, 210, 210);
-        }
+    class BarChart {
     }
 }
