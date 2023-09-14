@@ -171,44 +171,4 @@ public class ChartWindow extends JPanel {
             chart.renderPieChartBackground(g, reportType, new Dimensions(getWidth(), getHeight()));
         }
     }
-
-    class BarChart {
-        private void renderBarChartBackground(Graphics g, String reportType, Dimensions dimensions) {
-            if (reportType.equals("rpfll")) {
-                Color bgc = Color.RED;
-                g.setColor(bgc);
-                g.fillRect(100, 90, dimensions.width - 200, 420);
-            } else {
-                g.setColor(Color.BLACK);
-                g.fillRect(95, 95, 210, 210);
-            }
-        }
-    }
-
-    class PieChart {
-        private void renderPieChartBackground(Graphics g, String reportType, Dimensions dimensions) {
-            if (reportType.equals("rpfll")) {
-                Color bgcb;
-                bgcb = Color.BLUE;
-                g.setColor(bgcb);
-                g.fillOval(100, 100, 450, dimensions.height - 150);
-            } else {
-                g.setColor(Color.BLUE);
-                double isq = 405;
-                float padding = 90;
-                int sc = (int) (isq - padding * 2);
-                g.fillOval(100, 100, sc, sc);
-            }
-        }
-    }
-
-    private class Dimensions {
-        public final int width;
-        public final int height;
-
-        public Dimensions(int width, int height) {
-            this.width = width;
-            this.height = height;
-        }
-    }
 }
