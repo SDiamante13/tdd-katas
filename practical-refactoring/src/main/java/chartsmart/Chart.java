@@ -4,8 +4,10 @@ import java.awt.*;
 
 public interface Chart {
 
+    int BAR_CHART_TYPE = 406;
+
     static Chart create(int chartType) {
-        return chartType == ChartWindow.BAR_CHART_TYPE ? new BarChart() : new PieChart();
+        return chartType == BAR_CHART_TYPE ? new BarChart() : new PieChart();
     }
 
     void renderBackground(Graphics g, String reportType, Dimensions dimensions);

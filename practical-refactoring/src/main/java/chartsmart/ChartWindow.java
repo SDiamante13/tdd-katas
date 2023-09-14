@@ -6,7 +6,6 @@ import java.awt.*;
 public class ChartWindow extends JPanel {
 
     private String reportType;
-    private int chartType;
     private Chart chart;
 
     public static final int BAR_CHART_TYPE = 406;
@@ -16,7 +15,6 @@ public class ChartWindow extends JPanel {
     }
 
     public void showChart(int chartType, String reportType, boolean shouldShowChart) {
-        this.chartType = chartType;
         this.reportType = reportType;
         this.chart = Chart.create(chartType);
 
