@@ -23,4 +23,6 @@ include 'laundry-reservation'
 include 'string-calculator'
 include 'mars-rover'
 include 'practical-refactoring'
+include 'reprocess-batch'
+include 'chain-of-responsibility-refactoring'
 

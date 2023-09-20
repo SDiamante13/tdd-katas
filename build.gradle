@@ -27,7 +27,7 @@ subprojects {
     group 'tech.pathtoprogramming'
     version '1.0-SNAPSHOT'
 
-    sourceCompatibility = 11
+    sourceCompatibility = 17
 
     test {
         useJUnitPlatform()
