@@ -5,13 +5,27 @@ import java.util.Objects;
 public final class CD {
 
     private int stock;
+    private double price;
 
-    public CD(int stock) {
+    public CD(int stock, double price) {
         this.stock = stock;
+        this.price = price;
     }
 
-    public void buy(int quantity) {
+    public void buy(int quantity, CreditCard creditCard) {
+        checkThatStockIsEnoughFor(quantity);
+        try {
+            creditCard.pay(quantity * price);
+        } catch (PaymentException e) {
+            return;
+        }
         this.stock -= quantity;
+    }
+
+    private void checkThatStockIsEnoughFor(int quantity) {
+        if (quantity > stock) {
+            throw new InsufficientStockException();
+        }
     }
 
     public int stock() {
