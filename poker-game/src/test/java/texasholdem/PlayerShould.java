@@ -6,8 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PlayerShould {
 
-    ActivePlayer player = new ActivePlayer(1000);
-
+    Player player = new Player(1000);
 
     @Test
     void startWithChips() {

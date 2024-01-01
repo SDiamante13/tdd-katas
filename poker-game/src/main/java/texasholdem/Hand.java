@@ -1,26 +1,27 @@
 package texasholdem;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Hand {
 
     private Pot pot;
-    private List<Player> activePlayers;
+    private List<Player> players;
 
-    public Hand(Pot pot, List<Player> activePlayers) {
+    public Hand(Pot pot, List<Player> players) {
         this.pot = pot;
-        this.activePlayers = activePlayers;
+        this.players = players;
     }
 
     public void bettingRound() {
-        this.activePlayers = activePlayers.stream()
-                .filter(Player::didNotFold)
-                .collect(Collectors.toList());
+        for (Player player : players) {
+            Choice choice = player.askForChoice();
+            // add choice chips to pot
+            System.out.println("Choice: " + choice.state());
+        }
     }
 
     public List<Player> activePlayers() {
-        return activePlayers;
+        return players;
     }
 
     public Pot pot() {

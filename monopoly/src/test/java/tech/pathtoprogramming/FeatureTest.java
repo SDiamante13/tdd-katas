@@ -30,4 +30,7 @@ class FeatureTest {
         assertThat(player2.location()).isEqualTo(11);
         assertThat(player2.money()).isEqualTo(1500 - 140);
     }
+
+    // first player buys a property, second player lands on that property and pays the player rent
+    
 }

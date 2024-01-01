@@ -11,7 +11,6 @@ class APlayerShould {
 
     @Test
     void startTheGameWithDefaults() {
-
         assertThat(player.location()).isZero();
         assertThat(player.money()).isEqualTo(1500);
     }
