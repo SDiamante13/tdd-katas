@@ -10,7 +10,7 @@ class Account {
 
     public static final String ACCOUNT_STATEMENT_HEADER = "Date\t\t\tAmount\t\t\tBalance\n";
     private int balance;
-    private List<String> statements;
+    private final List<String> statements;
 
     public Account(int initialBalance) {
         balance = initialBalance;
@@ -19,21 +19,26 @@ class Account {
 
     public void deposit(int amount, Supplier<LocalDate> date) {
         balance += amount;
-        addToStatements(date, amount, balance);
+        addToStatements(date, amount, balance, true);
     }
 
-    private void addToStatements(Supplier<LocalDate> date, int amount, int balance) {
-        statements.add(format(date, amount, balance));
+    private void addToStatements(Supplier<LocalDate> date, int amount, int balance, boolean isCredit) {
+        statements.add(format(date, amount, balance, isCredit));
     }
 
-    private String format(Supplier<LocalDate> date, int amount, int balance) {
+    private String format(Supplier<LocalDate> date, int amount, int balance, boolean isCredit) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        return ACCOUNT_STATEMENT_HEADER +
-                date.get().format(formatter) + "\t\t\t" + "+" + amount + "\t\t\t" + balance;
-
+        String unaryOperator = isCredit ? "+" : "-";
+        return date.get().format(formatter) + "\t\t\t" + unaryOperator + amount + "\t\t\t" + balance;
     }
 
     public String printStatement() {
-        return String.join("\n", statements);
+        return ACCOUNT_STATEMENT_HEADER +
+                String.join("\n", statements);
+    }
+
+    public void withdraw(int amount, Supplier<LocalDate> date) {
+        balance -= amount;
+        addToStatements(date, amount, balance, false);
     }
 }
