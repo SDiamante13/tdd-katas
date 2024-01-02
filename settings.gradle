@@ -26,4 +26,5 @@ include 'practical-refactoring'
 include 'reprocess-batch'
 include 'chain-of-responsibility-refactoring'
 include 'cd-warehouse'
+include 'banking-kata'
 
