@@ -7,7 +7,8 @@ public class PromotionService {
 
     public List<UserMessage> applyPromotionTo(Item item) {
         List<UserMessage> result = new ArrayList<>();
-        result.add(new UserMessage("Total before promotion: " + (item.price + item.price * item.tax)));
+        result.add(new UserMessage("Total before promotion: " +
+                calculatePriceAfterPromotion(item)));
 
         item.price -= standardDiscount();
         if (item.price > 122) {
@@ -16,8 +17,14 @@ public class PromotionService {
 
         persist(item);
 
-        result.add(new UserMessage("Total after promotion: " + (item.price + item.price * item.tax)));
+        UserMessage totalAfterPromotionMessage = new UserMessage("Total after promotion: "
+                + calculatePriceAfterPromotion(item));
+        result.add(totalAfterPromotionMessage);
         return result;
+    }
+
+    private double calculatePriceAfterPromotion(Item item) {
+        return item.price + item.price * item.tax;
     }
 
     // This method can't be moved to another class, used by other code in this class.
