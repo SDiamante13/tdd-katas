@@ -10,9 +10,9 @@ public class PromotionService {
         result.add(new UserMessage("Total before promotion: " +
                 calculatePriceAfterPromotion(item)));
 
-        item.price -= standardDiscount();
-        if (item.price > 122) {
-            item.tax /= 2;
+        item.setPrice(item.getPrice() - standardDiscount());
+        if (item.getPrice() > 122) {
+            item.setTax(item.getTax() / 2);
         }
 
         persist(item);
@@ -24,7 +24,7 @@ public class PromotionService {
     }
 
     private double calculatePriceAfterPromotion(Item item) {
-        return item.price + item.price * item.tax;
+        return item.getPrice() + item.getPrice() * item.getTax();
     }
 
     // This method can't be moved to another class, used by other code in this class.
