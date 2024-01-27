@@ -11,8 +11,9 @@ public class PromotionService {
                 item.calculatePriceAfterPromotion()));
 
         item.setPrice(item.priceWithStandardDiscount());
+
         if (item.isPromotional()) {
-            item.setTax(item.getTax() / 2);
+            item.setTax(item.taxForPromotional());
         }
 
         persist(item);

@@ -21,10 +21,6 @@ public class Item {
         this.price = price;
     }
 
-    public double getTax() {
-        return tax;
-    }
-
     public void setTax(double tax) {
         this.tax = tax;
     }
@@ -39,5 +35,9 @@ public class Item {
 
     boolean isPromotional() {
         return price > 122;
+    }
+
+    double taxForPromotional() {
+        return tax / 2;
     }
 }
