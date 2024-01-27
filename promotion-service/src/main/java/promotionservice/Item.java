@@ -13,10 +13,6 @@ public class Item {
         this.tax = tax;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setPrice(int price) {
         this.price = price;
     }
