@@ -30,4 +30,8 @@ public class Item {
     public void setTax(double tax) {
         this.tax = tax;
     }
+
+    double calculatePriceAfterPromotion() {
+        return price + price * tax;
+    }
 }
