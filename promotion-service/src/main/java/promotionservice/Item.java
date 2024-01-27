@@ -1,9 +1,10 @@
 package promotionservice;
 
 public class Item {
-    private String name;
-    private int price;
-    private double tax;
+
+    private final String name;
+    private final int price;
+    private final double tax;
 
     private static final int STANDARD_DISCOUNT_AMOUNT = 2;
 
@@ -13,27 +14,27 @@ public class Item {
         this.tax = tax;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setTax(double tax) {
-        this.tax = tax;
-    }
-
-    double calculatePriceAfterPromotion() {
+    double calculatePriceWithTax() {
         return price + price * tax;
     }
 
-    int priceWithStandardDiscount() {
+    Item applyPriceAndTaxDiscounts() {
+        return new Item(
+                this.name,
+                priceWithStandardDiscount(),
+                isPromotional() ? taxForPromotional() : this.tax
+        );
+    }
+
+    private int priceWithStandardDiscount() {
         return price - STANDARD_DISCOUNT_AMOUNT;
     }
 
-    boolean isPromotional() {
+    private boolean isPromotional() {
         return price > 122;
     }
 
-    double taxForPromotional() {
+     private double taxForPromotional() {
         return tax / 2;
     }
 }

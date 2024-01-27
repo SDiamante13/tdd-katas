@@ -8,18 +8,14 @@ public class PromotionService {
     public List<UserMessage> applyPromotionTo(Item item) {
         List<UserMessage> result = new ArrayList<>();
         result.add(new UserMessage("Total before promotion: " +
-                item.calculatePriceAfterPromotion()));
+                item.calculatePriceWithTax()));
 
-        item.setPrice(item.priceWithStandardDiscount());
+        Item itemWithDiscounts = item.applyPriceAndTaxDiscounts();
 
-        if (item.isPromotional()) {
-            item.setTax(item.taxForPromotional());
-        }
-
-        persist(item);
+        persist(itemWithDiscounts);
 
         UserMessage totalAfterPromotionMessage = new UserMessage("Total after promotion: "
-                + item.calculatePriceAfterPromotion());
+                + itemWithDiscounts.calculatePriceWithTax());
         result.add(totalAfterPromotionMessage);
         return result;
     }

@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PromotionServiceTest {
 
-    private PromotionService promotionService = new PromotionService();
+    private final PromotionService promotionService = new PromotionService();
 
     @Test
     void bookPromotion() {
