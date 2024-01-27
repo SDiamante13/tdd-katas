@@ -3,18 +3,6 @@ package promotionservice;
 import java.util.ArrayList;
 import java.util.List;
 
-class Item {
-    String name;
-    int price;
-    double tax;
-
-    public Item(String name, int price, double tax) {
-        this.name = name;
-        this.price = price;
-        this.tax = tax;
-    }
-}
-
 public class PromotionService {
 
     public List<UserMessage> applyPromotionTo(Item item) {
