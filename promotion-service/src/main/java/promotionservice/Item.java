@@ -17,10 +17,6 @@ public class Item {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     public void setPrice(int price) {
         this.price = price;
     }
@@ -39,5 +35,9 @@ public class Item {
 
     int priceWithStandardDiscount() {
         return price - STANDARD_DISCOUNT_AMOUNT;
+    }
+
+    boolean isPromotional() {
+        return price > 122;
     }
 }
