@@ -1,0 +1,9 @@
+VendingMachine
+Display                                          INSERT COIN
+Balance                                                    0
+Coins                                                     []
+********************
+VendingMachine
+Display                                                    5
+Balance                                                    5
+Coins                                                    [5]

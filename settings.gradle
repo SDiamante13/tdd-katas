@@ -29,4 +29,5 @@ include 'cd-warehouse'
 include 'banking-kata'
 include 'promotion-service'
 include 'cash-machine-refactoring'
+include 'vending-machine'
 
