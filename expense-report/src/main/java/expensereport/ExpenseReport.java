@@ -1,51 +1,32 @@
 package expensereport;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
-import java.util.List;
 
-enum ExpenseType {
-    DINNER, BREAKFAST, CAR_RENTAL
-}
-
-class Expense {
-    ExpenseType type;
-    int amount;
-}
 
 public class ExpenseReport {
 
-    public void printReport(List<Expense> expenses) {
-        int total = 0;
-        int mealExpenses = 0;
+    Logger log = LoggerFactory.getLogger(ExpenseReport.class);
 
-        System.out.println("Expenses " + new Date());
+    public void printReport(Expenses expenses) {
+        printReport(expenses, new Date());
+    }
+
+    public void printReport(Expenses expenses, Date date) {
+        log.info("Expenses " + date);
 
         for (Expense expense : expenses) {
-            if (expense.type == ExpenseType.DINNER || expense.type == ExpenseType.BREAKFAST) {
-                mealExpenses += expense.amount;
-            }
-
-            String expenseName = "";
-            switch (expense.type) {
-                case DINNER:
-                    expenseName = "Dinner";
-                    break;
-                case BREAKFAST:
-                    expenseName = "Breakfast";
-                    break;
-                case CAR_RENTAL:
-                    expenseName = "Car Rental";
-                    break;
-            }
-
-            String mealOverExpensesMarker = expense.type == ExpenseType.DINNER && expense.amount > 5000 || expense.type == ExpenseType.BREAKFAST && expense.amount > 1000 ? "X" : " ";
-
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-
-            total += expense.amount;
+            printSingleExpense(expense);
         }
 
-        System.out.println("Meal expenses: " + mealExpenses);
-        System.out.println("Total expenses: " + total);
+        log.info("Meal expenses: " + expenses.getMealExpenses());
+        log.info("Total expenses: " + expenses.calculateTotal());
+    }
+
+    private void printSingleExpense(Expense expense) {
+        String mealOverExpensesMarker = expense.isOverLimit() ? "X" : " ";
+        log.info(expense.getName() + "\t" + expense.amount() + "\t" + mealOverExpensesMarker);
     }
 }
