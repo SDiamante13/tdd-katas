@@ -13,37 +13,31 @@ public class VendingMachine {
     private final Integer[] acceptedCoins;
 
     public VendingMachine() {
-        this("", new ArrayList<>(), new ArrayList<>(), 0, new Integer[]{5, 10, 25});
+        this(new ArrayList<>(), new ArrayList<>(), 0, new Integer[]{5, 10, 25});
     }
 
-    public VendingMachine(String display, List<Integer> coins, List<Integer> returns, Integer balance, Integer[] acceptedCoins) {
-        this.display = display;
+    public VendingMachine(List<Integer> coins, List<Integer> returns, Integer balance, Integer[] acceptedCoins) {
         this.coins = coins;
         this.returns = returns;
         this.balance = balance;
         this.acceptedCoins = acceptedCoins;
-
-        displayBalance();
-    }
-
-    private void displayBalance() {
-        this.display = this.balance != 0 ?
-                formatAsDollars(this.balance) :
-                "INSERT COIN";
-    }
-
-    private String formatAsDollars(int cents) {
-        return "$" + cents / 100.0;
+        this.display = formatBalance();
     }
 
     public void insertCoin(Integer coin) {
         if (Arrays.asList(acceptedCoins).contains(coin)) {
             this.coins.add(coin);
             this.balance += coin;
-            this.displayBalance();
+            this.display = formatBalance();
         } else {
             this.returns.add(coin);
         }
+    }
+
+    private String formatBalance() {
+        return this.balance != 0 ?
+                "$" + this.balance / 100.0 :
+                "INSERT COIN";
     }
 
     public Integer balance() {

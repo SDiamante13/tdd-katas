@@ -1,6 +1,9 @@
 package org.codingdojo.vendingmachine;
 
 import org.approvaltests.Approvals;
+import org.approvaltests.reporters.QuietReporter;
+import org.approvaltests.reporters.UseReporter;
+import org.approvaltests.reporters.intellij.IntelliJReporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,30 +14,38 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@UseReporter(QuietReporter.class)
 class VendingMachineTest {
 
     private VendingMachine machine;
-    private Map<String, Integer> coins;
+    private VendingMachinePrinter printer;
+    private Story story;
+    private Map<String, Integer> coins = new HashMap<>() {{
+        put("penny", 1);
+        put("nickel", 5);
+        put("dime", 10);
+        put("quarter", 25);
+    }};
 
     @BeforeEach
     void setUp() {
         machine = new VendingMachine();
-        coins = new HashMap<>() {{
-            put("penny", 1);
-            put("nickel", 5);
-            put("dime", 10);
-            put("quarter", 25);
-        }};
+        printer = new VendingMachinePrinter(machine);
+        story = new Story(printer);
     }
 
     @Test
-    void test_accept_coins() {
-        String initialState = new VendingMachinePrinter(machine).print();
+    void accept_nickel() {
+        story.init("Feature: Nickel is accepted");
+        story.arrange();
 
-        machine.insertCoin(coins.get("nickel"));
+        story.act(insertCoin("nickel"));
 
-        String finalState = new VendingMachinePrinter(machine).print();
+        Approvals.verify(story.toString());
+    }
 
-        Approvals.verify(initialState + "********************\n" + finalState);
+    private String insertCoin(String coin) {
+        machine.insertCoin(coins.get(coin));
+        return "insert coin: %s".formatted(coin);
     }
 }
