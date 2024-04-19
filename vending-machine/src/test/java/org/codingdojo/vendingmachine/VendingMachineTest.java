@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VendingMachineTest {
+class VendingMachineTest {
 
     private VendingMachine machine;
     private Map<String, Integer> coins;
@@ -19,7 +19,7 @@ public class VendingMachineTest {
     @BeforeEach
     void setUp() {
         machine = new VendingMachine();
-        coins = new HashMap<String, Integer>(){{
+        coins = new HashMap<>() {{
             put("penny", 1);
             put("nickel", 5);
             put("dime", 10);

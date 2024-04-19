@@ -13,12 +13,10 @@ public class VendingMachinePrinter {
     }
 
     public String print(){
-        StringBuilder text = new StringBuilder();
-        text.append("VendingMachine\n");
-        text.append(formatLineWithWhitespace("Display", machine.display()));
-        text.append(formatLineWithWhitespace("Balance", "" + machine.balance()));
-        text.append(formatLineWithWhitespace("Coins", Arrays.toString(machine.coins())));
-        return text.toString();
+        return "VendingMachine\n" +
+                formatLineWithWhitespace("Display", machine.display()) +
+                formatLineWithWhitespace("Balance", "" + machine.balance()) +
+                formatLineWithWhitespace("Coins", Arrays.toString(machine.coins()));
     }
 
     /** Convenience function that lays out a name and a value at either ends of a fixed-width line.
@@ -27,11 +25,6 @@ public class VendingMachinePrinter {
      */
     private String formatLineWithWhitespace(String name, String value){
         int whitespaceSize = columns - name.length() - value.length();
-        StringBuilder whiteSpace = new StringBuilder();
-        for (int i = 0; i < whitespaceSize; i++) {
-            whiteSpace.append(" ");
-        }
-        String line = String.format("%s%s%s\n", name, whiteSpace.toString(), value);
-        return line;
+        return String.format("%s%s%s\n", name, " ".repeat(Math.max(0, whitespaceSize)), value);
     }
 }

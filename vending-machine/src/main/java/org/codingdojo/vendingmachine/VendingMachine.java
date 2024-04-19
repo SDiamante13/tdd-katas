@@ -7,10 +7,10 @@ import java.util.List;
 public class VendingMachine {
 
     private String display;
-    private List<Integer> coins;
-    private List<Integer> returns;
+    private final List<Integer> coins;
+    private final List<Integer> returns;
     private Integer balance;
-    private Integer[] acceptedCoins;
+    private final Integer[] acceptedCoins;
 
     public VendingMachine() {
         this("", new ArrayList<>(), new ArrayList<>(), 0, new Integer[]{5, 10, 25});
@@ -27,11 +27,13 @@ public class VendingMachine {
     }
 
     private void displayBalance() {
-        if (this.balance != 0) {
-            this.display = String.valueOf(this.balance);
-        } else {
-            this.display = "INSERT COIN";
-        }
+        this.display = this.balance != 0 ?
+                formatAsDollars(this.balance) :
+                "INSERT COIN";
+    }
+
+    private String formatAsDollars(int cents) {
+        return "$" + cents / 100.0;
     }
 
     public void insertCoin(Integer coin) {

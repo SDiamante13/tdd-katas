@@ -4,6 +4,6 @@ Balance                                                    0
 Coins                                                     []
 ********************
 VendingMachine
-Display                                                    5
+Display                                                $0.05
 Balance                                                    5
 Coins                                                    [5]
