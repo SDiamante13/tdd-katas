@@ -36,7 +36,7 @@ public class VendingMachine {
 
     private String formatBalance() {
         return this.balance != 0 ?
-                "$" + this.balance / 100.0 :
+                "$%.2f".formatted(this.balance/100.0) :
                 "INSERT COIN";
     }
 

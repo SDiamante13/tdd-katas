@@ -44,6 +44,38 @@ class VendingMachineTest {
         Approvals.verify(story.toString());
     }
 
+    @Test
+    void accept_dime() {
+        story.init("Feature: Dime is accepted");
+        story.arrange();
+
+        story.act(insertCoin("dime"));
+
+        Approvals.verify(story.toString());
+    }
+
+    @Test
+    void accept_quarter() {
+        story.init("Feature: Quarter is accepted");
+        story.arrange();
+
+        story.act(insertCoin("quarter"));
+
+        Approvals.verify(story.toString());
+    }
+
+    @Test
+    void update_balance() {
+        story.init("Feature: Update balance displayed when coin inserted");
+        insertCoin("nickel");
+        insertCoin("quarter");
+        story.arrange();
+
+        story.act(insertCoin("dime"));
+
+        Approvals.verify(story.toString());
+    }
+
     private String insertCoin(String coin) {
         machine.insertCoin(coins.get(coin));
         return "insert coin: %s".formatted(coin);
