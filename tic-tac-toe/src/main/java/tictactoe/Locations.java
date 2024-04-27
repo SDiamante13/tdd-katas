@@ -1,9 +1,9 @@
-package tietactoe;
+package tictactoe;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static tietactoe.Location.*;
+import static tictactoe.Location.*;
 
 public class Locations {
 

@@ -1,4 +1,4 @@
-package tietactoe;
+package tictactoe;
 
 import java.util.HashMap;
 import java.util.Map;

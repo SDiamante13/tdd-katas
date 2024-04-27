@@ -1,4 +1,4 @@
-package tietactoe;
+package tictactoe;
 
 public enum Mark {
     X('X'), O('O');

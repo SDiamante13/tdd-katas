@@ -1,12 +1,10 @@
-package tietactoe;
+package tictactoe;
 
 import org.approvaltests.Approvals;
 import org.approvaltests.StoryBoard;
 import org.approvaltests.reporters.QuietReporter;
 import org.approvaltests.reporters.UseReporter;
-import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

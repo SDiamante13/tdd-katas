@@ -1,4 +1,4 @@
-package tietactoe;
+package tictactoe;
 
 public class Coordinate {
 
