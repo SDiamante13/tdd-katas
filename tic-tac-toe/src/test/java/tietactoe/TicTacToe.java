@@ -3,8 +3,13 @@ package tietactoe;
 class TicTacToe {
 
     private final char[][] grid = new char[3][3];
+    private char playerMark = 'X';
 
     public TicTacToe() {
+        initialize();
+    }
+
+    private void initialize() {
         int count = 1;
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
@@ -15,6 +20,10 @@ class TicTacToe {
 
     @Override
     public String toString() {
+        return print();
+    }
+
+    private String print() {
         String result = "";
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
@@ -30,29 +39,12 @@ class TicTacToe {
     }
 
     public void take(char location) {
-        Coordinate  coordinate = convertToCoordinate(location);
-        grid[coordinate.x()][coordinate.y()] = 'X';
+        Coordinate coordinate = Coordinate.convertToCoordinate(location);
+        placeMarkOn(coordinate, playerMark);
+        playerMark = 'O';
     }
 
-    private Coordinate convertToCoordinate(char location) {
-        return new Coordinate(1,1);
-    }
-
-    private class Coordinate {
-        private final int x;
-        private final int y;
-
-        public Coordinate(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int x() {
-            return x;
-        }
-
-        public int y() {
-            return y;
-        }
+    private void placeMarkOn(Coordinate coordinate, char playerMark) {
+        grid[coordinate.x()][coordinate.y()] = playerMark;
     }
 }
