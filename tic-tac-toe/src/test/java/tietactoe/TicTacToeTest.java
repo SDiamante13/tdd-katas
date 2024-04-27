@@ -17,6 +17,9 @@ class TicTacToeTest {
         TicTacToe ticTacToe = new TicTacToe();
         storyBoard.addFrame("New Game", ticTacToe);
 
+        ticTacToe.take('5');
+        storyBoard.addFrame("Player X takes turn", ticTacToe);
+
         Approvals.verify(storyBoard);
     }
 }
