@@ -1,4 +1,4 @@
-Tic-Tac-Toe: Player X Wins on Top Horizontal
+Tic-Tac-Toe: Player O Wins Horizontally Bottom
 
 
 New Game:
@@ -41,18 +41,18 @@ Player O takes 9:
 +---+---+---+
 
 
-Player X takes 3:
+Player X takes 5:
 +---+---+---+
-| X | X | X |
-| 4 | 5 | 6 |
+| X | X | 3 |
+| 4 | X | 6 |
 | O | 8 | O |
 +---+---+---+
-Player X Wins!
 
-Player O fails to take 8:
+
+Player O takes 8:
 +---+---+---+
-| X | X | X |
-| 4 | 5 | 6 |
-| O | 8 | O |
+| X | X | 3 |
+| 4 | X | 6 |
+| O | O | O |
 +---+---+---+
-Player X Wins!
+Player O Wins!

@@ -1,7 +1,5 @@
 package tietactoe;
 
-import static tietactoe.Mark.*;
-
 public class Grid {
 
     private final char[][] squares = new char[3][3];
@@ -38,17 +36,23 @@ public class Grid {
     }
 
     public String winStatus() {
-        if (threeHorizontalSquaresTakenBySamePlayer()) {
-            return "Player X Wins!";
+        for (int count = 0; count < 3; count++) {
+            if (squares[0][count] == squares[1][count] && squares[0][count] == squares[2][count]) {
+                return "Player %s Wins!".formatted(squares[0][count]);
+            }
+            if (squares[count][0] == squares[count][1] && squares[count][0] == squares[count][2]) {
+                return "Player %s Wins!".formatted(squares[count][0]);
+            }
         }
-        return "";
-    }
+        if (squares[0][0] == squares[1][1] && squares[0][0] == squares[2][2]) {
+            return "Player %s Wins!".formatted(squares[0][0]);
+        }
 
-    private boolean threeHorizontalSquaresTakenBySamePlayer() {
-        if (squares[0][0] == X.value() && squares[1][0] == X.value() && squares[2][0] == X.value()) {
-            return true;
+        if (squares[0][2] == squares[1][1] && squares[0][2] == squares[2][0]) {
+            return "Player %s Wins!".formatted(squares[0][2]);
         }
-        return false;
+
+        return "";
     }
 
     public void placeMarkOn(Mark mark, Location location) {
