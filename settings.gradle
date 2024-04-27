@@ -32,4 +32,5 @@ include 'cash-machine-refactoring'
 include 'vending-machine'
 include 'bingo-kata'
 include 'ugly-trivia'
+include 'tic-tac-toe'
 
