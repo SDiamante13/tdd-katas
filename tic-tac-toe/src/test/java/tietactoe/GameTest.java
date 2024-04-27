@@ -10,15 +10,19 @@ import org.junit.jupiter.api.Test;
 class GameTest {
 
     @Test
-    void storyboard() {
+    void ticTacToeGame() {
         StoryBoard storyBoard = new StoryBoard();
         storyBoard.addDescription("Tic-Tac-Toe");
+
         TicTacToe ticTacToe = new TicTacToe();
         storyBoard.addFrame("New Game", ticTacToe);
-        ticTacToe.grid.place("X", new Coordinate(1, 1));
+
+        ticTacToe.place("X", new Coordinate(1, 1));
         storyBoard.addFrame("Player X takes turn", ticTacToe);
+
+        ticTacToe.place("Y", new Coordinate(1, 1));
+        storyBoard.addFrame("Player Y makes illegal move", ticTacToe);
 
         Approvals.verify(storyBoard);
     }
-
 }

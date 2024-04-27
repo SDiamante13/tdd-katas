@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Grid {
 
+    // TODO: Map<Coordinate, Square | Mark>
     private final Map<Coordinate, String> squares;
 
     public Grid() {
@@ -20,8 +21,16 @@ public class Grid {
         }
     }
 
+    // TODO: Mark can be enum ['X' 'O' '_']
     public void place(String mark, Coordinate coordinate) {
-        squares.put(coordinate, mark);
+        if (squareIsEmptyAt(coordinate)) {
+            squares.put(coordinate, mark);
+        }
+    }
+
+    private boolean squareIsEmptyAt(Coordinate coordinate) {
+        String square = squares.get(coordinate);
+        return square.equals("_");
     }
 
     String format() {

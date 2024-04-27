@@ -12,4 +12,8 @@ class TicTacToe {
     public String toString() {
         return grid.format();
     }
+
+    public void place(String mark, Coordinate coordinate) {
+        grid.place(mark, coordinate);
+    }
 }
