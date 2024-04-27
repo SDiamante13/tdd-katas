@@ -49,6 +49,10 @@ enum Mark {
     public char value() {
         return this.value;
     }
+
+    Mark rotate() {
+        return equals(X) ? O : X;
+    }
 }
 class TicTacToe {
 
@@ -61,12 +65,8 @@ class TicTacToe {
 
     public void take(char location) {
         Coordinate coordinate = Coordinate.convertToCoordinate(location);
-        placeMarkOn(coordinate, currentMark);
-        currentMark = Mark.O;
-    }
-
-    private void placeMarkOn(Coordinate coordinate, Mark mark) {
-        grid.placeMarkOn(coordinate, mark);
+        grid.placeMarkOn(coordinate, currentMark);
+        currentMark = currentMark.rotate();
     }
 
     @Override

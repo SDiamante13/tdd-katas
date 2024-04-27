@@ -23,6 +23,9 @@ class TicTacToeTest {
         ticTacToe.take('6');
         storyBoard.addFrame("Player O takes turn", ticTacToe);
 
+        ticTacToe.take('2');
+        storyBoard.addFrame("Player X takes turn", ticTacToe);
+
         Approvals.verify(storyBoard);
     }
 }
