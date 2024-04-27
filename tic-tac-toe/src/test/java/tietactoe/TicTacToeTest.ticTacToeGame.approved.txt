@@ -1,4 +1,4 @@
-Tic-Tac-Toe
+Tic-Tac-Toe: Tie Game
 
 
 New Game:
@@ -9,7 +9,7 @@ New Game:
 +---+---+---+
 
 
-Player X takes turn:
+Player X takes 5:
 +---+---+---+
 | 1 | 2 | 3 |
 | 4 | X | 6 |
@@ -17,7 +17,7 @@ Player X takes turn:
 +---+---+---+
 
 
-Player O takes turn:
+Player O takes 6:
 +---+---+---+
 | 1 | 2 | 3 |
 | 4 | X | O |
@@ -25,9 +25,57 @@ Player O takes turn:
 +---+---+---+
 
 
-Player X takes turn:
+Player X takes 2:
 +---+---+---+
 | 1 | X | 3 |
 | 4 | X | O |
 | 7 | 8 | 9 |
++---+---+---+
+
+
+Player O takes 8:
++---+---+---+
+| 1 | X | 3 |
+| 4 | X | O |
+| 7 | O | 9 |
++---+---+---+
+
+
+Player X takes 9:
++---+---+---+
+| 1 | X | 3 |
+| 4 | X | O |
+| 7 | O | X |
++---+---+---+
+
+
+Player O takes 1:
++---+---+---+
+| O | X | 3 |
+| 4 | X | O |
+| 7 | O | X |
++---+---+---+
+
+
+Player X takes 3:
++---+---+---+
+| O | X | X |
+| 4 | X | O |
+| 7 | O | X |
++---+---+---+
+
+
+Player O takes 7:
++---+---+---+
+| O | X | X |
+| 4 | X | O |
+| O | O | X |
++---+---+---+
+
+
+Player X takes 4:
++---+---+---+
+| O | X | X |
+| X | X | O |
+| O | O | X |
 +---+---+---+

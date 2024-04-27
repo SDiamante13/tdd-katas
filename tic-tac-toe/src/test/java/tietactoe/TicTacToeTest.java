@@ -9,23 +9,35 @@ import org.junit.jupiter.api.Test;
 @UseReporter(QuietReporter.class)
 class TicTacToeTest {
 
+    private final StoryBoard storyBoard = new StoryBoard();
+    private final TicTacToe ticTacToe = new TicTacToe();
+
     @Test
     void ticTacToeGame() {
-        StoryBoard storyBoard = new StoryBoard();
-        storyBoard.addDescription("Tic-Tac-Toe");
+        storyBoard.addDescription("Tic-Tac-Toe: Tie Game");
 
-        TicTacToe ticTacToe = new TicTacToe();
         storyBoard.addFrame("New Game", ticTacToe);
 
-        ticTacToe.take('5');
-        storyBoard.addFrame("Player X takes turn", ticTacToe);
-
-        ticTacToe.take('6');
-        storyBoard.addFrame("Player O takes turn", ticTacToe);
-
-        ticTacToe.take('2');
-        storyBoard.addFrame("Player X takes turn", ticTacToe);
+        playerXTakes('5');
+        playerOTakes('6');
+        playerXTakes('2');
+        playerOTakes('8');
+        playerXTakes('9');
+        playerOTakes('1');
+        playerXTakes('3');
+        playerOTakes('7');
+        playerXTakes('4');
 
         Approvals.verify(storyBoard);
+    }
+
+    private void playerXTakes(char location) {
+        ticTacToe.take(location);
+        storyBoard.addFrame("Player X takes " + location, ticTacToe);
+    }
+
+    private void playerOTakes(char location) {
+        ticTacToe.take(location);
+        storyBoard.addFrame("Player O takes " + location, ticTacToe);
     }
 }
