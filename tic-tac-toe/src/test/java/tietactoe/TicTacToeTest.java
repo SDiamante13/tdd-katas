@@ -13,7 +13,7 @@ class TicTacToeTest {
     private final TicTacToe ticTacToe = new TicTacToe();
 
     @Test
-    void ticTacToeGame() {
+    void tieGame() {
         storyBoard.addDescription("Tic-Tac-Toe: Tie Game");
 
         storyBoard.addFrame("New Game", ticTacToe);
