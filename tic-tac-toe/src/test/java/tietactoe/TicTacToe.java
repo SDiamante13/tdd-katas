@@ -1,33 +1,27 @@
 package tietactoe;
 
-class TicTacToe {
+class Grid {
 
-    private final char[][] grid = new char[3][3];
-    private char playerMark = 'X';
+    private final char[][] squares = new char[3][3];
 
-    public TicTacToe() {
-        initialize();
+    public static Grid initialize() {
+        return new Grid();
     }
 
-    private void initialize() {
+    private Grid() {
         int count = 1;
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                grid[x][y] = Character.forDigit(count++, 10);
+                squares[x][y] = Character.forDigit(count++, 10);
             }
         }
     }
 
-    @Override
-    public String toString() {
-        return print();
-    }
-
-    private String print() {
+    public String print() {
         String result = "";
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                result += "| %s ".formatted(grid[x][y]);
+                result += "| %s ".formatted(squares[x][y]);
                 if (x == 2) {
                     result += "|\n";
                 }
@@ -38,6 +32,25 @@ class TicTacToe {
                 "+---+---+---+\n";
     }
 
+    public void placeMarkOn(Coordinate coordinate, char playerMark) {
+        squares[coordinate.x()][coordinate.y()] = playerMark;
+    }
+}
+
+class TicTacToe {
+
+    private final Grid grid;
+    private char playerMark = 'X';
+
+    public TicTacToe() {
+        grid = Grid.initialize();
+    }
+
+    @Override
+    public String toString() {
+        return grid.print();
+    }
+
     public void take(char location) {
         Coordinate coordinate = Coordinate.convertToCoordinate(location);
         placeMarkOn(coordinate, playerMark);
@@ -45,6 +58,6 @@ class TicTacToe {
     }
 
     private void placeMarkOn(Coordinate coordinate, char playerMark) {
-        grid[coordinate.x()][coordinate.y()] = playerMark;
+        grid.placeMarkOn(coordinate, playerMark);
     }
 }
