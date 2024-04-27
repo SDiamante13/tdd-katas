@@ -4,6 +4,7 @@ class Coordinate {
 
     private final int x;
     private final int y;
+    static Locations locations = new Locations();
 
     public Coordinate(int x, int y) {
         this.x = x;
@@ -11,13 +12,7 @@ class Coordinate {
     }
 
     static Coordinate convertToCoordinate(char location) {
-        if (location == '2') {
-            return new Coordinate(1,0);
-        }
-        if (location == '5') {
-            return new Coordinate(1,1);
-        }
-        return new Coordinate(2,1);
+        return locations.getCoordinate(location);
     }
 
     public int x() {
