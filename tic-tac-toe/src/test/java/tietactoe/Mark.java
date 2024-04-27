@@ -1,9 +1,9 @@
 package tietactoe;
 
-enum Mark {
+public enum Mark {
     X('X'), O('O');
 
-    private char value;
+    private final char value;
 
     Mark(char value) {
         this.value = value;

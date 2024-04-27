@@ -3,12 +3,14 @@ package tietactoe;
 public class Grid {
 
     private final char[][] squares = new char[3][3];
+    private final Locations locations;
 
-    public static Grid initialize() {
-        return new Grid();
+    public Grid() {
+        this.locations = new Locations();
+        initialize();
     }
 
-    private Grid() {
+    private void initialize() {
         int count = 1;
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
@@ -32,7 +34,8 @@ public class Grid {
                 "+---+---+---+\n";
     }
 
-    public void placeMarkOn(Coordinate coordinate, Mark mark) {
+    public void placeMarkOn(Mark mark, char location) {
+        Coordinate coordinate = locations.getCoordinate(location);
         squares[coordinate.x()][coordinate.y()] = mark.value();
     }
 }

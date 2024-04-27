@@ -6,12 +6,11 @@ class TicTacToe {
     private Mark currentMark = Mark.X;
 
     public TicTacToe() {
-        grid = Grid.initialize();
+        grid = new Grid();
     }
 
     public void take(char location) {
-        Coordinate coordinate = Coordinate.convertToCoordinate(location);
-        grid.placeMarkOn(coordinate, currentMark);
+        grid.placeMarkOn(currentMark, location);
         currentMark = currentMark.rotate();
     }
 
