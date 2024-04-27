@@ -12,11 +12,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @UseReporter(QuietReporter.class)
 class TicTacToeTest {
 
-    // a game is over when all fields are taken
-    // a game is over when all fields in a column are taken by a player
-    // a game is over when all fields in a row are taken by a player
-    // a game is over when all fields in a diagonal are taken by a player
-
     private final StoryBoard storyBoard = new StoryBoard();
     private final TicTacToe ticTacToe = new TicTacToe();
 
