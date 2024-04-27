@@ -32,32 +32,45 @@ class Grid {
                 "+---+---+---+\n";
     }
 
-    public void placeMarkOn(Coordinate coordinate, char playerMark) {
-        squares[coordinate.x()][coordinate.y()] = playerMark;
+    public void placeMarkOn(Coordinate coordinate, Mark mark) {
+        squares[coordinate.x()][coordinate.y()] = mark.value();
     }
 }
 
+enum Mark {
+    X('X'), O('O');
+
+    private char value;
+
+    Mark(char value) {
+        this.value = value;
+    }
+
+    public char value() {
+        return this.value;
+    }
+}
 class TicTacToe {
 
     private final Grid grid;
-    private char playerMark = 'X';
+    private Mark currentMark = Mark.X;
 
     public TicTacToe() {
         grid = Grid.initialize();
     }
 
+    public void take(char location) {
+        Coordinate coordinate = Coordinate.convertToCoordinate(location);
+        placeMarkOn(coordinate, currentMark);
+        currentMark = Mark.O;
+    }
+
+    private void placeMarkOn(Coordinate coordinate, Mark mark) {
+        grid.placeMarkOn(coordinate, mark);
+    }
+
     @Override
     public String toString() {
         return grid.print();
-    }
-
-    public void take(char location) {
-        Coordinate coordinate = Coordinate.convertToCoordinate(location);
-        placeMarkOn(coordinate, playerMark);
-        playerMark = 'O';
-    }
-
-    private void placeMarkOn(Coordinate coordinate, char playerMark) {
-        grid.placeMarkOn(coordinate, playerMark);
     }
 }
