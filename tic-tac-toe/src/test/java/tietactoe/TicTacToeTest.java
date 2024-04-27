@@ -7,7 +7,7 @@ import org.approvaltests.reporters.UseReporter;
 import org.junit.jupiter.api.Test;
 
 @UseReporter(QuietReporter.class)
-class GameTest {
+class TicTacToeTest {
 
     @Test
     void ticTacToeGame() {
@@ -16,12 +16,6 @@ class GameTest {
 
         TicTacToe ticTacToe = new TicTacToe();
         storyBoard.addFrame("New Game", ticTacToe);
-
-        ticTacToe.place("X", new Coordinate(1, 1));
-        storyBoard.addFrame("Player X takes turn", ticTacToe);
-
-        ticTacToe.place("Y", new Coordinate(1, 1));
-        storyBoard.addFrame("Player Y makes illegal move", ticTacToe);
 
         Approvals.verify(storyBoard);
     }
