@@ -3,7 +3,7 @@ package tictactoe;
 class TicTacToe {
 
     private final Grid grid;
-    private Mark currentMark = Mark.X;
+    public Mark currentMark = Mark.X;
 
     public TicTacToe() {
         grid = new Grid();
@@ -18,7 +18,7 @@ class TicTacToe {
         currentMark = currentMark.rotate();
     }
 
-    private boolean gameIsOver() {
+    public boolean gameIsOver() {
         return !grid.winStatus().isEmpty();
     }
 

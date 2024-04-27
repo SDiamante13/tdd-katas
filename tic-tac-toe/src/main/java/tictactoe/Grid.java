@@ -51,8 +51,23 @@ public class Grid {
         if (squares[0][2] == squares[1][1] && squares[0][2] == squares[2][0]) {
             return "Player %s Wins!".formatted(squares[0][2]);
         }
+        if (areAllSpacesTaken()) {
+            return "Game Over - TIE!";
+        }
 
         return "";
+    }
+
+    private boolean areAllSpacesTaken() {
+        boolean flag = true;
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++) {
+                if (Character.isDigit(squares[x][y])) {
+                    flag = false;
+                }
+            }
+        }
+        return flag;
     }
 
     public void placeMarkOn(Mark mark, Location location) {
