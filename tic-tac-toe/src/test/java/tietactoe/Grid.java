@@ -1,5 +1,7 @@
 package tietactoe;
 
+import static tietactoe.Mark.*;
+
 public class Grid {
 
     private final char[][] squares = new char[3][3];
@@ -31,11 +33,38 @@ public class Grid {
         }
         return "+---+---+---+\n" +
                 result +
-                "+---+---+---+\n";
+                "+---+---+---+\n" +
+                winStatus();
     }
 
-    public void placeMarkOn(Mark mark, char location) {
+    public String winStatus() {
+        if (threeHorizontalSquaresTakenBySamePlayer()) {
+            return "Player X Wins!";
+        }
+        return "";
+    }
+
+    private boolean threeHorizontalSquaresTakenBySamePlayer() {
+        if (squares[0][0] == X.value() && squares[1][0] == X.value() && squares[2][0] == X.value()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void placeMarkOn(Mark mark, Location location) {
         Coordinate coordinate = locations.getCoordinate(location);
+        validate(location, coordinate);
         squares[coordinate.x()][coordinate.y()] = mark.value();
+    }
+
+    private void validate(Location location, Coordinate coordinate) {
+        if (squareIsAlreadyTakenAt(coordinate)) {
+            throw new SquareAlreadyTakenException(location);
+        }
+    }
+
+    private boolean squareIsAlreadyTakenAt(Coordinate coordinate) {
+        char mark = squares[coordinate.x()][coordinate.y()];
+        return !Character.isDigit(mark);
     }
 }

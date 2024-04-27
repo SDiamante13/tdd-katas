@@ -9,9 +9,17 @@ class TicTacToe {
         grid = new Grid();
     }
 
-    public void take(char location) {
+    public void take(char locationDto) {
+        if (gameIsOver()) {
+            return;
+        }
+        Location location = Location.of(locationDto);
         grid.placeMarkOn(currentMark, location);
         currentMark = currentMark.rotate();
+    }
+
+    private boolean gameIsOver() {
+        return !grid.winStatus().isEmpty();
     }
 
     @Override
