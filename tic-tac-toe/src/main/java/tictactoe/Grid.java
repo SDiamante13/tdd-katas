@@ -1,8 +1,6 @@
 package tictactoe;
 
-import java.util.stream.IntStream;
-
-import static java.util.stream.IntStream.*;
+import static java.util.stream.IntStream.range;
 
 public class Grid {
 

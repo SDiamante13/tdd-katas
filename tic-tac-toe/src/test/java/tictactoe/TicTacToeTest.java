@@ -13,12 +13,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class TicTacToeTest {
 
     private final StoryBoard storyBoard = new StoryBoard();
-    private final TicTacToe ticTacToe = new TicTacToe();
+    private TicTacToe ticTacToe;
 
     @Test
     void tieGame() {
         storyBoard.addDescription("Tic-Tac-Toe: Tie Game");
-        storyBoard.addFrame("New Game", ticTacToe);
+
+        newGame();
 
         playerXTakes('5');
         playerOTakes('6');
@@ -36,7 +37,7 @@ class TicTacToeTest {
     @Test
     void playerXWins() {
         storyBoard.addDescription("Tic-Tac-Toe: Player X Wins on Top Horizontal");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('1');
         playerOTakes('7');
@@ -51,7 +52,7 @@ class TicTacToeTest {
     @Test
     void playerOWinsHorizontallyBottom() {
         storyBoard.addDescription("Tic-Tac-Toe: Player O Wins Horizontally Bottom");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('1');
         playerOTakes('7');
@@ -66,7 +67,7 @@ class TicTacToeTest {
     @Test
     void playerOWinsHorizontallyCenter() {
         storyBoard.addDescription("Tic-Tac-Toe: Player O Wins Center Horizontally");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('1');
         playerOTakes('4');
@@ -81,7 +82,7 @@ class TicTacToeTest {
     @Test
     void playerXWinsVertically() {
         storyBoard.addDescription("Tic-Tac-Toe: Player X Wins on Left Vertically");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('1');
         playerOTakes('8');
@@ -95,7 +96,7 @@ class TicTacToeTest {
     @Test
     void playerXWinsCenterVertically() {
         storyBoard.addDescription("Tic-Tac-Toe: Player X Wins on Center Vertically");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('2');
         playerOTakes('7');
@@ -109,7 +110,7 @@ class TicTacToeTest {
     @Test
     void playerXWinsRightVertically() {
         storyBoard.addDescription("Tic-Tac-Toe: Player X Wins on Right Vertically");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('3');
         playerOTakes('1');
@@ -123,7 +124,7 @@ class TicTacToeTest {
     @Test
     void playerOWinsRightDiagonally() {
         storyBoard.addDescription("Tic-Tac-Toe: Player O Wins on Right Diagonally");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('3');
         playerOTakes('1');
@@ -138,7 +139,7 @@ class TicTacToeTest {
     @Test
     void playerOWinsLeftDiagonally() {
         storyBoard.addDescription("Tic-Tac-Toe: Player O Wins on Left Diagonally");
-        storyBoard.addFrame("New Game", ticTacToe);
+        newGame();
 
         playerXTakes('1');
         playerOTakes('3');
@@ -152,6 +153,7 @@ class TicTacToeTest {
 
     @Test
     void illegalLocation() {
+        ticTacToe = new TicTacToe("Paul", "Lisa");
         assertThatThrownBy(()-> ticTacToe.take('A'))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Invalid location: A");
@@ -159,6 +161,7 @@ class TicTacToeTest {
 
     @Test
     void illegalMove() {
+        ticTacToe = new TicTacToe("Paul", "Lisa");
         ticTacToe.take('5');
         assertIllegalMove(() -> ticTacToe.take('5'),
                 "The square at location 5 has already been taken.");
@@ -168,6 +171,12 @@ class TicTacToeTest {
         assertThatThrownBy(lambda)
                 .isInstanceOf(SquareAlreadyTakenException.class)
                         .hasMessage(message);
+    }
+
+    private void newGame() {
+        ticTacToe = new TicTacToe("Paul", "Lisa");
+        storyBoard.addFrame("New Game", ticTacToe);
+        storyBoard.addFrame("Players", ticTacToe.printPlayers());
     }
 
     private void playerXTakes(char location) {

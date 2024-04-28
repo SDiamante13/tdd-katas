@@ -9,6 +9,9 @@ New Game:
 +---+---+---+
 
 
+Players:
+Paul (X) and Lisa (O) added to the game
+
 Player X takes 2:
 +---+---+---+
 | 1 | X | 3 |
