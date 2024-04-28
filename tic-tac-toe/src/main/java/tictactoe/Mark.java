@@ -9,7 +9,7 @@ public enum Mark {
         this.value = value;
     }
 
-    public char value() {
+    char value() {
         return this.value;
     }
 

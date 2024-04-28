@@ -3,7 +3,7 @@ package tictactoe;
 class TicTacToe {
 
     private final Grid grid;
-    public Mark currentMark = Mark.X;
+    private Mark currentMark = Mark.X;
 
     public TicTacToe() {
         grid = new Grid();
@@ -20,6 +20,10 @@ class TicTacToe {
 
     public boolean gameIsOver() {
         return !grid.winStatus().isEmpty();
+    }
+
+    public Mark currentPlayer() {
+        return this.currentMark;
     }
 
     @Override

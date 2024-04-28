@@ -1,7 +1,5 @@
 package tictactoe;
 
-import jdk.jshell.spi.ExecutionControlProvider;
-
 import java.util.Scanner;
 
 public class GameRunner {
@@ -14,8 +12,7 @@ public class GameRunner {
 
         do {
             try {
-
-                char currentMark = ticTacToe.currentMark.value();
+                char currentMark = ticTacToe.currentPlayer().value();
                 System.out.println("Player " + currentMark + " turn: ");
                 String location = input.nextLine();
                 ticTacToe.take(location.charAt(0));
