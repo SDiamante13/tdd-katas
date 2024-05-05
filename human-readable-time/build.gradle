@@ -1,3 +1,13 @@
+plugins {
+    id 'info.solidsoft.pitest' version '1.15.0'
+}
+
+group 'tech.pathtoprogramming.humanreadabletime.bowling'
+
+pitest {
+    junit5PluginVersion = '1.2.0'
+}
+
 repositories {
     mavenCentral()
 }

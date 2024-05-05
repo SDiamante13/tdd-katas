@@ -1,19 +1,8 @@
-package tech.pathtoprogramming.humanreadabletime;
-
-import org.junit.jupiter.api.Test;
+package tech.pathtoprogramming.humanreadabletime.bowling;
 
 import java.util.Arrays;
 
-public class GameTest {
-
-    @Test
-    void fullGame() {
-        Game game = new Game();
-
-        game.rolls(5,5);
-    }
-}
-class Game {
+public class Game {
     private int score = 0;
     private int remaining = 10;
     private boolean spare = false;
@@ -27,9 +16,9 @@ class Game {
     }
 
     public void roll(int pins) {
-        if(frames > 9){
-            if(frameRolls >= 2){
-                if(!(spare || strike)){
+        if (frames > 9) {
+            if (frameRolls >= 2) {
+                if (!(spare || strike)) {
                     return;
                 }
             }
@@ -37,16 +26,16 @@ class Game {
 
         frameRolls++;
 
-        if(strike){
+        if (strike) {
             score += pins;
             bonusRolls++;
-            if(bonusRolls == 2){
+            if (bonusRolls == 2) {
                 strike = false;
                 bonusRolls = 0;
             }
         }
 
-        if(spare) {
+        if (spare) {
             score += pins;
             spare = false;
         }
@@ -57,10 +46,10 @@ class Game {
         strike = pins == 10 || bonusRolls > 0;
         spare = remaining == 0 && !strike;
 
-        if(remaining == 0 || frameRolls == 2){
+        if (remaining == 0 || frameRolls == 2) {
             remaining = 10;
             frames++;
-            if(frames < 10) {
+            if (frames < 10) {
                 frameRolls = 0;
             }
         }
