@@ -76,11 +76,11 @@ class BingoBoardTest {
     }
 
     void whenCellIsDefined(int x, int y, String value) {
-        board.defineCell(x, y, value);
+        board.defineCell(value, new Coordinate(x, y));
     }
 
     void whenCellIsMarked(int x, int y) {
-        board.markCell(x, y);
+        board.markCell(new Coordinate(x, y));
     }
 
     void thenBoardIsNotInitialized() {
@@ -96,6 +96,6 @@ class BingoBoardTest {
     }
 
     void thenCellIsMarked(int x, int y) {
-        assertThat(board.isMarked(x, y)).isTrue();
+        assertThat(board.isMarked(new Coordinate(x, y))).isTrue();
     }
 }

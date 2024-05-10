@@ -1,47 +1,54 @@
 package bingo;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 public class BingoBoard {
 
-    private final String[][] cells;
-    private final boolean[][] marked;
+    private final Map<Coordinate, Cell> spaces;
 
     public BingoBoard(int width, int height) {
-        this.cells = new String[width][height];
-        this.marked = new boolean[width][height];
-    }
-
-    public void defineCell(int x, int y, String value) {
-        if (cells[x][y] != null) {
-            throw new IllegalStateException("cell already defined");
-        }
-        for (int c = 0; c < cells.length; c++) {
-            for (int r = 0; r < cells[c].length; r++) {
-                if (value.equals(cells[c][r]))
-                    throw new IllegalStateException(value + " already present at " + c + "," + r);
+        this.spaces = new HashMap<>();
+        for (int r = 0; r < width; r++) {
+            for (int c = 0; c < height; c++) {
+                spaces.put(new Coordinate(r, c), null);
             }
         }
-        cells[x][y] = value;
     }
 
-    public void markCell(int x, int y) {
+    public void defineCell(String value, Coordinate coordinate) {
+        if (spaces.get(coordinate) != null) {
+            throw new IllegalStateException("cell already defined");
+        }
+
+        for (Map.Entry<Coordinate, Cell> coordinateCellEntry : spaces.entrySet()) {
+            Coordinate c = coordinateCellEntry.getKey();
+            Cell cell = coordinateCellEntry.getValue();
+            if (cell != null && value.equals(cell.getValue())) {
+                throw new IllegalStateException(value + " already present at " + c.x() + "," + c.y());
+            }
+        }
+
+        spaces.put(coordinate, new Cell(value));
+    }
+
+    public void markCell(Coordinate coordinate) {
         if (!isInitialized()) {
             throw new IllegalStateException("board not initialized");
         }
-        marked[x][y] = true;
+        spaces.get(coordinate).mark();
     }
 
-    public boolean isMarked(int x, int y) {
-        return marked[x][y];
+    public boolean isMarked(Coordinate coordinate) {
+        return spaces.get(coordinate).isMarked();
     }
 
     public boolean isInitialized() {
-        for (String[] row : cells) {
-            for (String col : row) {
-                if (col == null)
-                    return false;
-            }
-        }
-        return true;
-    }
+        return spaces.keySet()
+                .stream()
+                .map(spaces::get)
+                .noneMatch(Objects::isNull);
 
+    }
 }
