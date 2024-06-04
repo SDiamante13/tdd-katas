@@ -1,4 +1,4 @@
-package tech.pathtoprogramming.fizzbuzz;
+/*package tech.pathtoprogramming.fizzbuzz;
 
 public class FizzBuzz {
 
@@ -12,4 +12,4 @@ public class FizzBuzz {
 //        return String.valueOf(number);
         return new FizzBuzzChain().getResult(number);
     }
-}
+}*/
