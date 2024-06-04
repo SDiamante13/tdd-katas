@@ -3,14 +3,17 @@ package fractions;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class FractionTest {
 
     @Test
     void addZeroes() {
         Fraction zero = new Fraction(0, 1);
-        Fraction sum = zero.plus(zero);
-        Assertions.assertThat(sum).isEqualTo(zero);
 
+        Fraction sum = zero.plus(zero);
+
+        assertThat(sum).isEqualTo(zero);
     }
 }
 
