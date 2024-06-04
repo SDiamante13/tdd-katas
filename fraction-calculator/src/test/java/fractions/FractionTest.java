@@ -1,6 +1,5 @@
 package fractions;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +14,15 @@ class FractionTest {
 
         assertThat(sum).isEqualTo(zero);
     }
+
+    @Test
+    void addZeroAndNonZero() {
+        Fraction zero = new Fraction(0, 1);
+        Fraction one = new Fraction(1, 1);
+
+        assertThat(zero.plus(one)).isEqualTo(one);
+        assertThat(one.plus(zero)).isEqualTo(one);
+    }
 }
 
 class Fraction {
@@ -27,8 +35,17 @@ class Fraction {
         this.denominator = denominator;
     }
 
+    public int numerator() {
+        return numerator;
+    }
+
+    public int denominator() {
+        return denominator;
+    }
+
     public Fraction plus(Fraction fraction) {
-        return new Fraction(0, 1);
+        int sumOfNumerators = numerator + fraction.numerator();
+        return new Fraction(sumOfNumerators, 1);
     }
 
     @Override
