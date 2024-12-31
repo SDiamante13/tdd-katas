@@ -3,18 +3,46 @@ package tech.pathtotprogramming.romannumerals;
 public class ArabicToRomanNumeralConverter {
     public String convert(int arabic) {
         String result = "";
-        while (arabic >= 10) {
-            result += "X";
-            arabic -= 10;
+
+        for (ArabicToRoman atr : ArabicToRoman.values()) {
+            while (arabic >= atr.arabic()) {
+                result += atr.romanNumeral();
+                arabic -= atr.arabic();
+            }
         }
-        while (arabic >= 5) {
-            result += "V";
-            arabic -= 5;
-        }
-        while (arabic >= 1) {
-            result += "I";
-            arabic -= 1;
-        }
+
         return result;
+    }
+}
+
+enum ArabicToRoman {
+    THOUSAND(1000, "M"),
+    NINE_HUNDRED(900, "CM"),
+    FIVE_HUNDRED(500, "D"),
+    FOUR_HUNDRED(400, "CD"),
+    HUNDRED(100, "C"),
+    NINETY(90, "XC"),
+    FIFTY(50, "L"),
+    FORTY(40, "XL"),
+    TEN(10, "X"),
+    NINE(9, "IX"),
+    FIVE(5, "V"),
+    FOUR(4, "IV"),
+    ONE(1, "I");
+
+    private final int arabic;
+    private final String romanNumeral;
+
+    ArabicToRoman(int arabic, String romanNumeral) {
+        this.arabic = arabic;
+        this.romanNumeral = romanNumeral;
+    }
+
+    public int arabic() {
+        return this.arabic;
+    }
+
+    public String romanNumeral() {
+        return romanNumeral;
     }
 }
