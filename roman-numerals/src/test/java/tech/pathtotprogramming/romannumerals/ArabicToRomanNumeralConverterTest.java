@@ -18,7 +18,8 @@ class ArabicToRomanNumeralConverterTest {
             "8,VIII",
             "10,X",
             "13,XIII",
-            "20,XX",
+            "15,XV",
+            "30,XXX",
     })
     void convertArabicToRoman(int arabic, String expectedRomanNumeral) {
         var arabicToRomanConverter = new ArabicToRomanNumeralConverter();

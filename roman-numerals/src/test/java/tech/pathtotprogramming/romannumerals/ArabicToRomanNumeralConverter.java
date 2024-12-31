@@ -7,8 +7,8 @@ public class ArabicToRomanNumeralConverter {
             result += "X";
             arabic -= 10;
         }
-        if (arabic >= 5) {
-            result = "V";
+        while (arabic >= 5) {
+            result += "V";
             arabic -= 5;
         }
         return result + "I".repeat(arabic);
