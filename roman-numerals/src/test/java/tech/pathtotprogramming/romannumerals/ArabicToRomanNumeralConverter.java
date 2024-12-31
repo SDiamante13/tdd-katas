@@ -11,6 +11,10 @@ public class ArabicToRomanNumeralConverter {
             result += "V";
             arabic -= 5;
         }
-        return result + "I".repeat(arabic);
+        while (arabic >= 1) {
+            result += "I";
+            arabic -= 1;
+        }
+        return result;
     }
 }
