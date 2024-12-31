@@ -1,6 +1,6 @@
 package tech.pathtotprogramming.romannumerals;
 
-public class ArabicToRomanConverter {
+public class ArabicToRomanNumeralConverter {
     public String convert(int arabic) {
         return "I".repeat(arabic);
     }
