@@ -34,4 +34,5 @@ include 'bingo-kata'
 include 'ugly-trivia'
 include 'tic-tac-toe'
 include 'fraction-calculator'
+include 'dev-bar-refactoring'
 
