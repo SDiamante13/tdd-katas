@@ -1,9 +1,6 @@
 package devparty;
 
-import devparty.model.Bar;
-import devparty.model.BarData;
-import devparty.model.BoatData;
-import devparty.model.BookingData;
+import devparty.model.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -29,6 +26,7 @@ public class BookingService {
     // [x] No Classes With More Than Two Instance Variables
     // [x] No Getters/Setters/Properties - Feature Envy code smell
 
+
     public BookingService(IBarRepository barRepo, IDevRepository devRepo, IBoatRepository boatRepo, IBookingRepository bookingRepo) {
         this.barRepo = barRepo;
         this.devRepo = devRepo;
@@ -41,34 +39,15 @@ public class BookingService {
         var devs = devRepo.get().stream().toList();
         var boats = boatRepo.get();
 
-        Map<LocalDate, Integer> numberOfAvailableDevsByDate = new HashMap<>();
-        for (var devData : devs) {
-            for (var date : devData.getOnSite()) {
-                if (numberOfAvailableDevsByDate.containsKey(date)) {
-                    numberOfAvailableDevsByDate.put(date, numberOfAvailableDevsByDate.get(date) + 1);
-                } else {
-                    numberOfAvailableDevsByDate.put(date, 1);
-                }
-            }
-        }
+        DevAvailabilityCalendar devAvailabilityCalendar = new DevAvailabilityCalendar(devs);
 
-        int maxNumberOfDevs = Collections.max(numberOfAvailableDevsByDate.values());
+        int maxNumberOfDevs = devAvailabilityCalendar.getMaxNumberOfDevs();
 
-        if (maxNumberOfDevs <= devs.size() * 0.6) {
+        if (devAvailabilityCalendar.notEnoughAvailableDevs(devs)) {
             return false;
         }
 
-        Optional<Map.Entry<LocalDate, Integer>> found = Optional.empty();
-        for (Map.Entry<LocalDate, Integer> entry : numberOfAvailableDevsByDate.entrySet()) {
-            if (entry.getValue() == maxNumberOfDevs) {
-                found = Optional.of(entry);
-                break;
-            }
-        }
-        LocalDate bestDate = found
-                .map(Map.Entry::getKey)
-                .orElse(null);
-
+        LocalDate bestDate = devAvailabilityCalendar.determineBestDate(maxNumberOfDevs);
 
         Optional<BoatData> firstAvailableBoat = findFirstAvailableBoat(boats, maxNumberOfDevs);
         firstAvailableBoat.ifPresent(boatData -> printAndSaveBoatBooking(boatData, bestDate));
@@ -110,6 +89,5 @@ public class BookingService {
     private static List<DayOfWeek> allDays() {
         return Arrays.asList(DayOfWeek.values());
     }
-
 
 }
