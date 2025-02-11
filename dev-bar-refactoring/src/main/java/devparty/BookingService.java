@@ -8,7 +8,6 @@ import java.util.*;
 
 public class BookingService {
 
-
     private final IBarRepository barRepo;
     private final IDevRepository devRepo;
     private final IBoatRepository boatRepo;
@@ -16,16 +15,15 @@ public class BookingService {
 
     // Goal: Separate I/O from business logic
 
-    // [x] Only One Level Of Indentation Per Method
+    // [/] Only One Level Of Indentation Per Method
     // [x] Don’t Use The ELSE Keyword -> guard clause
     // [x] Wrap All Primitives And Strings -> ValueObject -> PhoneNumber (String)
-    // [x] First Class Collections
+    // [/] First Class Collections
     // [x] One Dot Per Line -> Law of Demeter dog.tail.wag --> dog.wagTail()
     // [x] Don’t Abbreviate
     // [x] Keep All Entities Small - Classes < 50 lines
     // [x] No Classes With More Than Two Instance Variables
     // [x] No Getters/Setters/Properties - Feature Envy code smell
-
 
     public BookingService(IBarRepository barRepo, IDevRepository devRepo, IBoatRepository boatRepo, IBookingRepository bookingRepo) {
         this.barRepo = barRepo;
@@ -37,10 +35,9 @@ public class BookingService {
     public boolean reserveBar() {
         var barDataList = barRepo.get();
         var devs = devRepo.get().stream().toList();
-        var boats = boatRepo.get();
+        var boatDataList = boatRepo.get();
 
         DevAvailabilityCalendar devAvailabilityCalendar = new DevAvailabilityCalendar(devs);
-
         int maxNumberOfDevs = devAvailabilityCalendar.getMaxNumberOfDevs();
 
         if (devAvailabilityCalendar.notEnoughAvailableDevs(devs)) {
@@ -49,7 +46,8 @@ public class BookingService {
 
         LocalDate bestDate = devAvailabilityCalendar.determineBestDate(maxNumberOfDevs);
 
-        Optional<BoatData> firstAvailableBoat = findFirstAvailableBoat(boats, maxNumberOfDevs);
+        Boats boats = new Boats(boatDataList);
+        Optional<BoatData> firstAvailableBoat = boats.findFirstAvailableBoat(maxNumberOfDevs);
         firstAvailableBoat.ifPresent(boatData -> printAndSaveBoatBooking(boatData, bestDate));
         if (firstAvailableBoat.isPresent()) {
             return true;
@@ -63,10 +61,6 @@ public class BookingService {
         }
 
         return false;
-    }
-
-    private Optional<BoatData> findFirstAvailableBoat(List<BoatData> boats, int maxNumberOfDevs) {
-        return boats.stream().filter(boatData -> new Bar().hasEnoughCapacity(boatData, maxNumberOfDevs)).findFirst();
     }
 
     private void printAndSaveBoatBooking(BoatData boatData, LocalDate bestDate) {
