@@ -17,6 +17,16 @@ public class BookingService {
     private final IBoatRepository boatRepo;
     private final IBookingRepository bookingRepo;
 
+    // [x] Only One Level Of Indentation Per Method
+    // [x] Don’t Use The ELSE Keyword -> guard clause
+    // [x] Wrap All Primitives And Strings -> ValueObject -> PhoneNumber (String)
+    // [x] First Class Collections
+    // [x] One Dot Per Line -> Law of Demeter dog.tail.wag --> dog.wagTail()
+    // [x] Don’t Abbreviate
+    // [x] Keep All Entities Small - Classes < 50 lines
+    // [x] No Classes With More Than Two Instance Variables
+    // [x] No Getters/Setters/Properties - Feature Envy code smell
+
     public BookingService(IBarRepository barRepo, IDevRepository devRepo, IBoatRepository boatRepo, IBookingRepository bookingRepo) {
         this.barRepo = barRepo;
         this.devRepo = devRepo;
@@ -26,7 +36,7 @@ public class BookingService {
 
     public boolean reserveBar() {
         var bars = barRepo.get();
-        var devs = devRepo.get().stream().collect(Collectors.toList());
+        var devs = devRepo.get().stream().toList();
         var boats = boatRepo.get();
 
         Map<LocalDate, Integer> numberOfAvailableDevsByDate = new HashMap<>();
@@ -34,7 +44,6 @@ public class BookingService {
             for (var date : devData.getOnSite()) {
                 if (numberOfAvailableDevsByDate.containsKey(date)) {
                     numberOfAvailableDevsByDate.put(date, numberOfAvailableDevsByDate.get(date) + 1);
-                    continue;
                 } else {
                     numberOfAvailableDevsByDate.put(date, 1);
                 }
