@@ -71,7 +71,8 @@ public class BookingService {
         for (var boatData : boats) {
             Bar bar = new Bar();
             if (bar.hasEnoughCapacity(boatData, maxNumberOfDevs)) {
-                bookBar(boatData.getName(), bestDate);
+                String name = boatData.getName();
+                System.out.println("Bar booked: " + name + " at " + bestDate);
                 BarData barData = new BarData(boatData.getName(), boatData.getMaxPeople(), allDays());
                 bookingRepo.save(new BookingData(
                         barData, bestDate
@@ -82,15 +83,17 @@ public class BookingService {
 
         Optional<BarData> firstAvailableBar = findFirstAvailableBar(bars, maxNumberOfDevs, bestDate);
         firstAvailableBar
-                .ifPresent(barData -> {
-                    bookBar(barData.getName(), bestDate);
-                    bookingRepo.save(new BookingData(barData, bestDate));
-                });
+                .ifPresent(barData -> printAndSaveBooking(barData, bestDate));
         if (firstAvailableBar.isPresent()) {
             return true;
         }
 
         return false;
+    }
+
+    private void printAndSaveBooking(BarData barData, LocalDate bestDate) {
+        System.out.println("Bar booked: " + barData.getName() + " at " + bestDate);
+        bookingRepo.save(new BookingData(barData, bestDate));
     }
 
     private Optional<BarData> findFirstAvailableBar(List<BarData> bars, int maxNumberOfDevs, LocalDate bestDate) {
@@ -101,10 +104,6 @@ public class BookingService {
 
     private static List<DayOfWeek> allDays() {
         return Arrays.asList(DayOfWeek.values());
-    }
-
-    private void bookBar(String name, LocalDate dateTime) {
-        System.out.println("Bar booked: " + name + " at " + dateTime);
     }
 
 
