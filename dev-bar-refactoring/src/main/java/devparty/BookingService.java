@@ -2,6 +2,7 @@ package devparty;
 
 import devparty.model.Bar;
 import devparty.model.BarData;
+import devparty.model.BoatData;
 import devparty.model.BookingData;
 
 import java.time.DayOfWeek;
@@ -68,27 +69,31 @@ public class BookingService {
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
-        for (var boatData : boats) {
-            Bar bar = new Bar();
-            if (bar.hasEnoughCapacity(boatData, maxNumberOfDevs)) {
-                String name = boatData.getName();
-                System.out.println("Bar booked: " + name + " at " + bestDate);
-                BarData barData = new BarData(boatData.getName(), boatData.getMaxPeople(), allDays());
-                bookingRepo.save(new BookingData(
-                        barData, bestDate
-                ));
-                return true;
-            }
+
+        Optional<BoatData> firstAvailableBoat = findFirstAvailableBoat(boats, maxNumberOfDevs);
+        firstAvailableBoat.ifPresent(boatData -> printAndSaveBoatBooking(boatData, bestDate));
+        if (firstAvailableBoat.isPresent()) {
+            return true;
         }
 
         Optional<BarData> firstAvailableBar = findFirstAvailableBar(bars, maxNumberOfDevs, bestDate);
-        firstAvailableBar
-                .ifPresent(barData -> printAndSaveBooking(barData, bestDate));
+        firstAvailableBar.ifPresent(barData -> printAndSaveBooking(barData, bestDate));
         if (firstAvailableBar.isPresent()) {
             return true;
         }
 
         return false;
+    }
+
+    private Optional<BoatData> findFirstAvailableBoat(List<BoatData> boats, int maxNumberOfDevs) {
+        return boats.stream().filter(boatData -> new Bar().hasEnoughCapacity(boatData, maxNumberOfDevs)).findFirst();
+    }
+
+    private void printAndSaveBoatBooking(BoatData boatData, LocalDate bestDate) {
+        System.out.println("Bar booked: " + boatData.getName() + " at " + bestDate);
+        bookingRepo.save(new BookingData(
+                new BarData(boatData.getName(), boatData.getMaxPeople(), allDays()), bestDate
+        ));
     }
 
     private void printAndSaveBooking(BarData barData, LocalDate bestDate) {
