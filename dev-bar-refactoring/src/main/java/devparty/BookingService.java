@@ -35,7 +35,7 @@ public class BookingService {
     }
 
     public boolean reserveBar() {
-        var bars = barRepo.get();
+        var barDataList = barRepo.get();
         var devs = devRepo.get().stream().toList();
         var boats = boatRepo.get();
 
@@ -55,7 +55,8 @@ public class BookingService {
             return true;
         }
 
-        Optional<BarData> firstAvailableBar = findFirstAvailableBar(bars, maxNumberOfDevs, bestDate);
+        Bars bars = new Bars(barDataList);
+        Optional<BarData> firstAvailableBar = bars.findFirstAvailableBar(maxNumberOfDevs, bestDate);
         firstAvailableBar.ifPresent(barData -> printAndSaveBooking(barData, bestDate));
         if (firstAvailableBar.isPresent()) {
             return true;
@@ -78,12 +79,6 @@ public class BookingService {
     private void printAndSaveBooking(BarData barData, LocalDate bestDate) {
         System.out.println("Bar booked: " + barData.getName() + " at " + bestDate);
         bookingRepo.save(new BookingData(barData, bestDate));
-    }
-
-    private Optional<BarData> findFirstAvailableBar(List<BarData> bars, int maxNumberOfDevs, LocalDate bestDate) {
-        return bars.stream()
-                .filter(barData -> barData.getCapacity() >= maxNumberOfDevs && barData.getOpen().contains(bestDate.getDayOfWeek()))
-                .findFirst();
     }
 
     private static List<DayOfWeek> allDays() {
