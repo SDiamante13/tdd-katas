@@ -2,7 +2,6 @@ package devparty.model;
 
 import devparty.IBookingRepository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,4 @@ public class FakeBookingRepository  implements IBookingRepository {
         return bookingData;
     }
 
-    public BookingData getUpcomingBooking(LocalDate date) {
-        return bookingData.stream().filter(d -> d.date().isEqual(date) ).findFirst().orElse(null);
-    }
 }

@@ -16,17 +16,17 @@ class BookingServiceTest {
 
 
     @Test
-    public void reserveBarWhenAtLeast60PercentOfDevsAreAvailable() {
+    void reserveBarWhenAtLeast60PercentOfDevsAreAvailable() {
         String indoorBarName = "Bar La Belle Equipe";
-        List<Bar> indoorBars = asList(
+        List<Bar> indoorBars = List.of(
                 barWith(indoorBarName, asList(DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY))
         );
         List<Dev> developers = asList(
                 new Dev("Alice", asList(WEDNESDAY, THURSDAY, FRIDAY)),
-                new Dev("Bob", asList(THURSDAY)),
-                new Dev("Chad", asList(FRIDAY)),
+                new Dev("Bob", List.of(THURSDAY)),
+                new Dev("Chad", List.of(FRIDAY)),
                 new Dev("Dan", asList(WEDNESDAY, THURSDAY)),
-                new Dev("Eve", asList(THURSDAY))
+                new Dev("Eve", List.of(THURSDAY))
         );
 
         BookingController controller = buildController(indoorBars, developers);
@@ -40,18 +40,18 @@ class BookingServiceTest {
     }
 
     @Test
-    public void doNotReserveBarWhenOnly50PercentOfDevsAreAvailable() {
+    void doNotReserveBarWhenOnly50PercentOfDevsAreAvailable() {
         String indoorBarName = "Bar La Belle Equipe";
-        List<Bar> indoorBars = asList(
+        List<Bar> indoorBars = List.of(
                 barWith(indoorBarName, asList(DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY))
         );
 
         List<Dev> developers = asList(
                 new Dev("Alice", asList(WEDNESDAY, FRIDAY)),
-                new Dev("Bob", asList(THURSDAY)),
-                new Dev("Chad", asList(FRIDAY)),
-                new Dev("Dan", asList(WEDNESDAY)),
-                new Dev("Eve", asList(THURSDAY))
+                new Dev("Bob", List.of(THURSDAY)),
+                new Dev("Chad", List.of(FRIDAY)),
+                new Dev("Dan", List.of(WEDNESDAY)),
+                new Dev("Eve", List.of(THURSDAY))
         );
 
         BookingController controller = buildController(indoorBars, developers);
@@ -60,15 +60,15 @@ class BookingServiceTest {
     }
 
     @Test
-    public void reserveBarOnlyWhenBarIsOpen() {
+    void reserveBarOnlyWhenBarIsOpen() {
         String indoorBarName = "Bar La Belle Equipe";
         List<Bar> indoorBars = asList(
-                barWith("another name", asList( DayOfWeek.FRIDAY)),
-                barWith(indoorBarName, asList( DayOfWeek.THURSDAY))
+                barWith("another name", List.of(DayOfWeek.FRIDAY)),
+                barWith(indoorBarName, List.of(DayOfWeek.THURSDAY))
         );
         List<Dev> developers = asList(
-                new Dev("Bob", asList(THURSDAY)),
-                new Dev("Eve", asList(THURSDAY))
+                new Dev("Bob", List.of(THURSDAY)),
+                new Dev("Eve", List.of(THURSDAY))
         );
 
         BookingController controller = buildController(indoorBars, developers);
@@ -82,15 +82,15 @@ class BookingServiceTest {
     }
 
     @Test
-    public void doNotReserveWhenBarsAreClosed() {
+    void doNotReserveWhenBarsAreClosed() {
         String indoorBarName = "Bar La Belle Equipe";
         List<Bar> indoorBars = asList(
-                barWith("another name", asList( DayOfWeek.FRIDAY)),
-                barWith(indoorBarName, asList( DayOfWeek.THURSDAY))
+                barWith("another name", List.of(DayOfWeek.FRIDAY)),
+                barWith(indoorBarName, List.of(DayOfWeek.THURSDAY))
         );
         List<Dev> developers = asList(
-                new Dev("Bob", asList(WEDNESDAY)),
-                new Dev("Eve", asList(WEDNESDAY))
+                new Dev("Bob", List.of(WEDNESDAY)),
+                new Dev("Eve", List.of(WEDNESDAY))
         );
 
         BookingController controller = buildController(indoorBars, developers);
@@ -103,14 +103,14 @@ class BookingServiceTest {
     @Test
     void chooseABarWithEnoughSpace() {
         String indoorBarName = "Bar La Belle Equipe";
-        List<Bar> indoorBars = asList(
-                barWith(indoorBarName, 3, asList( DayOfWeek.THURSDAY))
+        List<Bar> indoorBars = List.of(
+                barWith(indoorBarName, 3, List.of(DayOfWeek.THURSDAY))
         );
         List<Dev> developers = asList(
-                new Dev("Bob", asList(THURSDAY)),
-                new Dev("Eve", asList(THURSDAY)),
-                new Dev("Fred", asList(THURSDAY)),
-                new Dev("Marie", asList(THURSDAY))
+                new Dev("Bob", List.of(THURSDAY)),
+                new Dev("Eve", List.of(THURSDAY)),
+                new Dev("Fred", List.of(THURSDAY)),
+                new Dev("Marie", List.of(THURSDAY))
 
         );
 
@@ -124,15 +124,15 @@ class BookingServiceTest {
     @Test
     void preferBoats() {
         String indoorBarName = "Bar La Belle Equipe";
-        List<Bar> indoorBars = asList(
-                barWith(indoorBarName, 3, asList( DayOfWeek.THURSDAY))
+        List<Bar> indoorBars = List.of(
+                barWith(indoorBarName, 3, List.of(DayOfWeek.THURSDAY))
         );
-        List<Boat> boats = asList(
+        List<Boat> boats = List.of(
                 new Boat(indoorBarName, 3)
         );
         List<Dev> developers = asList(
-                new Dev("Bob", asList(THURSDAY)),
-                new Dev("Eve", asList(THURSDAY))
+                new Dev("Bob", List.of(THURSDAY)),
+                new Dev("Eve", List.of(THURSDAY))
         );
 
         BookingController controller = buildController(indoorBars, developers, boats);
