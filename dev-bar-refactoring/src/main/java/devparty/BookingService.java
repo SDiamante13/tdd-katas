@@ -47,14 +47,14 @@ public class BookingService {
         LocalDate bestDate = devAvailabilityCalendar.determineBestDate(maxNumberOfDevs);
 
         Boats boats = new Boats(boatDataList);
-        Optional<BoatData> firstAvailableBoat = boats.findFirstAvailableBoat(maxNumberOfDevs);
+        Optional<Boat> firstAvailableBoat = boats.findFirstAvailableBoat(maxNumberOfDevs);
         firstAvailableBoat.ifPresent(boatData -> printAndSaveBoatBooking(boatData, bestDate));
         if (firstAvailableBoat.isPresent()) {
             return true;
         }
 
         Bars bars = new Bars(barDataList);
-        Optional<BarData> firstAvailableBar = bars.findFirstAvailableBar(maxNumberOfDevs, bestDate);
+        Optional<Bar> firstAvailableBar = bars.findFirstAvailableBar(maxNumberOfDevs, bestDate);
         firstAvailableBar.ifPresent(barData -> printAndSaveBooking(barData, bestDate));
         if (firstAvailableBar.isPresent()) {
             return true;
@@ -63,16 +63,16 @@ public class BookingService {
         return false;
     }
 
-    private void printAndSaveBoatBooking(BoatData boatData, LocalDate bestDate) {
-        System.out.println("Bar booked: " + boatData.getName() + " at " + bestDate);
+    private void printAndSaveBoatBooking(Boat boat, LocalDate bestDate) {
+        System.out.println("Bar booked: " + boat.name() + " at " + bestDate);
         bookingRepo.save(new BookingData(
-                new BarData(boatData.getName(), boatData.getMaxPeople(), allDays()), bestDate
+                new Bar(boat.name(), boat.maxPeople(), allDays()), bestDate
         ));
     }
 
-    private void printAndSaveBooking(BarData barData, LocalDate bestDate) {
-        System.out.println("Bar booked: " + barData.getName() + " at " + bestDate);
-        bookingRepo.save(new BookingData(barData, bestDate));
+    private void printAndSaveBooking(Bar bar, LocalDate bestDate) {
+        System.out.println("Bar booked: " + bar.name() + " at " + bestDate);
+        bookingRepo.save(new BookingData(bar, bestDate));
     }
 
     private static List<DayOfWeek> allDays() {

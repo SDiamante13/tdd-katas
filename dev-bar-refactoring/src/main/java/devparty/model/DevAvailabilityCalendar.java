@@ -1,23 +1,21 @@
-package devparty;
-
-import devparty.model.DevData;
+package devparty.model;
 
 import java.time.LocalDate;
 import java.util.*;
 
-class DevAvailabilityCalendar {
+public class DevAvailabilityCalendar {
 
     private final Map<LocalDate, Integer> numberOfAvailableDevsByDate = new HashMap<>();
 
     private static final double BOOKING_THRESHOLD = 0.6;
 
-    public DevAvailabilityCalendar(List<DevData> devs) {
+    public DevAvailabilityCalendar(List<Dev> devs) {
         populateNumberOfAvailableDevsByDate(devs);
     }
 
-    private void populateNumberOfAvailableDevsByDate(List<DevData> devs) {
+    private void populateNumberOfAvailableDevsByDate(List<Dev> devs) {
         for (var devData : devs) {
-            for (var date : devData.getOnSite()) {
+            for (var date : devData.onSite()) {
                 if (numberOfAvailableDevsByDate.containsKey(date)) {
                     numberOfAvailableDevsByDate.put(date, numberOfAvailableDevsByDate.get(date) + 1);
                 } else {
@@ -44,7 +42,7 @@ class DevAvailabilityCalendar {
         return Collections.max(numberOfAvailableDevsByDate.values());
     }
 
-    public boolean notEnoughAvailableDevs(List<DevData> devs) {
+    public boolean notEnoughAvailableDevs(List<Dev> devs) {
         return getMaxNumberOfDevs() <= devs.size() * BOOKING_THRESHOLD;
     }
 }

@@ -11,7 +11,6 @@ public class BookingController {
     private final IBookingRepository bookingRepository;
 
     public BookingController(BookingService bookingService, IBookingRepository bookingRepository) {
-
         this.bookingService = bookingService;
         this.bookingRepository = bookingRepository;
     }
