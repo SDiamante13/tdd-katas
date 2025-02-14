@@ -13,6 +13,10 @@ record Roll(int die1, int die2, int die3, int die4, int die5) {
                 .filter(d -> d == 1)
                 .map(d -> 100)
                 .sum();
+        long count = Arrays.stream(dice)
+                .filter(d -> d == 2)
+                .count();
+        sum += count == 3 ? 200 : 0;
 
         return new Points(sum);
     }
