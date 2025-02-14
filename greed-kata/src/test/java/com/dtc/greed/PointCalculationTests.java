@@ -8,12 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class PointCalculationTests {
 
+    private static final String DICE_ROLL_GET_X_POINTS = "Roll of [{0},{1},{2},{3},{4}] gets {5} points";
+
     @Test
     void noPointsForRollsThatDoNotMeetAnyOfTheScoringRuleRequirements() {
         assertPointCalculation(2, 3, 4, 6, 2, 0);
     }
 
-    @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
+    @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
     @CsvSource({
             "2,3,4,6,5,50",
             "2,3,4,5,6,50",
@@ -25,7 +27,7 @@ class PointCalculationTests {
         assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
     }
 
-    @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
+    @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
     @CsvSource({
             "2,3,4,5,5,100",
             "2,3,5,5,6,100",
@@ -36,9 +38,13 @@ class PointCalculationTests {
         assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
     }
 
-    @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
+    @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
     @CsvSource({
             "2,3,4,6,1,100",
+            "2,3,4,1,6,100",
+            "2,3,1,4,6,100",
+            "2,1,3,4,6,100",
+            "1,2,3,4,6,100",
     })
     void singleOne(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
         assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
