@@ -36,6 +36,14 @@ class PointCalculationTests {
         assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
     }
 
+    @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
+    @CsvSource({
+            "2,3,4,6,1,100",
+    })
+    void singleOne(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
+        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+    }
+
     private void assertPointCalculation(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
         Roll roll = new Roll(die1, die2, die3, die4, die5);
 
