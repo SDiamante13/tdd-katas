@@ -2,6 +2,20 @@ package com.dtc.greed;
 
 import java.util.Arrays;
 
+class Dice {
+
+    public final int[] dice;
+
+    public Dice(int die1, int die2, int die3, int die4, int die5) {
+        this.dice = new int[] {die1, die2, die3, die4, die5};
+    }
+
+    int howMany(int x) {
+        return (int) Arrays.stream(dice)
+                .filter(d -> d == x)
+                .count();
+    }
+}
 record Roll(int die1, int die2, int die3, int die4, int die5) {
     // introduce Dice!
     // ask Dice the questions you have.
@@ -9,25 +23,14 @@ record Roll(int die1, int die2, int die3, int die4, int die5) {
 
 
     public Points calculatePoints() {
-        int[] dice = {die1, die2, die3, die4, die5};
 
-        int sum = 0;
+        Dice dice = new Dice(die1, die2, die3, die4, die5);
 
-        int numberOfFives = (int) Arrays.stream(dice)
-                .filter(d -> d == 5)
-                .count();
-        sum += numberOfFives * 50;
-
-        int numberOfOnes = (int) Arrays.stream(dice)
-                .filter(d -> d == 1)
-                .count();
-        sum += numberOfOnes * 100;
-
-        long count = Arrays.stream(dice)
-                .filter(d -> d == 2)
-                .count();
-        sum += count == 3 ? 200 : 0; // expression
+        int sum = dice.howMany(5) * 50 +
+                dice.howMany(1) * 100 +
+                (dice.howMany(2) == 3 ? 200 : 0);
 
         return new Points(sum);
     }
+
 }
