@@ -10,12 +10,7 @@ class PointCalculationTests {
 
     @Test
     void noPointsForRollsThatDoNotMeetAnyOfTheScoringRuleRequirements() {
-        Roll roll = new Roll(2, 3, 4, 6, 2);
-
-        Points actualPoints = roll.calculatePoints();
-
-        assertThat(actualPoints)
-                .isEqualTo(new Points(0));
+        assertPointCalculation(2, 3, 4, 6, 2, 0);
     }
 
     @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
@@ -27,12 +22,7 @@ class PointCalculationTests {
             "5,2,3,4,6,50"
     })
     void singleFive(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        Roll roll = new Roll(die1, die2, die3, die4, die5);
-
-        Points actualPoints = roll.calculatePoints();
-
-        assertThat(actualPoints)
-                .isEqualTo(new Points(expectedPointsValue));
+        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
     }
 
     @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
@@ -43,6 +33,10 @@ class PointCalculationTests {
             "5,5,3,2,6,100"
     })
     void doubleFive(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
+        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+    }
+
+    private void assertPointCalculation(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
         Roll roll = new Roll(die1, die2, die3, die4, die5);
 
         Points actualPoints = roll.calculatePoints();
