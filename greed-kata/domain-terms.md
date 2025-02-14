@@ -5,5 +5,5 @@
 - Game
 - Points
 - Roller
-- Dice
+- Dice (Roll?)
 - Scoring Rules
