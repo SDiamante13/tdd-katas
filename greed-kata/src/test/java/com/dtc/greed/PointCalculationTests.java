@@ -1,6 +1,5 @@
 package com.dtc.greed;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,7 +18,7 @@ class PointCalculationTests {
                 .isEqualTo(new Points(0));
     }
 
-    @ParameterizedTest(name="Roll of [{0},{1},{2},{3},{4}] gets {5} points")
+    @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
     @CsvSource({
             "2,3,4,6,5,50",
             "2,3,4,5,6,50",
@@ -36,7 +35,7 @@ class PointCalculationTests {
                 .isEqualTo(new Points(expectedPointsValue));
     }
 
-    @ParameterizedTest(name="Roll of [{0},{1},{2},{3},{4}] gets {5} points")
+    @ParameterizedTest(name = "Roll of [{0},{1},{2},{3},{4}] gets {5} points")
     @CsvSource({
             "2,3,4,5,5,100"
     })

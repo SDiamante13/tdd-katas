@@ -1,12 +1,15 @@
 package com.dtc.greed;
 
+import java.util.Arrays;
+
 record Roll(int die1, int die2, int die3, int die4, int die5) {
     public Points calculatePoints() {
         int[] dice = {die1, die2, die3, die4, die5};
+        int sum = Arrays.stream(dice)
+                .filter(d -> d == 5)
+                .map(d -> 50)
+                .sum();
 
-        if (dice[0] == 5 || dice[1] == 5 || dice[2] == 5 || dice[3] == 5 || dice[4] == 5) {
-            return new Points(50);
-        }
-        return new Points(0);
+        return new Points(sum);
     }
 }
