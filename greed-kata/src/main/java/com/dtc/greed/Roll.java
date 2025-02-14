@@ -9,6 +9,10 @@ record Roll(int die1, int die2, int die3, int die4, int die5) {
                 .filter(d -> d == 5)
                 .map(d -> 50)
                 .sum();
+        sum += Arrays.stream(dice)
+                .filter(d -> d == 1)
+                .map(d -> 100)
+                .sum();
 
         return new Points(sum);
     }
