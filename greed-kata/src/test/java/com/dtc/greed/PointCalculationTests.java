@@ -18,7 +18,7 @@ class PointCalculationTests {
                 .isEqualTo(new Points(0));
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name="Roll of [{0},{1},{2},{3},{4}] gets {5} points")
     @CsvSource({
             "2,3,4,6,5,50",
             "2,3,4,5,6,50",
