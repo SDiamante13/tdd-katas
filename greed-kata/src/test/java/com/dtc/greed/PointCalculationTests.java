@@ -50,6 +50,15 @@ class PointCalculationTests {
         assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
     }
 
+    @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
+    @CsvSource({
+            "2,3,4,1,1,200",
+            "2,3,5,1,1,250"
+    })
+    void doubleOne(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
+        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+    }
+
     private void assertPointCalculation(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
         Roll roll = new Roll(die1, die2, die3, die4, die5);
 
