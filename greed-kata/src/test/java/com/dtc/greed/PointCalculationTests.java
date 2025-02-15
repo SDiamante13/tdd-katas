@@ -68,7 +68,16 @@ class PointCalculationTests {
     @CsvSource({
             "2,3,2,6,2,200"
     })
-    void tripleTwo(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
+    void tripleTwos(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
+    }
+
+    @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
+    @CsvSource({
+            "3,3,3,6,2,300"
+    })
+    void tripleThrees(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
         assertThat(pointsFor(die1, die2, die3, die4, die5))
                 .isEqualTo(new Points(expectedPointsValue));
     }
