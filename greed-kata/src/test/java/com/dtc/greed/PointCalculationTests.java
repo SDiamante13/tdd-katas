@@ -82,6 +82,17 @@ class PointCalculationTests {
                 .isEqualTo(new Points(expectedPointsValue));
     }
 
+    @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
+    @CsvSource({
+            "1,1,1,5,1,1150",
+            "3,4,5,3,3,350",
+            "1,5,1,2,4,250",
+    })
+    void examples(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
+    }
+
     private Points pointsFor(int die1, int die2, int die3, int die4, int die5) {
         return new Roll(new Dice(die1, die2, die3, die4, die5))
                 .calculatePoints();
