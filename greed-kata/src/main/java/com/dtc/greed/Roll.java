@@ -7,6 +7,7 @@ record Roll(Dice dice) {
     private static final List<ScoringRule> scoringRules = List.of(
             new OnesScoringRule(),
             new FivesScoringRule(),
+            new TripleScoringRule(1, 1000),
             new TripleScoringRule(2, 200),
             new TripleScoringRule(3, 300),
             new TripleScoringRule(4, 400),

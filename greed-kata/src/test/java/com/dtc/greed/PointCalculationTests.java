@@ -66,6 +66,9 @@ class PointCalculationTests {
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
     @CsvSource({
+            "1,1,1,6,3,1000",
+            "1,1,1,1,3,1100",
+            "1,1,1,1,1,1200",
             "2,2,2,6,3,200",
             "3,3,3,6,2,300",
             "4,4,4,6,2,400",
