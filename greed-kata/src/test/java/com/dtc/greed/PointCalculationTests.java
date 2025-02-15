@@ -12,7 +12,8 @@ class PointCalculationTests {
 
     @Test
     void noPointsForRollsThatDoNotMeetAnyOfTheScoringRuleRequirements() {
-        assertPointCalculation(2, 3, 4, 6, 2, 0);
+        assertThat(pointsFor(2, 3, 4, 6, 2))
+                .isEqualTo(new Points(0));
     }
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
@@ -24,7 +25,8 @@ class PointCalculationTests {
             "5,2,3,4,6,50"
     })
     void singleFive(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
     }
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
@@ -35,7 +37,8 @@ class PointCalculationTests {
             "5,5,3,2,6,100"
     })
     void doubleFive(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
     }
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
@@ -47,7 +50,8 @@ class PointCalculationTests {
             "1,2,3,4,6,100",
     })
     void singleOne(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
     }
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
@@ -56,7 +60,8 @@ class PointCalculationTests {
             "2,3,5,1,1,250"
     })
     void doubleOne(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
     }
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
@@ -64,15 +69,12 @@ class PointCalculationTests {
             "2,3,2,6,2,200"
     })
     void tripleTwo(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        assertPointCalculation(die1, die2, die3, die4, die5, expectedPointsValue);
+        assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
     }
 
-    private void assertPointCalculation(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
-        Roll roll = new Roll(die1, die2, die3, die4, die5);
-
-        Points actualPoints = roll.calculatePoints();
-
-        assertThat(actualPoints)
-                .isEqualTo(new Points(expectedPointsValue));
+    private Points pointsFor(int die1, int die2, int die3, int die4, int die5) {
+        return new Roll(new Dice(die1, die2, die3, die4, die5))
+                .calculatePoints();
     }
 }
