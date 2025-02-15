@@ -8,7 +8,10 @@ record Roll(Dice dice) {
             new OnesScoringRule(),
             new FivesScoringRule(),
             new TripleScoringRule(2, 200),
-            new TripleScoringRule(3, 300)
+            new TripleScoringRule(3, 300),
+            new TripleScoringRule(4, 400),
+            new TripleScoringRule(5, 500),
+            new TripleScoringRule(6, 600)
     );
 
     public Points calculatePoints() {

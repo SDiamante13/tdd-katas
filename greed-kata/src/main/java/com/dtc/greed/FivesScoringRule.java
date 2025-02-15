@@ -4,6 +4,10 @@ class FivesScoringRule implements ScoringRule {
 
     @Override
     public int calculateScore(Dice dice) {
-        return dice.howMany(5) * 50;
+        int count = dice.howMany(5);
+        if (count >= 3) {
+            count -= 3;
+        }
+        return count * 50;
     }
 }
