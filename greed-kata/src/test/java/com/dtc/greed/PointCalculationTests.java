@@ -93,8 +93,8 @@ class PointCalculationTests {
                 .isEqualTo(new Points(expectedPointsValue));
     }
 
-    private Points pointsFor(int die1, int die2, int die3, int die4, int die5) {
-        return new Roll(new Dice(die1, die2, die3, die4, die5))
+    private Points pointsFor(int... dieValues) {
+        return new Roll(new Dice(dieValues))
                 .calculatePoints();
     }
 }
