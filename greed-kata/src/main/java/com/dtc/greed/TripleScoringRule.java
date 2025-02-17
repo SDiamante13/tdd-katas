@@ -12,6 +12,6 @@ public class TripleScoringRule implements ScoringRule {
 
     @Override
     public int calculateScore(Dice dice) {
-        return dice.howMany(dieValue) >= 3 ? tripleScoreValue : 0;
+        return dice.howMany(dieValue) == 3 ? tripleScoreValue : 0;
     }
 }
