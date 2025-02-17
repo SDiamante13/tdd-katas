@@ -9,6 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PointCalculationTests {
 
     private static final String DICE_ROLL_GET_X_POINTS = "Roll of [{0},{1},{2},{3},{4}] gets {5} points";
+    private static final String SIX_DICE_ROLL_GET_X_POINTS = "Roll of [{0},{1},{2},{3},{4},{5}] gets {6} points";
+
 
     @Test
     void noPointsForRollsThatDoNotMeetAnyOfTheScoringRuleRequirements() {
@@ -90,6 +92,15 @@ class PointCalculationTests {
     })
     void examples(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
         assertThat(pointsFor(die1, die2, die3, die4, die5))
+                .isEqualTo(new Points(expectedPointsValue));
+    }
+
+    @ParameterizedTest(name = SIX_DICE_ROLL_GET_X_POINTS)
+    @CsvSource({
+            "2,2,3,4,6,3,0"
+    })
+    void six_dice(int die1, int die2, int die3, int die4, int die5, int die6, int expectedPointsValue) {
+        assertThat(pointsFor(die1, die2, die3, die4, die5, die6))
                 .isEqualTo(new Points(expectedPointsValue));
     }
 
