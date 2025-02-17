@@ -92,7 +92,8 @@ class PointCalculationTests {
 
     @ParameterizedTest(name = SIX_DICE_ROLL_GET_X_POINTS)
     @CsvSource({
-            "2,2,3,4,6,3,0"
+            "2,2,3,4,6,3,0",
+            "2,2,2,2,6,3,400"
     })
     void six_dice(int die1, int die2, int die3, int die4, int die5, int die6, int expectedPointsValue) {
         assertThat(pointsFor(die1, die2, die3, die4, die5, die6))

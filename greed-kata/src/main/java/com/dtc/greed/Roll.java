@@ -12,7 +12,8 @@ record Roll(Dice dice) {
             new TripleScoringRule(3, 300),
             new TripleScoringRule(4, 400),
             new TripleScoringRule(5, 500),
-            new TripleScoringRule(6, 600)
+            new TripleScoringRule(6, 600),
+            new FourOfAKindScoringRule(2, 400)
     );
 
     public Points calculatePoints() {
