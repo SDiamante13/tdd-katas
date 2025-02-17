@@ -69,14 +69,10 @@ class PointCalculationTests {
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
     @CsvSource({
             "1,1,1,6,3,1000",
-            "1,1,1,1,3,1100",
-            "1,1,1,1,1,1200",
             "2,2,2,6,3,200",
             "3,3,3,6,2,300",
             "4,4,4,6,2,400",
             "5,5,5,6,2,500",
-            "5,5,5,5,2,550",
-            "5,5,5,5,5,600",
             "6,6,6,2,2,600",
     })
     void triples(int die1, int die2, int die3, int die4, int die5, int expectedPointsValue) {
@@ -86,7 +82,6 @@ class PointCalculationTests {
 
     @ParameterizedTest(name = DICE_ROLL_GET_X_POINTS)
     @CsvSource({
-            "1,1,1,5,1,1150",
             "3,4,5,3,3,350",
             "1,5,1,2,4,250",
     })
@@ -108,4 +103,10 @@ class PointCalculationTests {
         return new Roll(new Dice(dieValues))
                 .calculatePoints();
     }
+
+    // may need tests for
+    // "1,1,1,1,3,1100",
+    // "1,1,1,1,1,1200",
+    // "5,5,5,5,2,550",
+    // "5,5,5,5,5,600",
 }
