@@ -2,6 +2,7 @@ package bingo;
 
 public class BingoBoard {
 
+    private final Cell[][] board;
     private final String[][] cells;
     private final boolean[][] marked;
     private final int width;
@@ -10,6 +11,8 @@ public class BingoBoard {
     public BingoBoard(int width, int height) {
         this.width = width;
         this.height = height;
+        this.board = new Cell[width][height];
+
         this.cells = new String[width][height];
         this.marked = new boolean[width][height];
     }
@@ -56,4 +59,6 @@ public class BingoBoard {
         return true;
     }
 
+    private class Cell {
+    }
 }
