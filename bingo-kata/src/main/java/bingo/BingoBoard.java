@@ -18,6 +18,10 @@ public class BingoBoard {
         return cells[x][y];
     }
 
+    private void setCell(int x, int y, String value) {
+        cells[x][y] = value;
+    }
+
     public void defineCell(int x, int y, String value) {
         if (getCell(x, y) != null) {
             throw new IllegalStateException("cell already defined");
@@ -28,7 +32,7 @@ public class BingoBoard {
                     throw new IllegalStateException(value + " already present at " + x1 + "," + y1);
             }
         }
-        cells[x][y] = value;
+        setCell(x, y, value);
     }
 
     public void markCell(int x, int y) {
