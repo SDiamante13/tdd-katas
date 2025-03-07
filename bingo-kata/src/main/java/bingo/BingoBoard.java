@@ -21,7 +21,7 @@ public class BingoBoard {
     }
 
     private void setCell(int x, int y, String value) {
-        board[x][y] = new Cell(value);
+        board[x][y] = new Cell(value, false);
     }
 
     public void defineCell(int x, int y, String value) {
@@ -58,6 +58,6 @@ public class BingoBoard {
         return true;
     }
 
-    private record Cell(String value) {
+    private record Cell(String value, boolean marked) {
     }
 }
