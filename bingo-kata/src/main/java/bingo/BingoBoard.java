@@ -18,7 +18,8 @@ public class BingoBoard {
     }
 
     private String getCell(int x, int y) {
-        return cells[x][y];
+        Cell cell = board[x][y];
+        return cell == null ? null : cell.value();
     }
 
     private void setCell(int x, int y, String value) {
