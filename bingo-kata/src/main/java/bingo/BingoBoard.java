@@ -4,8 +4,12 @@ public class BingoBoard {
 
     private final String[][] cells;
     private final boolean[][] marked;
+    private final int width;
+    private final int height;
 
     public BingoBoard(int width, int height) {
+        this.width = width;
+        this.height = height;
         this.cells = new String[width][height];
         this.marked = new boolean[width][height];
     }
