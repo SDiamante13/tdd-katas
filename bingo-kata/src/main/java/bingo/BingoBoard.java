@@ -18,8 +18,8 @@ public class BingoBoard {
         if (cells[x][y] != null) {
             throw new IllegalStateException("cell already defined");
         }
-        for (int c = 0; c < cells.length; c++) {
-            for (int r = 0; r < cells[c].length; r++) {
+        for (int c = 0; c < width; c++) {
+            for (int r = 0; r < height; r++) {
                 if (value.equals(cells[c][r]))
                     throw new IllegalStateException(value + " already present at " + c + "," + r);
             }
