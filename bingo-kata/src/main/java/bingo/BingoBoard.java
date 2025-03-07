@@ -46,7 +46,7 @@ public class BingoBoard {
     }
 
     public boolean isMarked(int x, int y) {
-        return marked[x][y];
+        return board[x][y].marked();
     }
 
     public boolean isInitialized() {
