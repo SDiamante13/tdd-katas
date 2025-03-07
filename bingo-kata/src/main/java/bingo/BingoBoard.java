@@ -3,7 +3,6 @@ package bingo;
 public class BingoBoard {
 
     private final Cell[][] board;
-    private final String[][] cells;
     private final boolean[][] marked;
     private final int width;
     private final int height;
@@ -13,7 +12,6 @@ public class BingoBoard {
         this.height = height;
         this.board = new Cell[width][height];
 
-        this.cells = new String[width][height];
         this.marked = new boolean[width][height];
     }
 
@@ -24,7 +22,6 @@ public class BingoBoard {
 
     private void setCell(int x, int y, String value) {
         board[x][y] = new Cell(value);
-        cells[x][y] = value;
     }
 
     public void defineCell(int x, int y, String value) {
