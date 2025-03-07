@@ -7,7 +7,6 @@ public class BingoBoard {
     // String[][] -> Cell[][] -> Map<Coordinate, Cell> -> Spaces
     private final Cell[][] board;
 
-    private final boolean[][] marked;
     private final int width;
     private final int height;
 
@@ -16,7 +15,6 @@ public class BingoBoard {
         this.height = height;
         this.board = new Cell[width][height];
 
-        this.marked = new boolean[width][height];
     }
 
     private String getCell(int x, int y){
@@ -25,7 +23,7 @@ public class BingoBoard {
     }
 
     private void setCell(int x, int y, String value){
-        board[x][y] = new Cell(value);
+        board[x][y] = new Cell(value, false);
     }
 
     public void defineCell(int x, int y, String value) {
@@ -45,11 +43,11 @@ public class BingoBoard {
         if (!isAllCellsDefined()) {
             throw new IllegalStateException("board not initialized");
         }
-        marked[x][y] = true;
+        board[x][y] = new Cell(getCell(x,y), true);
     }
 
     public boolean isMarked(int x, int y) {
-        return marked[x][y];
+        return board[x][y].marked;
     }
 
     public boolean isAllCellsDefined() {
@@ -63,7 +61,7 @@ public class BingoBoard {
         return true;
     }
 
-    private record Cell(String value) {
+    private record Cell(String value, boolean marked) {
 
     }
 }
