@@ -3,7 +3,6 @@ package bingo;
 public class BingoBoard {
 
     private final Cell[][] board;
-    private final boolean[][] marked;
     private final int width;
     private final int height;
 
@@ -11,8 +10,6 @@ public class BingoBoard {
         this.width = width;
         this.height = height;
         this.board = new Cell[width][height];
-
-        this.marked = new boolean[width][height];
     }
 
     private String getCell(int x, int y) {
@@ -42,7 +39,6 @@ public class BingoBoard {
             throw new IllegalStateException("board not initialized");
         }
         board[x][y] = new Cell(getCell(x, y), true);
-        marked[x][y] = true;
     }
 
     public boolean isMarked(int x, int y) {
