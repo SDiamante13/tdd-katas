@@ -41,6 +41,7 @@ public class BingoBoard {
         if (!isInitialized()) {
             throw new IllegalStateException("board not initialized");
         }
+        board[x][y] = new Cell(getCell(x, y), true);
         marked[x][y] = true;
     }
 
