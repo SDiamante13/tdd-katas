@@ -22,6 +22,7 @@ public class BingoBoard {
     }
 
     private void setCell(int x, int y, String value) {
+        board[x][y] = new Cell(value);
         cells[x][y] = value;
     }
 
@@ -59,6 +60,6 @@ public class BingoBoard {
         return true;
     }
 
-    private class Cell {
+    private record Cell(String value) {
     }
 }
