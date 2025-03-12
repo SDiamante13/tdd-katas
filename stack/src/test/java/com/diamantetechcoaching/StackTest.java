@@ -1,10 +1,12 @@
 package com.diamantetechcoaching;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class StackTest {
 
@@ -80,6 +82,20 @@ class StackTest {
         assertThat(stack.size()).isEqualTo(1);
     }
 
+    @Test
+    void cannotPeekWhenStackIsEmpty() {
+        Stack<Integer> stack = new Stack<>();
+        assertThatThrownBy(stack::peek)
+                .isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void cannotPopWhenStackIsEmpty() {
+        Stack<Integer> stack = new Stack<>();
+        assertThatThrownBy(stack::pop)
+                .isInstanceOf(IllegalStateException.class);
+    }
+
     private static class Stack<T> {
 
         private T[] elements;
@@ -114,11 +130,18 @@ class StackTest {
         }
 
         public T peek() {
+            if (isEmpty()) {
+                throw new IllegalStateException("Stack is empty");
+            }
             return elements[numberOfElements - 1];
         }
 
         public T pop() {
+            if (isEmpty()) {
+                throw new IllegalStateException("Stack is empty");
+            }
             T lastElement = elements[numberOfElements - 1];
+            elements[numberOfElements - 1] = null;
             numberOfElements--;
             return lastElement;
         }
