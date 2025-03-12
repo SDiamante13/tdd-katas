@@ -2,6 +2,8 @@ package com.diamantetechcoaching;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StackTest {
@@ -42,6 +44,16 @@ class StackTest {
         assertThat(stack.size()).isEqualTo(2);
     }
 
+//    @Test
+//    void peekReturnsFirstElementWithoutRemovingIt() {
+//        Stack stack = new Stack();
+//        stack.push(1);
+//        stack.push(2);
+//
+//        assertThat(stack.peek()).isEqualTo(2);
+//        assertThat(stack.size()).isEqualTo(2);
+//    }
+
     private static class Stack {
 
         private int[] elements = {-1};
@@ -55,12 +67,23 @@ class StackTest {
         }
 
         public void push(int element) {
-            this.elements[0] = element;
+            if (this.elements.length == numberOfElements) {
+                grow();
+            }
+            this.elements[numberOfElements] = element;
             this.numberOfElements++;
+        }
+
+        private void grow() {
+            this.elements = Arrays.copyOf(this.elements, this.elements.length * 2);
         }
 
         public int size() {
             return numberOfElements;
+        }
+
+        public int peek() {
+            return 0;
         }
     }
 }
