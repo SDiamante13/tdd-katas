@@ -16,11 +16,11 @@ class StackTest {
     [x] - stack with two elements has size of 2
     [x] - peek returns the last added element without removing it
     [x] - pop returns the last element that was pushed
-    [ ] - Stack handles generics
+    [x] - Stack handles generics
     */
     @Test
     void newStackIsEmpty() {
-        Stack stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
 
         assertThat(stack.isEmpty())
                 .isTrue();
@@ -28,7 +28,7 @@ class StackTest {
 
     @Test
     void stackWithOneElementIsNotEmpty() {
-        Stack stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
         stack.push(1);
 
         assertThat(stack.isEmpty()).isFalse();
@@ -37,7 +37,7 @@ class StackTest {
 
     @Test
     void stackWithTwoElementsHasSizeOfTwo() {
-        Stack stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
         stack.push(1);
         stack.push(2);
 
@@ -46,7 +46,7 @@ class StackTest {
 
     @Test
     void peekReturnsFirstElementWithoutRemovingIt() {
-        Stack stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
         stack.push(1);
         stack.push(2);
 
@@ -56,7 +56,7 @@ class StackTest {
 
     @Test
     void popReturnsAndRemovesTheLastElement() {
-        Stack stack = new Stack();
+        Stack<Integer> stack = new Stack<>();
         stack.push(9);
         stack.push(8);
         stack.push(7);
@@ -66,19 +66,34 @@ class StackTest {
         assertThat(stack.pop()).isEqualTo(8);
         assertThat(stack.size()).isEqualTo(1);
         assertThat(stack.pop()).isEqualTo(9);
-        assertThat(stack.size()).isEqualTo(0);
+        assertThat(stack.size()).isZero();
     }
 
-    private static class Stack {
+    @Test
+    void stackHandlesOtherTypes() {
+        Stack<String> stack = new Stack<>();
 
-        private int[] elements = {};
+        stack.push("one");
+        stack.push("three");
+
+        assertThat(stack.pop()).isEqualTo("three");
+        assertThat(stack.size()).isEqualTo(1);
+    }
+
+    private static class Stack<T> {
+
+        private T[] elements;
         private int numberOfElements = 0;
+
+        public Stack() {
+            this.elements = (T[]) new Object[10];
+        }
 
         public boolean isEmpty() {
             return numberOfElements == 0;
         }
 
-        public void push(int element) {
+        public void push(T element) {
             if (hasNoCapacity()) {
                 grow();
             }
@@ -98,12 +113,12 @@ class StackTest {
             return numberOfElements;
         }
 
-        public int peek() {
+        public T peek() {
             return elements[numberOfElements - 1];
         }
 
-        public int pop() {
-            int lastElement = elements[numberOfElements - 1];
+        public T pop() {
+            T lastElement = elements[numberOfElements - 1];
             numberOfElements--;
             return lastElement;
         }
