@@ -36,4 +36,5 @@ include 'tic-tac-toe'
 include 'fraction-calculator'
 include 'dev-bar-refactoring'
 include 'greed-kata'
+include 'stack'
 
