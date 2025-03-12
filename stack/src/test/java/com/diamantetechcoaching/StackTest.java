@@ -30,6 +30,7 @@ class StackTest {
         stack.push(1);
 
         assertThat(stack.isEmpty()).isFalse();
+//        assertThat(stack.size()).isEqualTo(1);
     }
 
     @Test
@@ -43,17 +44,17 @@ class StackTest {
 
     private static class Stack {
 
-        private int element = -1;
+        private int[] elements = new int[2];
 
         public boolean isEmpty() {
-            if (element != -1) {
+            if (elements[0] != 0) {
                 return false;
             }
             return true;
         }
 
         public void push(int element) {
-            this.element = element;
+            this.elements[0] = element;
         }
 
         public int size() {
