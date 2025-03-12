@@ -11,7 +11,7 @@ class StackTest {
     ---------
     [x] - new stack should be empty
     [x] - stack with one element should not be empty
-    [ ] - stack with two elements has size of 2
+    [x] - stack with two elements has size of 2
     [ ] - peek returns the last added element without removing it
     [ ] - pop returns the last element that was pushed
     [ ] - Stack handles generics
@@ -30,7 +30,7 @@ class StackTest {
         stack.push(1);
 
         assertThat(stack.isEmpty()).isFalse();
-//        assertThat(stack.size()).isEqualTo(1);
+        assertThat(stack.size()).isEqualTo(1);
     }
 
     @Test
@@ -44,10 +44,11 @@ class StackTest {
 
     private static class Stack {
 
-        private int[] elements = new int[2];
+        private int[] elements = {-1};
+        private int numberOfElements = 0;
 
         public boolean isEmpty() {
-            if (elements[0] != 0) {
+            if (elements[0] != -1) {
                 return false;
             }
             return true;
@@ -55,10 +56,11 @@ class StackTest {
 
         public void push(int element) {
             this.elements[0] = element;
+            this.numberOfElements++;
         }
 
         public int size() {
-            return 2;
+            return numberOfElements;
         }
     }
 }
