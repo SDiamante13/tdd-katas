@@ -15,7 +15,7 @@ class StackTest {
     [x] - stack with one element should not be empty
     [x] - stack with two elements has size of 2
     [x] - peek returns the last added element without removing it
-    [ ] - pop returns the last element that was pushed
+    [x] - pop returns the last element that was pushed
     [ ] - Stack handles generics
     */
     @Test
@@ -54,6 +54,17 @@ class StackTest {
         assertThat(stack.size()).isEqualTo(2);
     }
 
+    @Test
+    void popReturnsAndRemovesTheLastElement() {
+        Stack stack = new Stack();
+        stack.push(9);
+        stack.push(8);
+        stack.push(7);
+
+        assertThat(stack.pop()).isEqualTo(7);
+        assertThat(stack.size()).isEqualTo(2);
+    }
+
     private static class Stack {
 
         private int[] elements = {};
@@ -85,6 +96,12 @@ class StackTest {
 
         public int peek() {
             return elements[numberOfElements - 1];
+        }
+
+        public int pop() {
+            int lastElement = elements[numberOfElements - 1];
+            numberOfElements--;
+            return lastElement;
         }
     }
 }
