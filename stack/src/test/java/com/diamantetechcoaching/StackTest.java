@@ -1,6 +1,5 @@
 package com.diamantetechcoaching;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -130,20 +129,22 @@ class StackTest {
         }
 
         public T peek() {
-            if (isEmpty()) {
-                throw new IllegalStateException("Stack is empty");
-            }
+            requireNotEmpty();
             return elements[numberOfElements - 1];
         }
 
         public T pop() {
-            if (isEmpty()) {
-                throw new IllegalStateException("Stack is empty");
-            }
+            requireNotEmpty();
             T lastElement = elements[numberOfElements - 1];
             elements[numberOfElements - 1] = null;
             numberOfElements--;
             return lastElement;
+        }
+
+        private void requireNotEmpty() {
+            if (isEmpty()) {
+                throw new IllegalStateException("Stack is empty");
+            }
         }
     }
 }
