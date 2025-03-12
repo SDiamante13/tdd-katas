@@ -63,6 +63,10 @@ class StackTest {
 
         assertThat(stack.pop()).isEqualTo(7);
         assertThat(stack.size()).isEqualTo(2);
+        assertThat(stack.pop()).isEqualTo(8);
+        assertThat(stack.size()).isEqualTo(1);
+        assertThat(stack.pop()).isEqualTo(9);
+        assertThat(stack.size()).isEqualTo(0);
     }
 
     private static class Stack {
