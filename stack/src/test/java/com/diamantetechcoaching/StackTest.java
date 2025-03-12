@@ -56,14 +56,11 @@ class StackTest {
 
     private static class Stack {
 
-        private int[] elements = {-1};
+        private int[] elements = {};
         private int numberOfElements = 0;
 
         public boolean isEmpty() {
-            if (elements[0] != -1) {
-                return false;
-            }
-            return true;
+            return numberOfElements == 0;
         }
 
         public void push(int element) {
@@ -75,7 +72,7 @@ class StackTest {
         }
 
         private void grow() {
-            this.elements = Arrays.copyOf(this.elements, this.elements.length * 2);
+            this.elements = Arrays.copyOf(this.elements, (this.elements.length + 1) * 2);
         }
 
         public int size() {
