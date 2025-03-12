@@ -32,6 +32,15 @@ class StackTest {
         assertThat(stack.isEmpty()).isFalse();
     }
 
+    @Test
+    void stackWithTwoElementsHasSizeOfTwo() {
+        Stack stack = new Stack();
+        stack.push(1);
+        stack.push(2);
+
+        assertThat(stack.size()).isEqualTo(2);
+    }
+
     private static class Stack {
 
         private int element = -1;
@@ -45,6 +54,10 @@ class StackTest {
 
         public void push(int element) {
             this.element = element;
+        }
+
+        public int size() {
+            return 2;
         }
     }
 }
