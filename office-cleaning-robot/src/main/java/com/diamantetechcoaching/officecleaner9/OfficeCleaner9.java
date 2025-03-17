@@ -16,7 +16,7 @@ public class OfficeCleaner9 {
         String[] startPoints = input.nextLine().split(" "); ;
         var robot = new RobotCleaner();
         //Visits the starting location
-        robot.StartAt(Integer.parseInt(startPoints[0]), Integer.parseInt(startPoints[1]));
+        robot.startAt(Integer.parseInt(startPoints[0]), Integer.parseInt(startPoints[1]));
 
         List<String> listOfCommands = new ArrayList<>();
         for (int i = 0; i < noCommands; i++)

@@ -1,16 +1,17 @@
 package com.diamantetechcoaching.officecleaner9;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 public class RobotCleaner {
     /**
      * Directions NEWS = North, East, West, South
      */
-    final String DIRECTIONS = "NEWS";
+    private static final String DIRECTIONS = "NEWS";
     /**
      * Maximum number of steps
      */
-    final int MAX_STEPS = 100000;
+    private static final int MAX_STEPS = 100000;
 
     private static final int FLOOR_UPPER_WIDTH = 100_000;
     private static final int FLOOR_LOWER_WIDTH = -100_000;
@@ -37,15 +38,12 @@ public class RobotCleaner {
     /**
      * Sorted List(for fast searching) of visited spaces(coordinates) on floor.
      */
-    public TreeMap<String, Coordinates> visitedPlaces = new TreeMap<String, Coordinates>();
-
-    public RobotCleaner() {
-    }
+    public Map<String, Coordinates> visitedPlaces = new TreeMap<>();
 
     /**
      * Starts the robot at given location and Visit it
      */
-    public void StartAt(int X, int Y) {
+    public void startAt(int X, int Y) {
         currentX = X;
         currentY = Y;
         //Visited start position,  (Key  = CURRENT_X + CURRENT_Y) for searching
