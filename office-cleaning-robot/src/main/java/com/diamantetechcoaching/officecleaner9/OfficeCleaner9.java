@@ -29,7 +29,7 @@ public class OfficeCleaner9 {
         {
             String[] options = command.split(" ");
 
-            robot.CleanFloor(options[0].charAt(0), Integer.parseInt(options[1]));
+            robot.cleanFloor(options[0].charAt(0), Integer.parseInt(options[1]));
         }
 
         robot.PrintVisitedPlaces();

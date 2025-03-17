@@ -57,11 +57,10 @@ public class RobotCleaner {
      * in direction
      * with number of steps
      */
-    public void CleanFloor(char direction, int steps) {
-        if (!DIRECTIONS.contains("" + direction))
+    public void cleanFloor(char direction, int steps) {
+        if (!DIRECTIONS.contains("" + direction) || steps < 0 || steps > MAX_STEPS) {
             return;
-        if (steps < 0 || steps > MAX_STEPS)
-            return;
+        }
         moveAcrossFloor(direction, steps);
     }
 
