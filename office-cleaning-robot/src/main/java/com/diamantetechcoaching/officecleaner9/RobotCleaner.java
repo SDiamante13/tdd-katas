@@ -24,16 +24,16 @@ public class RobotCleaner {
     /**
      * Sorted List(for fast searching) of visited spaces(coordinates) on floor.
      */
-    public Map<String, Coordinates> visitedPlaces = new TreeMap<>();
+    public Map<String, Coordinate> visitedPlaces = new TreeMap<>();
 
     /**
      * Starts the robot at given location and Visit it
      */
-    public void startAt(int X, int Y) {
-        currentX = X;
-        currentY = Y;
+    public void startAt(int x, int y) {
+        currentX = x;
+        currentY = y;
         //Visited start position,  (Key  = CURRENT_X + CURRENT_Y) for searching
-        visitedPlaces.put(String.format("%s %s", currentX, currentY), new Coordinates(currentX, currentY));
+        visitedPlaces.put(String.format("%s %s", currentX, currentY), new Coordinate(currentX, currentY));
     }
 
     /**
@@ -75,7 +75,7 @@ public class RobotCleaner {
                 //if place is not visited
                 if (!visitedPlaces.containsKey(String.format("%s %s", currentX, currentY + 1))) {
                     //Visit it and add to the visited places
-                    visitedPlaces.put(String.format("%s %s", currentX, currentY + 1), new Coordinates(currentX, ++currentY));
+                    visitedPlaces.put(String.format("%s %s", currentX, currentY + 1), new Coordinate(currentX, ++currentY));
                 } else {
                     //otherwise moves to the next location
                     ++currentY;
@@ -94,7 +94,7 @@ public class RobotCleaner {
                 //if place is not visited
                 if (!visitedPlaces.containsKey(String.format("%s %s", currentX, currentY - 1))) {
                     //Visit it and add to the visited places
-                    visitedPlaces.put(String.format("%s %s", currentX, currentY - 1), new Coordinates(currentX, --currentY));
+                    visitedPlaces.put(String.format("%s %s", currentX, currentY - 1), new Coordinate(currentX, --currentY));
                 } else {
                     //otherwise moves to the next location
                     --currentY;
@@ -113,7 +113,7 @@ public class RobotCleaner {
                 //if place is not visited
                 if (!visitedPlaces.containsKey(String.format("%s %s", currentX - 1, currentY))) {
                     //Visit it and add to the visited places
-                    visitedPlaces.put(String.format("%s %s", currentX - 1, currentY), new Coordinates(--currentX, currentY));
+                    visitedPlaces.put(String.format("%s %s", currentX - 1, currentY), new Coordinate(--currentX, currentY));
                 } else {
                     //otherwise moves to the next location
                     --currentX;
@@ -132,7 +132,7 @@ public class RobotCleaner {
                 //if place is not visited
                 if (!visitedPlaces.containsKey(String.format("%s %s", currentX + 1, currentY))) {
                     //Visit it and add to the visited places
-                    visitedPlaces.put(String.format("%s %s", currentX + 1, currentY), new Coordinates(++currentX, currentY));
+                    visitedPlaces.put(String.format("%s %s", currentX + 1, currentY), new Coordinate(++currentX, currentY));
                 } else {
                     //otherwise moves to the next location
                     ++currentX;
