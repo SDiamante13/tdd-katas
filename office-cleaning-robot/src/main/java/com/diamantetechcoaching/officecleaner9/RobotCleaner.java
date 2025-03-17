@@ -40,9 +40,6 @@ public class RobotCleaner {
      */
     private static int CURRENT_Y;
 
-    /**
-     * Holds the x y coordiantes on floor.
-     */
     public class Coordinates {
         public int X;
         public int Y;
@@ -62,20 +59,15 @@ public class RobotCleaner {
      */
     public TreeMap<String, Coordinates> visitedPlaces = new TreeMap<String, Coordinates>();
 
-    /**
-     * Constructor with no parameter
-     */
     public RobotCleaner() {
     }
 
     /**
      * Starts the robot at given location and Visit it
      */
-    // <param name="X">X coordinate</param>
-    // <param name="Y">Y coordiante</param>
     public void StartAt(int X, int Y) {
-        CURRENT_X = X; // x(-100,000 <= x <= 100,000)
-        CURRENT_Y = Y; //y(-100,000 <= y <= 100,000)
+        CURRENT_X = X;
+        CURRENT_Y = Y;
         //Visited start position,  (Key  = CURRENT_X + CURRENT_Y) for searching
         visitedPlaces.put(String.format("%s %s", CURRENT_X, CURRENT_Y), new Coordinates(CURRENT_X, CURRENT_Y));
     }
@@ -85,13 +77,9 @@ public class RobotCleaner {
      * in direction
      * with number of steps
      */
-    // <param name="direction">Direction {'E', 'W', 'N', 'S'}</param>
-    // <param name="steps"></param>
     public void CleanFloor(char direction, int steps) {
-        // if the correct direction is no given it exits
         if (!DIRECTIONS.contains("" + direction))
             return;
-        //if steps is less than 0 or greater than MAX_STEPS it exits
         if (steps < 0 || steps > MAX_STEPS)
             return;
         switch (direction) {
