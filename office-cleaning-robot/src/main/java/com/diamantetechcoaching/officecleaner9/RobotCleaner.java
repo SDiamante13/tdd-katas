@@ -21,20 +21,6 @@ public class RobotCleaner {
     private int currentX;
     private int currentY;
 
-    public class Coordinates {
-        public int x;
-        public int y;
-
-        public Coordinates(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public String ToString() {
-            return "[" + this.x + ", " + this.y + ", Visit]";
-        }
-    }
-
     /**
      * Sorted List(for fast searching) of visited spaces(coordinates) on floor.
      */
@@ -159,7 +145,7 @@ public class RobotCleaner {
 
         var result = "";
         for (var spot : visitedPlaces.values()) {
-            result += spot.ToString();
+            result += spot.toString();
             result += "\n";
         }
         //System.out.println(result);
