@@ -11,41 +11,26 @@ public class RobotCleaner {
      * Maximum number of steps
      */
     final int MAX_STEPS = 100000;
-    /**
-     * Upper bounadry width of the room.
-     * from problem x(-100,000 <= x <= 100,000).
-     */
-    private final int FLOOR_UPPER_WIDTH = 100000;
-    /**
-     * Lower bounadry width of the room.
-     * from problem x(-100,000 <= x <= 100,000).
-     */
-    private final int FLOOR_LOWER_WIDTH = -100000;
-    /**
-     * Upper bounadry length of the room.
-     * from problem y(-100,000 <= y <= 100,000).
-     */
-    private final int FLOOR_UPPER_LENGTH = 100000;
-    /**
-     * Lower bounadry length of the room.
-     * from problem y(-100,000 <= y <= 100,000).
-     */
-    private final int FLOOR_LOWER_LENGTH = -100000;
+
+    private static final int FLOOR_UPPER_WIDTH = 100_000;
+    private static final int FLOOR_LOWER_WIDTH = -100_000;
+    private static final int FLOOR_UPPER_LENGTH = 100_000;
+    private static final int FLOOR_LOWER_LENGTH = -100_000;
 
     private int currentX;
     private int currentY;
 
     public class Coordinates {
-        public int X;
-        public int Y;
+        public int x;
+        public int y;
 
         public Coordinates(int x, int y) {
-            this.X = x;
-            this.Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         public String ToString() {
-            return "[" + this.X + ", " + this.Y + ", Visit]";
+            return "[" + this.x + ", " + this.y + ", Visit]";
         }
     }
 
