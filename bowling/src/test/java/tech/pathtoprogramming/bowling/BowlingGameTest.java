@@ -57,6 +57,18 @@ class BowlingGameTest {
         assertThat(game.score()).isEqualTo(39);
     }
     @Test
+    void scoresTheThreeFrameExample() {
+        BowlingGame game = new BowlingGame();
+        game.roll(10);
+        game.roll(5);
+        game.roll(5);
+        game.roll(9);
+        game.roll(0);
+        rollMany(game, 14, 0);
+
+        assertThat(game.score()).isEqualTo(48);
+    }
+    @Test
     void scoresTheTenthFrameFillBalls() {
         BowlingGame game = new BowlingGame();
         rollMany(game, 18, 0);
