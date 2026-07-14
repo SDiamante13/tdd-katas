@@ -7,14 +7,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BowlingGameTest {
 
     @Test
-    void scoresAnOpenFrame() {
+    void scoresASpare() {
         BowlingGame game = new BowlingGame();
+        game.roll(5);
+        game.roll(5);
         game.roll(3);
-        game.roll(4);
-        rollMany(game, 18, 0);
+        rollMany(game, 17, 0);
 
-        assertThat(game.score()).isEqualTo(7);
+        assertThat(game.score()).isEqualTo(16);
     }
+
 
 
     private void rollMany(BowlingGame game, int rolls, int pins) {
