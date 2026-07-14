@@ -47,11 +47,14 @@ class BowlingGameTest {
     }
 
     @Test
-    void scoresACompleteGameOfStrikes() {
+    void scoresTheTenthFrameFillBalls() {
         BowlingGame game = new BowlingGame();
-        rollMany(game, 12, 10);
+        rollMany(game, 18, 0);
+        game.roll(10);
+        game.roll(1);
+        game.roll(9);
 
-        assertThat(game.score()).isEqualTo(300);
+        assertThat(game.score()).isEqualTo(20);
     }
 
     private void rollMany(BowlingGame game, int rolls, int pins) {
