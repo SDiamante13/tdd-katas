@@ -16,17 +16,29 @@ public class BowlingGame {
         int roll = 0;
         for (int frame = 0; frame < 10; frame++) {
             if (isStrike(roll)) {
-                total += 10 + rolls.get(roll + 1) + rolls.get(roll + 2);
+                total += strikeScore(roll);
                 roll++;
             } else if (isSpare(roll)) {
-                total += 10 + rolls.get(roll + 2);
+                total += spareScore(roll);
                 roll += 2;
             } else {
-                total += rolls.get(roll) + rolls.get(roll + 1);
+                total += openFrameScore(roll);
                 roll += 2;
             }
         }
         return total;
+    }
+
+    private int strikeScore(int roll) {
+        return 10 + rolls.get(roll + 1) + rolls.get(roll + 2);
+    }
+
+    private int spareScore(int roll) {
+        return 10 + rolls.get(roll + 2);
+    }
+
+    private int openFrameScore(int roll) {
+        return rolls.get(roll) + rolls.get(roll + 1);
     }
 
     private boolean isStrike(int roll) {
