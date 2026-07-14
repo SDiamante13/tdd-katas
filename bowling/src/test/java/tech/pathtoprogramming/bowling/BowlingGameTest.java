@@ -47,6 +47,16 @@ class BowlingGameTest {
     }
 
     @Test
+    void scoresConsecutiveStrikes() {
+        BowlingGame game = new BowlingGame();
+        game.roll(10);
+        game.roll(10);
+        game.roll(3);
+        rollMany(game, 15, 0);
+
+        assertThat(game.score()).isEqualTo(39);
+    }
+    @Test
     void scoresTheTenthFrameFillBalls() {
         BowlingGame game = new BowlingGame();
         rollMany(game, 18, 0);
