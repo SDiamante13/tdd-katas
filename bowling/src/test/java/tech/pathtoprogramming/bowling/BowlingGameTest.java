@@ -79,6 +79,16 @@ class BowlingGameTest {
         assertThat(game.score()).isEqualTo(20);
     }
 
+    @Test
+    void scoresThreeStrikesInTheTenthFrame() {
+        BowlingGame game = new BowlingGame();
+        rollMany(game, 18, 0);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
+
+        assertThat(game.score()).isEqualTo(30);
+    }
     private void rollMany(BowlingGame game, int rolls, int pins) {
         for (int roll = 0; roll < rolls; roll++) {
             game.roll(pins);
