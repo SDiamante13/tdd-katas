@@ -39,5 +39,7 @@ class GameOfLifeTest {
     void displayGridAsStringFor1DArray() {
         assertThat(new Grid(new Cell(State.ALIVE,0,0), new Cell(State.DEAD,1,0)).toString())
                 .isEqualTo("[1 0]");
+        assertThat(new Grid(new Cell(State.ALIVE,0,0), new Cell(State.DEAD,1,0), new Cell(State.ALIVE,2,0)).toString())
+                .isEqualTo("[1 0 1]");
     }
 }

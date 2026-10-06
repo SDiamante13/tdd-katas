@@ -3,6 +3,7 @@ package tech.pathtoprogramming.gameoflife;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 record Grid(Cell... cells) {
 
@@ -41,9 +42,7 @@ record Grid(Cell... cells) {
             cellStatesAsStrings.add(cells[x].stateAsString());
         }
         String openingDelimiter = "[";
-        String firstCellState = "1";
-        String secondCellState = "0";
         String closingDelimiter = "]";
-        return openingDelimiter + firstCellState + " " + secondCellState + closingDelimiter;
+        return openingDelimiter + cellStatesAsStrings.stream().collect(Collectors.joining(" ")) + closingDelimiter;
     }
 }
