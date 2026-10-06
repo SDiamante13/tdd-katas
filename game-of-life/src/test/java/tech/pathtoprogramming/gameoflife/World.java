@@ -15,13 +15,14 @@ public record World(Set<Position> positionsOfLiveCells) {
     }
 
     Set<Position> candidates() {
-        if (positionsOfLiveCells.isEmpty()) {
-            return Set.of();
-        }
         return positionsOfLiveCells;
     }
 
     boolean livesOn(Position position) {
-        return true;
+        return countNeighbors(position) == 3;
+    }
+
+    private int countNeighbors(Position position) {
+        return 3;
     }
 }
