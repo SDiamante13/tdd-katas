@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GameOfLifeTest {
 
     // test list:
-    // ✅ given a grid of size 1x1 with a dead cell, the cell should remain dead
+    // ✅ given a grid of size 1x1 with a state cell, the cell should remain state
     // ✅ given a grid of size 1x1 with an alive cell, the cell should die
     // ✅ given grid of [1 0] -> [0 0]
     // make grid and cells easier to read during test failures (toString())

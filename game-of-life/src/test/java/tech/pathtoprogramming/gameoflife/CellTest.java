@@ -8,7 +8,7 @@ class CellTest {
 
     @Test
     void getStateAsString() {
-        assertThat(new Cell(State.DEAD, 0, 0).getStateAsString()).isEqualTo("0");
-        assertThat(new Cell(State.ALIVE, 0, 0).getStateAsString()).isEqualTo("1");
+        assertThat(new Cell(State.DEAD, 0, 0).stateAsString()).isEqualTo("0");
+        assertThat(new Cell(State.ALIVE, 0, 0).stateAsString()).isEqualTo("1");
     }
 }

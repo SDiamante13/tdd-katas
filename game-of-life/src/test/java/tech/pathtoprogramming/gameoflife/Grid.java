@@ -38,7 +38,7 @@ record Grid(Cell... cells) {
     public String toString() {
         List<String> cellStatesAsStrings = new ArrayList<>();
         for (int x = 0; x < cells.length; x++) {
-            cellStatesAsStrings.add(cells[x].getStateAsString());
+            cellStatesAsStrings.add(cells[x].stateAsString());
         }
         String openingDelimiter = "[";
         String firstCellState = "1";
