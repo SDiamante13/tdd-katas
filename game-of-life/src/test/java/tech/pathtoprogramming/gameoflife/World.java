@@ -18,7 +18,7 @@ public record World(Set<Position> positionsOfLiveCells) {
         if (positionsOfLiveCells.isEmpty()) {
             return Set.of();
         }
-        return Set.of(new Position(1,1), new Position(2,1), new Position(1,2), new Position(2,2));
+        return positionsOfLiveCells;
     }
 
     boolean livesOn(Position position) {
