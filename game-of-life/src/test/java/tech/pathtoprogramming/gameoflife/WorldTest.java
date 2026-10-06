@@ -2,9 +2,8 @@ package tech.pathtoprogramming.gameoflife;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static tech.pathtoprogramming.gameoflife.WorldParser.parse;
 
 class WorldTest {
 
@@ -23,10 +22,6 @@ class WorldTest {
                 """
         );
         assertThat(block.next()).isEqualTo(block);
-    }
-
-    private World parse(String input) {
-        return new World(Set.of(new Position(1,1), new Position(2,1), new Position(1,2), new Position(2,2)));
     }
 }
 
