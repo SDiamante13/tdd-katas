@@ -45,4 +45,8 @@ record Grid(Cell... cells) {
         String closingDelimiter = "]";
         return openingDelimiter + cellStatesAsStrings.stream().collect(Collectors.joining(" ")) + closingDelimiter;
     }
+
+    public Cell getCellAtPosition(int x, int y) {
+        return cells[x];
+    }
 }

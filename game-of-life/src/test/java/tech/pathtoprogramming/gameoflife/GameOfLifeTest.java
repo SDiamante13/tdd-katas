@@ -42,4 +42,12 @@ class GameOfLifeTest {
         assertThat(new Grid(new Cell(State.ALIVE,0,0), new Cell(State.DEAD,1,0), new Cell(State.ALIVE,2,0)).toString())
                 .isEqualTo("[1 0 1]");
     }
+
+    @Test
+    void getCellAtPosition() {
+        Cell aliveCellAtFirstPosition = new Cell(State.ALIVE, 0, 0);
+        Cell deadCellAtSecondPosition = new Cell(State.DEAD, 1, 0);
+        Grid grid = new Grid(aliveCellAtFirstPosition, deadCellAtSecondPosition);
+        assertThat(grid.getCellAtPosition(0, 0)).isEqualTo(aliveCellAtFirstPosition);
+    }
 }
