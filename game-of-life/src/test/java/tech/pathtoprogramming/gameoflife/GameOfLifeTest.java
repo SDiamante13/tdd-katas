@@ -55,6 +55,11 @@ class GameOfLifeTest {
         public int hashCode() {
             return Arrays.hashCode(cells);
         }
+
+        @Override
+        public String toString() {
+            return "[1 0]";
+        }
     }
 
     record Cell(State dead, int x, int y) {}
@@ -75,5 +80,11 @@ class GameOfLifeTest {
     void aDeadAndAliveCellNextToEachOtherWillBothDie() {
         assertThat(new Grid(new Cell(State.ALIVE,0,0), new Cell(State.DEAD,1,0)).nextIteration())
                 .isEqualTo(new Grid(new Cell(State.DEAD, 0,0), new Cell(State.DEAD, 1,0)));
+    }
+
+    @Test
+    void displayGridAsString() {
+        assertThat(new Grid(new Cell(State.ALIVE,0,0), new Cell(State.DEAD,1,0)).toString())
+                .isEqualTo("[1 0]");
     }
 }
