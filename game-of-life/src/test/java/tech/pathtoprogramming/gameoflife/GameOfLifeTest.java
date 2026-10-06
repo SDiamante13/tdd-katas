@@ -2,12 +2,6 @@ package tech.pathtoprogramming.gameoflife;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GameOfLifeTest {
@@ -22,47 +16,6 @@ class GameOfLifeTest {
                  //  [0 1] -> [0 1]
     // given grid of [1 1] -> [1 1]
                  //  [0 1] -> [1 1]
-
-    enum State {
-        ALIVE, DEAD
-    }
-    record Grid(Cell... cells) {
-
-        public Grid nextIteration() {
-            List<Cell> list = new ArrayList<>();
-            for (int x = 0; x < cells.length; x++) {
-                Cell cell = cells[x];
-                Cell applesauce = applesauce(cell);
-                list.add(applesauce);
-            }
-            Cell[] newCells = list.toArray(new Cell[0]);
-            return new Grid(newCells);
-        }
-
-        private static Cell applesauce(Cell cell) {
-            return new Cell(State.DEAD, cell.x, 0);
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Grid grid = (Grid) o;
-            return Arrays.equals(cells, grid.cells);
-        }
-
-        @Override
-        public int hashCode() {
-            return Arrays.hashCode(cells);
-        }
-
-        @Override
-        public String toString() {
-            return "[1 0]";
-        }
-    }
-
-    record Cell(State dead, int x, int y) {}
 
     @Test
     void aDeadCellWithNoNeighborsRemainsDead() {
@@ -83,7 +36,7 @@ class GameOfLifeTest {
     }
 
     @Test
-    void displayGridAsString() {
+    void displayGridAsStringFor1DArray() {
         assertThat(new Grid(new Cell(State.ALIVE,0,0), new Cell(State.DEAD,1,0)).toString())
                 .isEqualTo("[1 0]");
     }
