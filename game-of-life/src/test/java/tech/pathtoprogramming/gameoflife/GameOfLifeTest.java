@@ -2,6 +2,8 @@ package tech.pathtoprogramming.gameoflife;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class GameOfLifeTest {
@@ -18,10 +20,23 @@ class GameOfLifeTest {
     enum State {
         ALIVE, DEAD
     }
-    record Grid(Cell cell) {
+    record Grid(Cell... cells) {
 
         public Grid nextIteration() {
             return new Grid(new Cell(State.DEAD, 0,0));
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Grid grid = (Grid) o;
+            return Arrays.equals(cells, grid.cells);
+        }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(cells);
         }
     }
 
