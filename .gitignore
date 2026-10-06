@@ -66,3 +66,4 @@ gradle-app.setting
 **/build/
 
 **/.jqwik-database
+.DS_Store
