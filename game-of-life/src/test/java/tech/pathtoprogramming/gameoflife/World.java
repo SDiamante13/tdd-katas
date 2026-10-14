@@ -21,7 +21,7 @@ public record World(Set<Position> positionsOfLiveCells) {
     boolean livesOn(Position position) {
         Set<Position> possibleNeighbors = position.neighbors();
         int neighbors = countOfLiveNeighbors(positionsOfLiveCells, possibleNeighbors);
-        return Rule.satisfies(neighbors);
+        return Rule.satisfies(true, neighbors);
     }
 
     static int countOfLiveNeighbors(Set<Position> positionsOfLiveCells, Set<Position> possibleNeighbors) {

@@ -28,6 +28,25 @@ class WorldTest {
     }
 
     @Test
+    void blinkerPatternFlips() {
+        // live are 0,1 - 1,1 - 2,1
+        World blinker = parse("""
+                . . .
+                # # #
+                . . .
+                """
+        ).next();
+        assertThat(blinker.next()).isEqualTo(
+                parse("""
+                . # .
+                . # .
+                . # .
+                """
+                )
+        );
+    }
+
+    @Test
     void countOfLiveNeighbors_noMatchesReturnsZero() {
         Set<Position> positionOfLiveNeighbors = Set.of(new Position(0,0), new Position(1,0));
         Set<Position> possibleNeighbors = Set.of(
