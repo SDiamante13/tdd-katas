@@ -75,8 +75,10 @@ public record World(Set<Position> positionsOfLiveCells) {
         return Set.of();
     }
 
-    int countOfLiveNeighbors(Set<Position> positionsOfLiveCells, Set<Position> possibleNeighbors) {
-        return 3;
+    static int countOfLiveNeighbors(Set<Position> positionsOfLiveCells, Set<Position> possibleNeighbors) {
+        return Math.toIntExact(positionsOfLiveCells.stream()
+                .filter(possibleNeighbors::contains)
+                .count());
     }
 
 }
