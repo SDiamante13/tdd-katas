@@ -6,32 +6,32 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static tech.pathtoprogramming.gameoflife.State.*;
 
-class RuleTest {
+class StateTest {
 
     @Nested
     class AnyLiveCell {
         @Test
         void withFewerThanTwoLiveNeighborsDies() {
-            boolean livesOn = next(ALIVE, 1);
-            assertThat(livesOn).isFalse();
+            State nextState = ALIVE.next(1);
+            assertThat(nextState).isEqualTo(DEAD);
         }
 
         @Test
         void withTwoLiveNeighborsLives() {
-            boolean livesOn = next(ALIVE, 2);
-            assertThat(livesOn).isTrue();
+            State nextState = ALIVE.next(2);
+            assertThat(nextState).isEqualTo(ALIVE);
         }
 
         @Test
         void withThreeLiveNeighborsLives() {
-            boolean livesOn = next(ALIVE, 3);
-            assertThat(livesOn).isTrue();
+            State nextState = ALIVE.next(3);
+            assertThat(nextState).isEqualTo(ALIVE);
         }
 
         @Test
         void withMoreThanThreeLiveNeighborsDies() {
-            boolean livesOn = next(ALIVE, 4);
-            assertThat(livesOn).isFalse();
+            State nextState = ALIVE.next(4);
+            assertThat(nextState).isEqualTo(DEAD);
         }
     }
 
@@ -39,16 +39,16 @@ class RuleTest {
     class AnyDeadCell {
         @Test
         void withExactlyThreeLiveNeighborsLives() {
-            boolean livesOn = next(DEAD, 3);
-            assertThat(livesOn).isTrue();
+            State nextState = DEAD.next(3);
+            assertThat(nextState).isEqualTo(ALIVE);
         }
         @Test
         void remainsDeadIfThereAreNotExactlyThreeLiveNeighbors() {
-            assertThat(next(DEAD, 0)).isFalse();
-            assertThat(next(DEAD, 1)).isFalse();
-            assertThat(next(DEAD, 2)).isFalse();
-            assertThat(next(DEAD, 4)).isFalse();
-            assertThat(next(DEAD, 5)).isFalse();
+            assertThat(DEAD.next(0)).isEqualTo(DEAD);
+            assertThat(DEAD.next(1)).isEqualTo(DEAD);
+            assertThat(DEAD.next(2)).isEqualTo(DEAD);
+            assertThat(DEAD.next(4)).isEqualTo(DEAD);
+            assertThat(DEAD.next(5)).isEqualTo(DEAD);
         }
     }
 }
