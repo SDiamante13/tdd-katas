@@ -24,7 +24,3 @@ class WorldTest {
         assertThat(block.next()).isEqualTo(block);
     }
 }
-
-record Position(int x, int y) {
-
-}
