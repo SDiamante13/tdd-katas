@@ -16,10 +16,6 @@ public record Position(int x, int y) {
                 new Position(x - 1, y));
     }
 
-    boolean hasLiveCellOld(Set<Position> positionsOfLiveCells) {
-        return positionsOfLiveCells.contains(this);
-    }
-
     State hasLiveCell(Set<Position> positionsOfLiveCells) {
         return positionsOfLiveCells.contains(this) ? State.ALIVE : State.DEAD;
     }

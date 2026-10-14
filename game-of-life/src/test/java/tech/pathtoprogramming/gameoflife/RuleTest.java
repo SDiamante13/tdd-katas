@@ -12,25 +12,25 @@ class RuleTest {
     class AnyLiveCell {
         @Test
         void withFewerThanTwoLiveNeighborsDies() {
-            boolean livesOn = Rule.satisfies(ALIVE, 1);
+            boolean livesOn = next(ALIVE, 1);
             assertThat(livesOn).isFalse();
         }
 
         @Test
         void withTwoLiveNeighborsLives() {
-            boolean livesOn = Rule.satisfies(ALIVE, 2);
+            boolean livesOn = next(ALIVE, 2);
             assertThat(livesOn).isTrue();
         }
 
         @Test
         void withThreeLiveNeighborsLives() {
-            boolean livesOn = Rule.satisfies(ALIVE, 3);
+            boolean livesOn = next(ALIVE, 3);
             assertThat(livesOn).isTrue();
         }
 
         @Test
         void withMoreThanThreeLiveNeighborsDies() {
-            boolean livesOn = Rule.satisfies(ALIVE, 4);
+            boolean livesOn = next(ALIVE, 4);
             assertThat(livesOn).isFalse();
         }
     }
@@ -39,16 +39,16 @@ class RuleTest {
     class AnyDeadCell {
         @Test
         void withExactlyThreeLiveNeighborsLives() {
-            boolean livesOn = Rule.satisfies(DEAD, 3);
+            boolean livesOn = next(DEAD, 3);
             assertThat(livesOn).isTrue();
         }
         @Test
         void remainsDeadIfThereAreNotExactlyThreeLiveNeighbors() {
-            assertThat(Rule.satisfies(DEAD, 0)).isFalse();
-            assertThat(Rule.satisfies(DEAD, 1)).isFalse();
-            assertThat(Rule.satisfies(DEAD, 2)).isFalse();
-            assertThat(Rule.satisfies(DEAD, 4)).isFalse();
-            assertThat(Rule.satisfies(DEAD, 5)).isFalse();
+            assertThat(next(DEAD, 0)).isFalse();
+            assertThat(next(DEAD, 1)).isFalse();
+            assertThat(next(DEAD, 2)).isFalse();
+            assertThat(next(DEAD, 4)).isFalse();
+            assertThat(next(DEAD, 5)).isFalse();
         }
     }
 }
