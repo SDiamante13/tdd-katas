@@ -12,14 +12,12 @@ public record World(Set<Position> positionsOfLiveCells) {
     }
 
     public World next() {
-        return new World(candidates().stream().filter(this::livesOn).collect(Collectors.toSet()));
+        return new World(candidates().stream()
+                .filter(position -> nextStateAt(position) == State.ALIVE)
+                .collect(Collectors.toSet()));
     }
 
     Set<Position> candidates() {
-        return liveCellsPlusTheNeighborsOfTheLiveCells();
-    }
-
-    private Set<Position> liveCellsPlusTheNeighborsOfTheLiveCells() {
         Set<Position> neighborsOfTheLiveCells = getNeighborsOfTheLiveCells(positionsOfLiveCells);
         neighborsOfTheLiveCells.addAll(positionsOfLiveCells);
         return neighborsOfTheLiveCells;
@@ -32,10 +30,10 @@ public record World(Set<Position> positionsOfLiveCells) {
                 .collect(Collectors.toSet());
     }
 
-    boolean livesOn(Position position) {
-        Set<Position> positionsOfNeighbors = position.neighbors();
-        int neighbors = countOfLiveNeighbors(positionsOfNeighbors);
-        return State.nextOld(position.hasLiveCell(positionsOfLiveCells), neighbors);
+    private State nextStateAt(Position position) {
+        int liveNeighbors = countOfLiveNeighbors(position.neighbors());
+        State currentState = stateAt(position);
+        return currentState.next(liveNeighbors);
     }
 
     private int countOfLiveNeighbors(Set<Position> positionsOfNeighbors) {
@@ -44,4 +42,7 @@ public record World(Set<Position> positionsOfLiveCells) {
                 .count());
     }
 
+    private State stateAt(Position position) {
+        return positionsOfLiveCells.contains(position) ? State.ALIVE : State.DEAD;
+    }
 }
