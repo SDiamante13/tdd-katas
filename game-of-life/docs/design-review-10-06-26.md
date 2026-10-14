@@ -18,14 +18,14 @@ Combined design
 - Model: Set<Position>, immutable World, next() returns a new World
 - Input: World.parse(String), a test helper first. Promote it to production only when needed.
 - Output: toString() renders the bounding box, which feeds approvals and AssertJ failure messages.
-- Collaborators (stubs): candidates(), Neighborhood, Rule
+- Collaborators (stubs): candidates(), Neighborhood, tech.pathtoprogramming.gameoflife.Rule
 
 # Decisions for next run (St. Pauli redo)
 
 ## Model
 - `World` immutable record wrapping `Set<Position>` of live cells. No `Cell`, no coordinates in cells.
 - State = set membership. Present = alive, absent = dead.
-- Keep `State` enum at the edge only: `World.stateAt(Position)` and `Rule.next(State, int neighbors) -> State`.
+- Keep `State` enum at the edge only: `World.stateAt(Position)` and `tech.pathtoprogramming.gameoflife.Rule.next(State, int neighbors) -> State`.
 - Set over varargs/List: invalid grids unrepresentable, record equality for free (no `equals`/`hashCode`).
 
 ## API (step 1)
@@ -35,12 +35,12 @@ Combined design
 - Production API is the set. `World.parse` is test sugar until a real caller needs it.
 
 ## Stub tree
-- `World.next()` -> `candidates()` (live cells + neighbors), `Neighborhood.countAround`, `Rule`.
+- `World.next()` -> `candidates()` (live cells + neighbors), `Neighborhood.countAround`, `tech.pathtoprogramming.gameoflife.Rule`.
 - Replace the stub hiding the most behavior first.
 
 ## Readability
 - Text grids: `.` dead, `#` alive, origin top-left, y down.
-- Approval tests for `World.next()` and the blinker. Plain assertions for `Rule` and `Neighborhood`.
+- Approval tests for `World.next()` and the blinker. Plain assertions for `tech.pathtoprogramming.gameoflife.Rule` and `Neighborhood`.
 - Approved files are append-only. Never overwrite one to turn red green.
 - Small grids per cycle (1x3, 2x2), one behavior each.
 - Render: normalized bounding box for early cycles. Fixed window `render(w, h)` for the blinker.

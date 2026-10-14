@@ -19,10 +19,7 @@ public record World(Set<Position> positionsOfLiveCells) {
     }
 
     boolean livesOn(Position position) {
-        return countNeighbors(position) == 3;
+        return Rule.satisfies(position.countNeighbors());
     }
 
-    private int countNeighbors(Position position) {
-        return 3;
-    }
 }
