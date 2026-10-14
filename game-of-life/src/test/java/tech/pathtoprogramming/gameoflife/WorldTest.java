@@ -14,6 +14,7 @@ class WorldTest {
 
     @Test
     void blockPatternStaysTheSameTheNextGeneration() {
+        // live are 1,1 - 2,1 - 1,2 - 2,2
         World block = parse("""
                 . . . .
                 . # # .

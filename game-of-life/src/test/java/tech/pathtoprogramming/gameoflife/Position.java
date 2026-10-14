@@ -2,7 +2,7 @@ package tech.pathtoprogramming.gameoflife;
 
 public record Position(int x, int y) {
 
-    int countNeighbors() {
+    int neighbors() {
         return 3;
     }
 }
