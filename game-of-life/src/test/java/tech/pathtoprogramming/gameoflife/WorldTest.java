@@ -35,7 +35,7 @@ class WorldTest {
                 # # #
                 . . .
                 """
-        ).next();
+        );
         assertThat(blinker.next()).isEqualTo(
                 parse("""
                 . # .
@@ -47,7 +47,7 @@ class WorldTest {
     }
 
     @Test
-    void countOfLiveNeighbors_noMatchesReturnsZero() {
+    void countOfLiveNeighbors_returnsNumberOfPositionMatchesBetweenTheLiveNeighborsAndThePossibleNeighbors() {
         Set<Position> positionOfLiveNeighbors = Set.of(new Position(0,0), new Position(1,0));
         Set<Position> possibleNeighbors = Set.of(
                 new Position(1,0),
