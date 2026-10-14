@@ -20,7 +20,7 @@ class WorldTest {
                 . # # .
                 . . . .
                 """
-        );
+        ).next();
         assertThat(block.next()).isEqualTo(block);
     }
 }
