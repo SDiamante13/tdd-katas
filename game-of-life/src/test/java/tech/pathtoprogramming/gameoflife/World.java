@@ -33,14 +33,14 @@ public record World(Set<Position> positionsOfLiveCells) {
     }
 
     boolean livesOn(Position position) {
-        Set<Position> possibleNeighbors = position.neighbors();
-        int neighbors = countOfLiveNeighbors(positionsOfLiveCells, possibleNeighbors);
+        Set<Position> positionsOfNeighbors = position.neighbors();
+        int neighbors = countOfLiveNeighbors(positionsOfNeighbors);
         return Rule.satisfies(position.hasLiveCell(positionsOfLiveCells), neighbors);
     }
 
-    static int countOfLiveNeighbors(Set<Position> positionsOfLiveCells, Set<Position> possibleNeighbors) {
+    private int countOfLiveNeighbors(Set<Position> positionsOfNeighbors) {
         return Math.toIntExact(positionsOfLiveCells.stream()
-                .filter(possibleNeighbors::contains)
+                .filter(positionsOfNeighbors::contains)
                 .count());
     }
 
