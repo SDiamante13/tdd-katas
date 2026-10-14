@@ -1,6 +1,7 @@
 package tech.pathtoprogramming.gameoflife;
 
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,13 +16,26 @@ public record World(Set<Position> positionsOfLiveCells) {
     }
 
     Set<Position> candidates() {
-        return positionsOfLiveCells;
+        return liveCellsPlusTheNeighborsOfTheLiveCells();
+    }
+
+    private Set<Position> liveCellsPlusTheNeighborsOfTheLiveCells() {
+        Set<Position> neighborsOfTheLiveCells = getNeighborsOfTheLiveCells(positionsOfLiveCells);
+        neighborsOfTheLiveCells.addAll(positionsOfLiveCells);
+        return neighborsOfTheLiveCells;
+    }
+
+    private static Set<Position> getNeighborsOfTheLiveCells(Set<Position> positionsOfLiveCells) {
+        return positionsOfLiveCells.stream()
+                .map(Position::neighbors)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
     }
 
     boolean livesOn(Position position) {
         Set<Position> possibleNeighbors = position.neighbors();
         int neighbors = countOfLiveNeighbors(positionsOfLiveCells, possibleNeighbors);
-        return Rule.satisfies(true, neighbors);
+        return Rule.satisfies(position.hasLiveCell(positionsOfLiveCells), neighbors);
     }
 
     static int countOfLiveNeighbors(Set<Position> positionsOfLiveCells, Set<Position> possibleNeighbors) {

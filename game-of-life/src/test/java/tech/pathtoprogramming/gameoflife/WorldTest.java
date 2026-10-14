@@ -16,20 +16,18 @@ class WorldTest {
 
     @Test
     void blockPatternStaysTheSameTheNextGeneration() {
-        // live are 1,1 - 2,1 - 1,2 - 2,2
         World block = parse("""
                 . . . .
                 . # # .
                 . # # .
                 . . . .
                 """
-        ).next();
+        );
         assertThat(block.next()).isEqualTo(block);
     }
 
     @Test
     void blinkerPatternFlips() {
-        // live are 0,1 - 1,1 - 2,1
         World blinker = parse("""
                 . . .
                 # # #

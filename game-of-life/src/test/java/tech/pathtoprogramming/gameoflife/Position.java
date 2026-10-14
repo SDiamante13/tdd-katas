@@ -15,4 +15,8 @@ public record Position(int x, int y) {
                 new Position(x - 1, y + 1),
                 new Position(x - 1, y));
     }
+
+    boolean hasLiveCell(Set<Position> positionsOfLiveCells) {
+        return positionsOfLiveCells.contains(this);
+    }
 }
